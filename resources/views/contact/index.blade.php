@@ -63,43 +63,27 @@
                     </div>
                 </div>
 
+                @if ($faqs)
                 <div class="card bg-base-100 border border-base-300">
                     <div class="card-body">
                         <h3 class="card-title text-xl mb-4">Frequently Asked Questions</h3>
 
                         <div class="space-y-3">
+                            @foreach ($faqs as $faq)
                             <div class="collapse collapse-plus bg-base-200">
                                 <input type="radio" name="faq-accordion" checked="checked" />
                                 <div class="collapse-title font-medium">
-                                    How long does shipping take?
+                                    {{ $faq->question }}
                                 </div>
                                 <div class="collapse-content">
-                                    <p class="text-sm text-gray-600">Standard shipping takes 3-5 business days. Express shipping is available for 1-2 business day delivery.</p>
+                                    <p class="text-sm text-gray-600">{{ $faq->answer }}</p>
                                 </div>
                             </div>
-
-                            <div class="collapse collapse-plus bg-base-200">
-                                <input type="radio" name="faq-accordion" />
-                                <div class="collapse-title font-medium">
-                                    Do you offer international shipping?
-                                </div>
-                                <div class="collapse-content">
-                                    <p class="text-sm text-gray-600">Yes, we ship to most countries worldwide. International orders typically arrive within 7-14 business days.</p>
-                                </div>
-                            </div>
-
-                            <div class="collapse collapse-plus bg-base-200">
-                                <input type="radio" name="faq-accordion" />
-                                <div class="collapse-title font-medium">
-                                    Can I return or exchange a perfume?
-                                </div>
-                                <div class="collapse-content">
-                                    <p class="text-sm text-gray-600">We accept returns of unopened products within 30 days of purchase. Unfortunately, we cannot accept returns on opened perfumes for hygiene reasons.</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <div class="card bg-primary text-primary-content">
                     <div class="card-body">

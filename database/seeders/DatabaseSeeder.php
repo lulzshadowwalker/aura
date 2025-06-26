@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Faq;
 use App\Models\SupportMessage;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -122,5 +123,6 @@ class DatabaseSeeder extends Seeder
         }
 
         SupportMessage::factory()->count(10)->create();
+        Faq::factory()->count(5)->create();
     }
 }

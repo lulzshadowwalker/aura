@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Faq;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -47,5 +48,15 @@ class ContactControllerTest extends TestCase
             ->assertOk()
             ->assertSee($user->name)
             ->assertSee($user->email);
+    }
+
+    public function test_it_displays_faqs(): void
+    {
+        $faqs = Faq::factory()->count(5)->create();
+
+        $this->get(route("contact.index"))
+            ->assertOk()
+            ->assertSee($faqs[0]->question)
+            ->assertSee($faqs[0]->answer);
     }
 }
