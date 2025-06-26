@@ -7,8 +7,9 @@
     @vite('resources/css/app.css')
 </head>
 <body class="min-h-screen flex flex-col">
-    <x-header></x-header>
+    <x-header :collections="$collections"></x-header>
     <main class="flex-1"> {{ $slot }} </main>
+    <x-footer :collections="$collections"></x-footer>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
