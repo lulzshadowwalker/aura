@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -12,3 +13,7 @@ Route::get("/products", function () {
 Route::get("/collections", function () {
     throw new Exception("Collections page not implemented yet");
 })->name("collections.index");
+
+Route::get("/contact", [ContactController::class, "index"])->name(
+    "contact.index"
+);

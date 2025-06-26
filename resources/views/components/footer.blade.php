@@ -17,7 +17,7 @@
 
 <nav>
     <h6 class="footer-title">Support</h6>
-    <a class="link link-hover">Contact</a>
+    <a class="link link-hover" href="{{ route('contact.index') }}">Contact</a>
 </nav>
 
   <form class="md:ms-auto">
