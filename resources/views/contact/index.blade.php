@@ -16,11 +16,11 @@
                             <fieldset class="fieldset">
                                 <label class="label">Name</label>
                                 <input type="text" name="name" class="input w-full validator" placeholder="Your name" required
-                                       value="{{ old('name', auth()->user()->name ?? '') }}" />
+                                    value="{{ old('name', auth()->user()->name ?? '') }}" />
 
                                 <label class="label mt-4">Email</label>
                                 <input type="email" name="email" class="input w-full validator" placeholder="your@email.com" required
-                                       value="{{ old('email', auth()->user()->email ?? '') }}" />
+                                    value="{{ old('email', auth()->user()->email ?? '') }}" />
 
                                 <label class="label mt-4">Message</label>
                                 <textarea name="message" class="textarea h-32 w-full validator" placeholder="How can we help you?" required>{{ old('message') }}</textarea>
@@ -101,9 +101,17 @@
 
     <style>
         @keyframes wiggle {
-            0%, 100% { transform: rotate(-15deg); }
-            50% { transform: rotate(15deg); }
+
+            0%,
+            100% {
+                transform: rotate(-15deg);
+            }
+
+            50% {
+                transform: rotate(15deg);
+            }
         }
+
         .animate-wiggle {
             animation: wiggle 1s ease-in-out infinite;
         }
