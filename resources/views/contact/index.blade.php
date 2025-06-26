@@ -42,15 +42,15 @@
 
                         <div class="flex items-center mb-4">
                             <i data-lucide="mail" class="w-5 h-5 text-primary mr-3"></i>
-                            <div>
-                                <p class="text-gray-600">support@perfumestore.com</p>
+                            <div class="tooltip" data-tip="Email us for any inquiries">
+                                <a href="mailto:support@perfumestore.com" class="link link-hover">support@perfumestore.com</a>
                             </div>
                         </div>
 
                         <div class="flex items-start mb-4">
                             <i data-lucide="map-pin" class="w-5 h-5 text-primary mr-3 mt-0.5"></i>
-                            <div>
-                                <p class="text-gray-600">123 Perfume Street<br>Fragrance City, FC 12345</p>
+                            <div class="tooltip" data-tip="Open location in Google Maps">
+                                <a href="https://www.google.com/maps/place/123+Perfume+Street,+Fragrance+City,+FC+12345" target="_blank" rel="noopener noreferrer" class="link link-hover">123 Perfume Street<br>Fragrance City, FC 12345</a>
                             </div>
                         </div>
 
