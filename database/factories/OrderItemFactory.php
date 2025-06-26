@@ -36,7 +36,10 @@ class OrderItemFactory extends Factory
         return [
             "product_name" => "Perfume",
             "variant_name" => "{$size}ml",
-            "sku" => "PRF-" . fake()->numberBetween(100, 999) . "-{$size}ML",
+            "sku" =>
+                "PRF-" .
+                fake()->unique()->numberBetween(100, 999) .
+                "-{$size}ML",
             "quantity" => $quantity,
             "unit_price" => $unitPrice,
             "subtotal" => $subtotal,

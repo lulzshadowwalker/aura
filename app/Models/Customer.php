@@ -25,7 +25,7 @@ class Customer extends Model
     protected function casts(): array
     {
         return [
-            'id' => 'integer',
+            "id" => "integer",
         ];
     }
 
@@ -52,5 +52,10 @@ class Customer extends Model
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function supportMessages(): HasMany
+    {
+        return $this->hasMany(SupportMessage::class);
     }
 }

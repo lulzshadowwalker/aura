@@ -38,7 +38,7 @@ class ProductVariantFactory extends Factory
             "name" => "{$size["volume"]}ml",
             "sku" =>
                 "PRF-" .
-                fake()->numberBetween(100, 999) .
+                fake()->unique()->numberBetween(100, 999) .
                 "-{$size["volume"]}ML",
             "price" => $size["price"],
             "sale_price" => $salePrice,

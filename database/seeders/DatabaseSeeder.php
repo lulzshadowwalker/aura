@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SupportMessage;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Customer;
@@ -119,5 +120,7 @@ class DatabaseSeeder extends Seeder
                     ->id,
             ]);
         }
+
+        SupportMessage::factory()->count(10)->create();
     }
 }
