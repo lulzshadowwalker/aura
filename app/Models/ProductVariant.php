@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class ProductVariant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -17,12 +18,12 @@ class ProductVariant extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'sku',
-        'price',
-        'sale_price',
-        'volume_ml',
-        'product_id',
+        "name",
+        "sku",
+        "price",
+        "sale_price",
+        "volume_ml",
+        "product_id",
     ];
 
     /**
@@ -33,13 +34,15 @@ class ProductVariant extends Model
     protected function casts(): array
     {
         return [
-            'id' => 'integer',
-            'name' => 'array',
-            'price' => 'decimal',
-            'sale_price' => 'decimal',
-            'product_id' => 'integer',
+            "id" => "integer",
+            "name" => "array",
+            "price" => "decimal",
+            "sale_price" => "decimal",
+            "product_id" => "integer",
         ];
     }
+
+    public array $translatable = ["name"];
 
     public function product(): BelongsTo
     {

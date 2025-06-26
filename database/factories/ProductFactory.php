@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Product;
 
-class ProductFactory extends Factory
+class ProductFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.
@@ -22,10 +20,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => "{}",
+            "name" => $this->localized(fn(): string => fake()->word()),
             "slug" => fake()->unique()->slug(),
             "sku" => fake()->unique()->word(),
-            "description" => fake()->text(),
+            "description" => $this->localized(
+                fn(): string => fake()->sentence()
+            ),
             "is_active" => fake()->boolean(),
             "category_id" => Category::factory(),
         ];

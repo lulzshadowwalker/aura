@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->json("name");
             $table->string("slug")->unique();
             $table->string("sku")->unique();
-            $table->text("description");
+            $table->json("description");
             $table->boolean("is_active");
             $table->foreignId("category_id");
             $table->timestamps();

@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Collection;
 
-class CollectionFactory extends Factory
+class CollectionFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.
@@ -21,9 +20,11 @@ class CollectionFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => "{}",
+            "name" => $this->localized(fn(): string => fake()->word()),
             "slug" => fake()->unique()->slug(),
-            "description" => fake()->text(),
+            "description" => $this->localized(
+                fn(): string => fake()->sentence()
+            ),
             "is_active" => fake()->boolean(),
         ];
     }

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -18,12 +19,12 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'slug',
-        'sku',
-        'description',
-        'is_active',
-        'category_id',
+        "name",
+        "slug",
+        "sku",
+        "description",
+        "is_active",
+        "category_id",
     ];
 
     /**
@@ -34,12 +35,13 @@ class Product extends Model
     protected function casts(): array
     {
         return [
-            'id' => 'integer',
-            'name' => 'array',
-            'is_active' => 'boolean',
-            'category_id' => 'integer',
+            "id" => "integer",
+            "is_active" => "boolean",
+            "category_id" => "integer",
         ];
     }
+
+    public array $translatable = ["name", "description"];
 
     public function category(): BelongsTo
     {
