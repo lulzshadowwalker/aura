@@ -1,4 +1,4 @@
-<x-layout title="Contact Us - Perfume Store">
+<x-layout title="Contact">
     <div class="max-w-7xl mx-auto py-8">
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Get in Touch</h1>
@@ -15,13 +15,15 @@
                             @csrf
                             <fieldset class="fieldset">
                                 <label class="label">Name</label>
-                                <input type="text" name="name" class="input w-full validator" placeholder="Your name" required />
+                                <input type="text" name="name" class="input w-full validator" placeholder="Your name" required
+                                       value="{{ old('name', auth()->user()->name ?? '') }}" />
 
                                 <label class="label mt-4">Email</label>
-                                <input type="email" name="email" class="input w-full validator" placeholder="your@email.com" required />
+                                <input type="email" name="email" class="input w-full validator" placeholder="your@email.com" required
+                                       value="{{ old('email', auth()->user()->email ?? '') }}" />
 
                                 <label class="label mt-4">Message</label>
-                                <textarea name="message" class="textarea h-32 w-full validator" placeholder="How can we help you?" required></textarea>
+                                <textarea name="message" class="textarea h-32 w-full validator" placeholder="How can we help you?" required>{{ old('message') }}</textarea>
 
                                 <button type="submit" class="btn btn-primary w-full mt-6">
                                     <i data-lucide="send" class="w-4 h-4 mr-2"></i>

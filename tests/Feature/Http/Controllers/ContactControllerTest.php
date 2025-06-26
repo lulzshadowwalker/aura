@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -35,5 +36,16 @@ class ContactControllerTest extends TestCase
             ])
             ->assertRedirect(route("contact.index"))
             ->assertSessionHasErrors(["name", "email", "message"]);
+    }
+
+    public function test_form_is_prefilled_with_current_user_details_if_authenticated(): void
+    {
+        $user = User::factory()->create();
+        auth()->login($user);
+
+        $this->get(route("contact.index"))
+            ->assertOk()
+            ->assertSee($user->name)
+            ->assertSee($user->email);
     }
 }
