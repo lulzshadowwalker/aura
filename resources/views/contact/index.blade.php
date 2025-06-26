@@ -11,17 +11,17 @@
                     <div class="card-body">
                         <h2 class="card-title text-2xl mb-6">Send us a Message</h2>
 
-                        <form action="#" method="post">
+                        <form action="{{ route('contact.store') }}" method="post">
                             @csrf
                             <fieldset class="fieldset">
                                 <label class="label">Name</label>
-                                <input type="text" name="name" class="input w-full" placeholder="Your name" required />
+                                <input type="text" name="name" class="input w-full validator" placeholder="Your name" required />
 
                                 <label class="label mt-4">Email</label>
-                                <input type="email" name="email" class="input w-full" placeholder="your@email.com" required />
+                                <input type="email" name="email" class="input w-full validator" placeholder="your@email.com" required />
 
                                 <label class="label mt-4">Message</label>
-                                <textarea name="message" class="textarea h-32 w-full" placeholder="How can we help you?" required></textarea>
+                                <textarea name="message" class="textarea h-32 w-full validator" placeholder="How can we help you?" required></textarea>
 
                                 <button type="submit" class="btn btn-primary w-full mt-6">
                                     <i data-lucide="send" class="w-4 h-4 mr-2"></i>

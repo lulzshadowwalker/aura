@@ -8,7 +8,10 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <x-header :collections="$collections"></x-header>
-    <main class="flex-1"> {{ $slot }} </main>
+    <main class="flex-1">
+        {{ $slot }}
+    </main>
+    <x-flash-messages />
     <x-footer :collections="$collections"></x-footer>
 
     <!-- Lucide Icons -->
