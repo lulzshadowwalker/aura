@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReturnPolicyController;
+use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -33,4 +34,8 @@ Route::get("/collections/{collection}", function ($collection) {
 
 Route::get("/return-policy", [ReturnPolicyController::class, "index"])->name(
     "return-policy.index"
+);
+
+Route::get("/terms-and-conditions", [TermsController::class, "index"])->name(
+    "terms.index"
 );
