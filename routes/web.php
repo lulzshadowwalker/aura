@@ -5,6 +5,7 @@ use App\Http\Controllers\ReturnPolicyController;
 use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get("/", [HomeController::class, "index"])->name("home.index");
 
@@ -38,4 +39,8 @@ Route::get("/return-policy", [ReturnPolicyController::class, "index"])->name(
 
 Route::get("/terms-and-conditions", [TermsController::class, "index"])->name(
     "terms.index"
+);
+
+Route::post("/favorites", [FavoriteController::class, "store"])->name(
+    "favorites.store"
 );

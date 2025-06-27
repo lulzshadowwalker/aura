@@ -89,4 +89,19 @@ class Product extends Model implements HasMedia
             return $this->getMedia(self::MEDIA_COLLECTION_IMAGES);
         });
     }
+
+    public function isFavorite(): Attribute
+    {
+        $customer = auth()->user()?->customer;
+        if (!$customer) {
+            return Attribute::get(fn(): bool => false);
+        }
+
+        return Attribute::get(
+            fn(): bool => $customer
+                ->favorites()
+                ->where("product_id", $this->id)
+                ->exists()
+        );
+    }
 }

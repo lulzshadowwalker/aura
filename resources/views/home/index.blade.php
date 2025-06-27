@@ -32,7 +32,7 @@
         @if($collection->products->isNotEmpty())
           <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             @foreach($collection->products->take(4) as $product)
-              <x-product-card :product="$product" />
+              <x-product-card :product="$product" :collection="$collection" />
             @endforeach
           </div>
 
