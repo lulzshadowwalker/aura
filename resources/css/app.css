@@ -11,3 +11,11 @@
         light --default,
         /* dark --prefersdark, */ cookie;
 }
+
+.spinner {
+    display: none !important;
+}
+
+[aria-busy] .spinner {
+    display: inline-block !important;
+}

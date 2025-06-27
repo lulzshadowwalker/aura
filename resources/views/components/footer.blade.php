@@ -20,15 +20,20 @@
       <a class="link link-hover" href="{{ route('contact.index') }}">Contact</a>
     </nav>
 
-    <form class="md:ms-auto">
+    <form id="js-newsletter-form" x-target action="{{ route('newsletter-subscribers.store') }}" method="post" class="md:ms-auto" x-data="{ default: '{{ auth()->user()?->email }}', email: '' }">
+    @csrf
       <h6 class="footer-title">Newsletter</h6>
       <fieldset class="w-80">
         <div class="join">
           <input
-            type="text"
-            placeholder="username@site.com"
-            class="input input-bordered join-item" />
-          <button class="btn btn-primary join-item">Subscribe</button>
+            name="email"
+            type="email"
+            placeholder="email@example.com"
+            class="input input-bordered join-item validator"
+             x-model="email"
+            required
+            />
+          <button class="btn btn-primary join-item">Subscribe <x-spinner /></button>
         </div>
       </fieldset>
     </form>

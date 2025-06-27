@@ -1,11 +1,11 @@
 <?php
-
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReturnPolicyController;
 use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\NewsletterSubscriberController;
 
 Route::get("/", [HomeController::class, "index"])->name("home.index");
 
@@ -44,3 +44,8 @@ Route::get("/terms-and-conditions", [TermsController::class, "index"])->name(
 Route::post("/favorites", [FavoriteController::class, "store"])->name(
     "favorites.store"
 );
+
+Route::post("/newsletter-subscribers", [
+    NewsletterSubscriberController::class,
+    "store",
+])->name("newsletter-subscribers.store");
