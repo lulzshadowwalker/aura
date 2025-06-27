@@ -1,5 +1,5 @@
 <x-layout title="Contact">
-    <div class="max-w-7xl mx-auto py-8">
+    <div class="max-w-7xl mx-auto py-8 px-4">
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Get in Touch</h1>
             <p class="text-lg text-gray-600">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h2 class="card-title text-2xl mb-6">Send us a Message</h2>
 
-                        <form action="{{ route('contact.store') }}" method="post">
+                        <form id="js-contact-form" x-target action="{{ route('contact.store') }}" method="post">
                             @csrf
                             <fieldset class="fieldset">
                                 <label class="label">Name</label>

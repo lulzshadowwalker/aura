@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ isset($title) && $title ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
-    @vite('resources/css/app.css')
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -16,6 +17,10 @@
     <x-flash-messages />
     <x-footer :collections="$collections"></x-footer>
 
+    <!-- FontAwesomeIcons -->
+    <script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>
+
+    <!-- NOTE: Use fontawesome going forward as we will deprecate lucide icons at some point -->
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
