@@ -20,6 +20,35 @@
     </div>
   </section>
 
-  <div>home</div>
+  <div class="container mx-auto px-4 my-12 max-md:my-8">
+    <h2 class="sr-only">Our Collections</h2>
+    @foreach ($collections as $collection)
+      <section class="mb-16 last:mb-0">
+        <header class="mb-8">
+          <h3 class="text-3xl lg:text-4xl font-light tracking-wide mb-2">{{ $collection->name }}</h3>
+          <p class="text-lg text-base-content/70">{{ $collection->description }}</p>
+        </header>
+
+        @if($collection->products->isNotEmpty())
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            @foreach($collection->products->take(4) as $product)
+              <x-product-card :product="$product" />
+            @endforeach
+          </div>
+
+          @if($collection->products->count() > 4)
+            <a href="{{ route('collections.show', $collection->slug) }}" class="link link-hover flex items-center justify-end gap-1">
+            View All {{ $collection->name }}
+            <i data-lucide="move-right" class="w-5 h-5"></i>
+            </a>
+          @endif
+        @else
+          <div class="text-center py-12">
+            <p class="text-base-content/60">No products available in this collection yet.</p>
+          </div>
+        @endif
+      </section>
+    @endforeach
+  </div>
 </x-layout>
 </rewrite_this>

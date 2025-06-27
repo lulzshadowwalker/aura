@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        return view("home.index");
+        $collections = Collection::all();
+        return view("home.index", compact("collections"));
     }
 }

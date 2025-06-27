@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
@@ -15,7 +16,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ["user_id"];
 
     /**
      * Get the attributes that should be cast.
@@ -57,5 +58,10 @@ class Customer extends Model
     public function supportMessages(): HasMany
     {
         return $this->hasMany(SupportMessage::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

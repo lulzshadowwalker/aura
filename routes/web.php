@@ -21,3 +21,11 @@ Route::get("/contact", [ContactController::class, "index"])->name(
 Route::post("/contact", [ContactController::class, "store"])->name(
     "contact.store"
 );
+
+Route::get("/products/{product}", function ($product) {
+    throw new Exception("Product page not implemented yet");
+})->name("products.show");
+
+Route::get("/collections/{collection}", function ($collection) {
+    throw new Exception("Collection page not implemented yet");
+})->name("collections.show");
