@@ -12,7 +12,7 @@
     <nav>
       <h6 class="footer-title">Legal</h6>
       <a class="link link-hover">Terms of use</a>
-      <a class="link link-hover">Return Policy</a>
+      <a href="{{ route('return-policy.index') }}" class="link link-hover">Return Policy</a>
     </nav>
 
     <nav>

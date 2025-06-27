@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ReturnPolicyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -29,3 +30,7 @@ Route::get("/products/{product}", function ($product) {
 Route::get("/collections/{collection}", function ($collection) {
     throw new Exception("Collection page not implemented yet");
 })->name("collections.show");
+
+Route::get("/return-policy", [ReturnPolicyController::class, "index"])->name(
+    "return-policy.index"
+);
