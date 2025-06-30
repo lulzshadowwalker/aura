@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cookie">
+<html lang="en" data-theme="lofi">
 
 <head>
     <meta charset="UTF-8">
@@ -11,12 +11,13 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-    <x-header :collections="$collections"></x-header>
+    <x-header :collections="$collections" />
     <main class="flex-1">
         {{ $slot }}
     </main>
     <x-flash-messages />
-    <x-footer :collections="$collections"></x-footer>
+    <x-footer :collections="$collections" />
+    <x-cart-fab />
 
     <!-- FontAwesomeIcons -->
     <script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>

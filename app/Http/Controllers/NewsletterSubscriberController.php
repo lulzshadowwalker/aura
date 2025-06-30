@@ -9,7 +9,6 @@ class NewsletterSubscriberController extends Controller
 {
     public function store(Request $request)
     {
-        sleep(2);
         $request->validate(['email' => 'required|email']);
 
         if (NewsletterSubscriber::where('email', $request->input('email'))->exists()) {

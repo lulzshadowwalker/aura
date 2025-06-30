@@ -9,7 +9,7 @@
 @plugin "daisyui" {
     themes:
         light --default,
-        /* dark --prefersdark, */ cookie;
+        /* dark --prefersdark, */ lofi;
 }
 
 .spinner {
