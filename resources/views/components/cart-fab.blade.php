@@ -1,10 +1,10 @@
 <div x-data="{ cartOpen: false }" @keydown.escape.window="cartOpen = false">
     <!-- Cart FAB -->
     <div class="fixed bottom-6 right-6 z-40">
-        <button @click="cartOpen = true" class="btn btn-primary btn-circle shadow-lg" aria-label="Open cart">
-            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+        <button @click="cartOpen = true" class="btn btn-primary btn-circle btn-lg shadow-lg" aria-label="Open cart">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
             <!-- Cart count -->
-            <div class="badge badge-secondary absolute -top-1 -right-1">3</div>
+            <div class="badge badge-secondary absolute -top-3 -end-3">3</div>
         </button>
     </div>
 
@@ -49,9 +49,9 @@
         <div class="flex-1 overflow-y-auto p-6 space-y-6">
             <!-- Sample Cart Item 1 -->
             <div class="flex items-start space-x-4">
-                <img src="https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-perfume-bottle-mockup-cutout-png-file-png-image_11588760.png" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300">
+                <img src="https://i.imgur.com/n9GsysZ.png" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300 scale-140 -translate-y-4">
                 <div class="flex-1">
-                    <h3 class="text-lg font-semibold text-base-content">Mystic Bloom</h3>
+                    <h3 class="text-lg font-semibold text-base-content">Layaly</h3>
                     <p class="text-sm font-light text-neutral-500">Eau de Parfum - 50ml</p>
                     <p class="text-lg font-bold text-base-content mt-2">$120.00</p>
                 </div>
@@ -69,9 +69,9 @@
 
             <!-- Sample Cart Item 2 -->
             <div class="flex items-start space-x-4">
-                <img src="https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-perfume-bottle-mockup-cutout-png-file-png-image_11588760.png" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300">
+                <img src="https://i.imgur.com/8YKjZsa.png" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300 scale-140 -translate-4">
                 <div class="flex-1">
-                    <h3 class="text-lg font-semibold text-base-content">Ocean Breeze</h3>
+                    <h3 class="text-lg font-semibold text-base-content">Asrar</h3>
                     <p class="text-sm font-light text-neutral-500">Eau de Toilette - 100ml</p>
                     <p class="text-lg font-bold text-base-content mt-2">$85.00</p>
                 </div>

@@ -4,12 +4,13 @@
 @source "../**/*.js";
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
+@source "../../node_modules/alpine-tailwind-lightbox/src/template.html";
 
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
     themes:
         light --default,
-        /* dark --prefersdark, */ lofi;
+        /* dark --prefersdark, */ cookie;
 }
 
 .spinner {

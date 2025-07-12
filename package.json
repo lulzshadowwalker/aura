@@ -18,6 +18,8 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
-        "@imacrayon/alpine-ajax": "^0.12.3"
+        "@alpinejs/focus": "^3.14.9",
+        "@imacrayon/alpine-ajax": "^0.12.3",
+        "alpine-tailwind-lightbox": "^1.1.0"
     }
 }

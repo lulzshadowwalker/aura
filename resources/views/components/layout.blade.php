@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="lofi">
+<html lang="en" data-theme="cookie">
 
 <head>
     <meta charset="UTF-8">

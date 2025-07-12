@@ -20,7 +20,7 @@ class CategoryFactory extends BaseFactory
     {
         return [
             "name" => $this->localized(
-                fn(): string => fake()->unique()->word()
+                fn(): string => fake()->unique()->sentence(2, 3)
             ),
             "slug" => fake()->unique()->slug(),
         ];

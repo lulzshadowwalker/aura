@@ -23,7 +23,7 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'rating' => fake()->numberBetween(-10000, 10000),
+            'rating' => intval(fake()->numberBetween(0, 5)),
             'content' => fake()->paragraphs(3, true),
             'product_id' => Product::factory(),
             'customer_id' => Customer::factory(),

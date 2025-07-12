@@ -20,11 +20,11 @@ class ProductFactory extends BaseFactory
     public function definition(): array
     {
         return [
-            "name" => $this->localized(fn(): string => fake()->word()),
+            "name" => $this->localized(fn(): string => fake()->sentence(2, 3)),
             "slug" => fake()->unique()->slug(),
             "sku" => fake()->unique()->word(),
             "description" => $this->localized(
-                fn(): string => fake()->sentence()
+                fn(): string => fake()->sentence(18,28)
             ),
             "is_active" => fake()->boolean(),
             "category_id" => Category::factory(),

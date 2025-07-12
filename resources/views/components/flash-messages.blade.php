@@ -27,17 +27,11 @@
     </div>
     @endif
 
-     <!-- TODO: I am not sure if this is something we should keep, maybe display a generic error message to the user -->
     @if($errors->any())
     <div class="alert alert-error gap-2">
         <i class="fa-solid fa-circle-exclamation"></i>
         <div>
-            <span class="font-semibold">Please fix the following errors:</span>
-            <ul class="mt-1 text-sm">
-                @foreach($errors->all() as $error)
-                <li>• {{ $error }}</li>
-                @endforeach
-            </ul>
+            {{ str_replace(".", "", collect($errors->all())->join(', '))}}.
         </div>
     </div>
     @endif

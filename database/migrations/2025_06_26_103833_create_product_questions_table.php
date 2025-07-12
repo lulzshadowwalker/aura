@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
+            $table->text('question');
             $table->string('email')->nullable();
-            $table->string('answer')->nullable();
+            $table->text('answer')->nullable();
             $table->foreignId('product_id');
             $table->foreignId('customer_id');
             $table->timestamps();
