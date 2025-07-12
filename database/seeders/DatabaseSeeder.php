@@ -10,7 +10,6 @@ use App\Models\Customer;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Product;
-use App\Models\ProductVariant;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
@@ -20,6 +19,7 @@ use App\Models\Favorite;
 use App\Models\ProductQuestion;
 use App\Models\PromoCode;
 use App\Models\NewsletterSubscriber;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,10 +43,7 @@ class DatabaseSeeder extends Seeder
         // Create collections
         $collections = Collection::factory(4)->create();
 
-        // Create products and variants
-        $products = Product::factory(12)
-            ->has(ProductVariant::factory()->count(2), "productVariants")
-            ->create();
+        $products = Product::factory(12)->create();
 
         // Attach products to random collections (many-to-many)
         foreach ($products as $product) {
@@ -94,7 +91,7 @@ class DatabaseSeeder extends Seeder
             ]);
             CartItem::factory(rand(1, 3))->create([
                 "cart_id" => $cart->id,
-                "product_variant_id" => ProductVariant::inRandomOrder()->first()
+                "product_id" => Product::inRandomOrder()->first()
                     ->id,
             ]);
         }
@@ -102,11 +99,11 @@ class DatabaseSeeder extends Seeder
         // Create a guest cart
         $guestCart = Cart::factory()->create([
             "customer_id" => null,
-            "session_id" => \Str::uuid(),
+            "session_id" => Str::uuid(),
         ]);
         CartItem::factory(rand(1, 2))->create([
             "cart_id" => $guestCart->id,
-            "product_variant_id" => ProductVariant::inRandomOrder()->first()
+            "product_id" => Product::inRandomOrder()->first()
                 ->id,
         ]);
 
@@ -117,7 +114,7 @@ class DatabaseSeeder extends Seeder
             ]);
             $orderItems = OrderItem::factory(rand(1, 3))->create([
                 "order_id" => $order->id,
-                "product_variant_id" => ProductVariant::inRandomOrder()->first()
+                "product_id" => Product::inRandomOrder()->first()
                     ->id,
             ]);
         }

@@ -114,34 +114,6 @@
                             </div>
                         </div>
 
-                        <!-- Size/Variant Selection -->
-                        <!-- <div x-data="{ selectedSize: '100ml', selectedPrice: 120.00 }">
-                            <div class="flex justify-between items-baseline mb-4">
-                                <h3 class="text-lg font-medium text-gray-800">Size</h3>
-                                <div class="text-right">
-                                    <span class="text-2xl line-through text-gray-400 mr-2">$160.00</span>
-                                    <span class="text-3xl font-light text-primary" x-text="`$${selectedPrice.toFixed(2)}`"></span>
-                                </div>
-                            </div>
-                            <div class="flex gap-3">
-                                <button class="btn btn-outline flex-1"
-                                    :class="selectedSize === '50ml' ? 'btn-primary' : ''"
-                                    @click="selectedSize = '50ml'; selectedPrice = 90.00">
-                                    50ml
-                                </button>
-                                <button class="btn btn-outline flex-1"
-                                    :class="selectedSize === '100ml' ? 'btn-primary' : ''"
-                                    @click="selectedSize = '100ml'; selectedPrice = 120.00">
-                                    100ml
-                                </button>
-                                <button class="btn btn-outline flex-1"
-                                    :class="selectedSize === '150ml' ? 'btn-primary' : ''"
-                                    @click="selectedSize = '150ml'; selectedPrice = 180.00">
-                                    150ml
-                                </button>
-                            </div>
-                        </div> -->
-
                         <!-- Add to Cart -->
                         <div class="flex items-center gap-3">
                             <button class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">

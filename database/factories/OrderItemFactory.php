@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\ProductVariant;
+use App\Models\Product;
 
 class OrderItemFactory extends Factory
 {
@@ -35,7 +35,6 @@ class OrderItemFactory extends Factory
 
         return [
             "product_name" => "Perfume",
-            "variant_name" => "{$size}ml",
             "sku" =>
                 "PRF-" .
                 fake()->unique()->numberBetween(100, 999) .
@@ -45,7 +44,7 @@ class OrderItemFactory extends Factory
             "subtotal" => $subtotal,
             "total" => $subtotal,
             "order_id" => Order::factory(),
-            "product_variant_id" => ProductVariant::factory(),
+            "product_id" => Product::factory(),
         ];
     }
 }

@@ -28,6 +28,8 @@ class Product extends Model implements HasMedia
         "description",
         "is_active",
         "category_id",
+        "price",
+        "sale_price",
     ];
 
     /**
@@ -41,6 +43,8 @@ class Product extends Model implements HasMedia
             "id" => "integer",
             "is_active" => "boolean",
             "category_id" => "integer",
+            "sale_price" => "decimal",
+            "product_id" => "integer",
         ];
     }
 
@@ -54,11 +58,6 @@ class Product extends Model implements HasMedia
     public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class);
-    }
-
-    public function productVariants(): HasMany
-    {
-        return $this->hasMany(ProductVariant::class);
     }
 
     public function reviews(): HasMany
@@ -103,5 +102,15 @@ class Product extends Model implements HasMedia
                 ->where("product_id", $this->id)
                 ->exists()
         );
+    }
+
+    public function cartItems(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }
