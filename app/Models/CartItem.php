@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CartItem extends Model
 {
     use HasFactory;
+    
+    protected $touches = ['cart'];
 
     /**
      * The attributes that are mass assignable.

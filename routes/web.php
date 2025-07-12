@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductQuestionController;
+use App\Http\Controllers\Web\CartItemController;
 
 Route::get("/", [HomeController::class, "index"])->name("home.index");
 
@@ -54,3 +55,8 @@ Route::post("/newsletter-subscribers", [
     NewsletterSubscriberController::class,
     "store",
 ])->name("newsletter-subscribers.store");
+
+Route::post('/cart/items/{product:slug}', [CartItemController::class, 'store'])->name('cart.items.add');
+Route::post('/cart/items/{cartItem}/increment', [CartItemController::class, 'increment'])->name('cart.items.increment');
+Route::post('/cart/items/{cartItem}/decrement', [CartItemController::class, 'decrement'])->name('cart.items.decrement');
+Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.items.remove');

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Factories\CartFactory;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -21,6 +22,7 @@ class CartFab extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.cart-fab');
+        $cart = CartFactory::make();
+        return view('components.cart-fab', compact('cart'));
     }
 }

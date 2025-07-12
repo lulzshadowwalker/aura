@@ -116,10 +116,13 @@
 
                         <!-- Add to Cart -->
                         <div class="flex items-center gap-3">
-                            <button class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
-                                <i class="fas fa-shopping-bag mr-2"></i>
-                                Add to Bag
-                            </button>
+                            <form x-target="js-cart-fab js-cart-slideover" action="{{ route('cart.items.add', $product->slug) }}" method="POST" class="flex justify-stretch w-full">
+                                @csrf
+                                <button class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
+                                    <i class="fas fa-shopping-bag mr-2"></i>
+                                    Add to Bag
+                                </button>
+                            </form
                             <button class="btn btn-outline btn-lg btn-square"
                                 aria-label="Add to Favorites"
                                 title="Add to Favorites">
