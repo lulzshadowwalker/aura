@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +37,7 @@ class OrderItem extends Model
         return [
             'id' => 'integer',
             'unit_price' => 'decimal',
+            'price' => MoneyCast::class . ':unit_price',
             'subtotal' => 'decimal',
             'total' => 'decimal',
             'order_id' => 'integer',

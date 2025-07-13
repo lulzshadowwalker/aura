@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Faq;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -41,7 +42,7 @@ class ContactControllerTest extends TestCase
 
     public function test_form_is_prefilled_with_current_user_details_if_authenticated(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->has(Customer::factory())->create();
         auth()->login($user);
 
         $this->get(route("contact.index"))

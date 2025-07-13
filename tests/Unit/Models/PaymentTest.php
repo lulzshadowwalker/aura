@@ -27,10 +27,10 @@ class PaymentTest extends TestCase
         $payment = Payment::factory()->pending()->create();
         $payment->update(['status' => PaymentStatus::paid]);
 
-        // Notification::assertSentTo(
-        //     $payment->payable->payer(),
-        //     InvoicePaid::class
-        // );
+        Notification::assertSentTo(
+            $payment->payable->payer(),
+            InvoicePaid::class
+        );
     }
 
     public function test_an_invoice_is_sent_when_payment_is_created_with_paid_status()
@@ -39,10 +39,10 @@ class PaymentTest extends TestCase
 
         $payment = Payment::factory()->paid()->create();
 
-        // Notification::assertSentTo(
-        //     $payment->payable->payer(),
-        //     InvoicePaid::class
-        // );
+        Notification::assertSentTo(
+            $payment->payable->payer(),
+            InvoicePaid::class
+        );
     }
 }
 

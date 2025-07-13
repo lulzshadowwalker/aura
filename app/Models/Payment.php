@@ -62,10 +62,10 @@ class Payment extends Model
         return $this->morphTo();
     }
 
-    // public function invoice(): HasOne
-    // {
-    //     return $this->hasOne(Invoice::class);
-    // }
+    public function invoice(): HasOne
+    {
+        return $this->hasOne(Invoice::class);
+    }
 
     public function user(): BelongsTo
     {
