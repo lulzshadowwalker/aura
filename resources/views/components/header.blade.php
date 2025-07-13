@@ -21,12 +21,13 @@
       </li>
       <li><a href="{{ route('products.index') }}">Products</a></li>
 
+      @if (auth()->check())
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              src="{{ auth()->user()->avatar }}" />
           </div>
         </div>
 
@@ -40,9 +41,17 @@
             </a>
           </li>
           <li><a class="text-sm">Settings</a></li>
-          <li><a class="text-sm">Logout</a></li>
+          <li>
+            <form method="post" action="{{ route('auth.logout') }}" class="w-full">
+              @csrf
+              <button type="submit" class="text-sm w-full">Logout</button>
+            </form>
+          </li>
         </ul>
       </div>
+      @else 
+      <x-auth-button />
+      @endif
     </ul>
   </div>
 </header>

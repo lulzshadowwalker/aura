@@ -10,7 +10,7 @@ class FavoriteController extends Controller
     {
         //  TODO: Session and Customer favorites
         //  TODO: MigrateSessionFavoritesAction
-        $customer = \App\Models\Customer::first();
+        $customer = auth()->user()?->customer;
 
         $exists = $customer
             ->favorites()

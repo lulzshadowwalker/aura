@@ -64,7 +64,7 @@ class User extends Authenticatable implements HasMedia
     public function avatar(): Attribute
     {
         return Attribute::get(
-            fn() => $this->getFirstMedia(self::MEDIA_COLLECTION_AVATAR) ?:
+            fn() => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_AVATAR) ?:
                 null
         );
     }

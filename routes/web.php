@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReturnPolicyController;
 use App\Http\Controllers\TermsController;
@@ -60,3 +61,10 @@ Route::post('/cart/items/{product:slug}', [CartItemController::class, 'store'])-
 Route::post('/cart/items/{cartItem}/increment', [CartItemController::class, 'increment'])->name('cart.items.increment');
 Route::post('/cart/items/{cartItem}/decrement', [CartItemController::class, 'decrement'])->name('cart.items.decrement');
 Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.items.remove');
+
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/otp', [AuthController::class, 'sendOtp'])->name('otp');
+    Route::get('/google', [AuthController::class, 'redirectToGoogle'])->name('google');
+    Route::get('/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.callback');
+});
