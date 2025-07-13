@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Customer;
 use App\Models\Order;
 
@@ -37,7 +36,7 @@ class OrderFactory extends Factory
             "discount_amount" => $discountAmount,
             "total" => $total,
             "promo_code" => fake()->randomElement($promoCodes),
-            "customer_id" => fake()->boolean(80) ? Customer::factory() : null,
+            "customer_id" => Customer::factory(),
         ];
     }
 }
