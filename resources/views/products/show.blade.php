@@ -352,7 +352,7 @@
                         <div class="text-center">
                             <h4 class="font-medium text-gray-800 mb-1">{{ $product['name'] }}</h4>
                             <p class="text-sm text-gray-500 mb-2">{{ $product['type'] }}</p>
-                            <p class="font-medium text-gray-900">${{ $product['price'] }}.00</p>
+                            <p class="font-medium text-gray-900">${{ $product['amount'] }}.00</p>
                         </div>
                     </div>
                     @endforeach

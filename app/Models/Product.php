@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,8 +29,8 @@ class Product extends Model implements HasMedia
         "description",
         "is_active",
         "category_id",
-        "price",
-        "sale_price",
+        "amount",
+        "sale_amount",
     ];
 
     /**
@@ -43,7 +44,8 @@ class Product extends Model implements HasMedia
             "id" => "integer",
             "is_active" => "boolean",
             "category_id" => "integer",
-            "sale_price" => "decimal",
+            "sale_price" => MoneyCast::class . ":sale_amount",
+            "price" => MoneyCast::class,
             "product_id" => "integer",
         ];
     }
