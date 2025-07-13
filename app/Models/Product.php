@@ -76,6 +76,7 @@ class Product extends Model implements HasMedia
     }
 
     const MEDIA_COLLECTION_IMAGES = "product.images";
+    const MEDIA_COLLECTION_COVER = "product.cover";
 
     public function registerMediaCollections(): void
     {
@@ -86,6 +87,13 @@ class Product extends Model implements HasMedia
     {
         return Attribute::get(function () {
             return $this->getMedia(self::MEDIA_COLLECTION_IMAGES);
+        });
+    }
+
+    public function cover(): Attribute
+    {
+        return Attribute::get(function () {
+            return $this->getFirstMedia(self::MEDIA_COLLECTION_COVER);
         });
     }
 
