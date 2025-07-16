@@ -35,9 +35,9 @@ class Order extends Model
     {
         return [
             "id" => "integer",
-            "subtotal" => "decimal",
-            "discount_amount" => "decimal",
-            "total" => "decimal",
+            "subtotal" => "decimal:2",
+            "discount_amount" => "decimal:2",
+            "total" => "decimal:2",
             "customer_id" => "integer",
         ];
     }
