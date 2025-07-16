@@ -3,44 +3,61 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductQuestionResource\Pages;
-use App\Filament\Resources\ProductQuestionResource\RelationManagers;
 use App\Models\ProductQuestion;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductQuestionResource extends Resource
 {
     protected static ?string $model = ProductQuestion::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('question')
-                    ->required()
-                    ->columnSpanFull(),
+                Forms\Components\Section::make('Question & Answer')
+                    ->description('View the question and provide an answer.')
+                    ->aside()
+                    ->schema([
+                        Forms\Components\Textarea::make('question')
+                            ->required()
+                            ->disabled()
+                            ->helperText('The question asked by the customer.')
+                            ->columnSpanFull(),
 
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->disabled()
+                            ->helperText('The email of the person who asked the question.')
+                            ->maxLength(255),
 
-                Forms\Components\Textarea::make('answer')
-                    ->columnSpanFull(),
+                        Forms\Components\Textarea::make('answer')
+                            ->helperText('Provide an answer to the question.')
+                            ->columnSpanFull(),
+                    ]),
 
-                Forms\Components\Select::make('product_id')
-                    ->relationship('product', 'name')
-                    ->required(),
+                Forms\Components\Section::make('Associations')
+                    ->description('Product and customer associated with this question.')
+                    ->aside()
+                    ->schema([
+                        Forms\Components\Select::make('product_id')
+                            ->relationship('product', 'name')
+                            ->required()
+                            ->disabled()
+                            ->helperText('The product this question is about.'),
 
-                Forms\Components\Select::make('customer_id')
-                    ->relationship('customer.user', 'name')
-                    ->required(),
+                        Forms\Components\Select::make('customer_id')
+                            ->relationship('customer.user', 'name')
+                            ->disabled()
+                            ->helperText('The customer who asked the question.'),
+                    ]),
             ]);
     }
 
@@ -48,28 +65,38 @@ class ProductQuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('product.name')
+                    ->sortable()
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn (ProductQuestion $record) => $record->product->name),
+
+                Tables\Columns\TextColumn::make('customer.user.name')
+                    ->sortable()
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn (ProductQuestion $record) => $record->customer->user->name),
 
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
-                    ->sortable()
-                    ->limit(40),
+                    ->limit(40)
+                    ->tooltip(fn (ProductQuestion $record) => $record->question),
 
-                Tables\Columns\TextColumn::make('product.name')
-                    ->numeric()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('customer.user.name')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('answer')
+                    ->searchable()
+                    ->limit(40)
+                    ->tooltip(fn (ProductQuestion $record) => $record->answer),
 
                 Tables\Columns\IconColumn::make('is_answered')
-                    ->sortable()
-                    ->toggleable()
                     ->label('Answered')
                     ->boolean()
-                    ->alignCenter()
-                    ->getStateUsing(fn($record) => $record->isAnswered),
+                    ->alignCenter(),
+
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Email address copied')
+                    ->copyMessageDuration(1500),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -82,10 +109,21 @@ class ProductQuestionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                TernaryFilter::make('is_answered')
+                    ->label('Answered Status')
+                    ->boolean()
+                    ->trueLabel('Answered')
+                    ->falseLabel('Unanswered')
+                    ->queries(
+                        true: fn (Builder $query) => $query->whereNotNull('answer'),
+                        false: fn (Builder $query) => $query->whereNull('answer'),
+                        blank: fn (Builder $query) => $query,
+                    )
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
+                Tables\Actions\ViewAction::make()->slideOver(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -108,5 +146,15 @@ class ProductQuestionResource extends Resource
             'index' => Pages\ListProductQuestions::route('/'),
             'edit' => Pages\EditProductQuestion::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereNull('answer')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::whereNull('answer')->count() > 0 ? 'warning' : 'primary';
     }
 }

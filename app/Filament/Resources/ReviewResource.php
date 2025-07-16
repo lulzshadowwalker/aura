@@ -3,42 +3,58 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
-use App\Filament\Resources\ReviewResource\RelationManagers;
 use App\Models\Review;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\SelectFilter;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('rating')
-                    ->required()
-                    ->numeric()
-                    ->minValue(1)
-                    ->maxValue(5),
+                Forms\Components\Section::make('Review Details')
+                    ->description('View the details of the review.')
+                    ->aside()
+                    ->schema([
+                        Forms\Components\TextInput::make('rating')
+                            ->required()
+                            ->numeric()
+                            ->minValue(1)
+                            ->maxValue(5)
+                            ->disabled()
+                            ->helperText('The star rating given by the customer.'),
 
-                Forms\Components\Textarea::make('content')
-                    ->required()
-                    ->columnSpanFull(),
+                        Forms\Components\Textarea::make('content')
+                            ->required()
+                            ->disabled()
+                            ->helperText('The content of the review.')
+                            ->columnSpanFull(),
+                    ]),
 
-                Forms\Components\Select::make('product_id')
-                    ->relationship('product', 'name')
-                    ->required(),
+                Forms\Components\Section::make('Associations')
+                    ->description('Product and customer associated with this review.')
+                    ->aside()
+                    ->schema([
+                        Forms\Components\Select::make('product_id')
+                            ->relationship('product', 'name')
+                            ->required()
+                            ->disabled()
+                            ->helperText('The product that was reviewed.'),
 
-                Forms\Components\Select::make('customer_id')
-                    ->relationship('customer.user', 'name'),
+                        Forms\Components\Select::make('customer_id')
+                            ->relationship('customer.user', 'name')
+                            ->disabled()
+                            ->helperText('The customer who wrote the review.'),
+                    ]),
             ]);
     }
 
@@ -52,11 +68,21 @@ class ReviewResource extends Resource
                     ->formatStateUsing(fn ($state) => str_repeat('★', $state) . str_repeat('☆', 5 - $state)),
 
                 Tables\Columns\TextColumn::make('product.name')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn (Review $record) => $record->product->name),
 
                 Tables\Columns\TextColumn::make('customer.user.name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(fn (Review $record) => $record->customer->user->name),
+
+                Tables\Columns\TextColumn::make('content')
+                    ->searchable()
+                    ->limit(40)
+                    ->tooltip(fn (Review $record) => $record->content),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -69,17 +95,26 @@ class ReviewResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('rating')
+                    ->options([
+                        5 => '★★★★★',
+                        4 => '★★★★☆',
+                        3 => '★★★☆☆',
+                        2 => '★★☆☆☆',
+                        1 => '★☆☆☆☆',
+                    ])
+                    ->multiple(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->slideOver(),
+                Tables\Actions\ViewAction::make()->slideOver(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -95,5 +130,15 @@ class ReviewResource extends Resource
             'index' => Pages\ListReviews::route('/'),
             'edit' => Pages\EditReview::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'primary' : 'gray';
     }
 }
