@@ -69,6 +69,7 @@ class ProductQuestionResource extends Resource
                     ->toggleable()
                     ->label('Answered')
                     ->boolean()
+                    ->alignCenter()
                     ->getStateUsing(fn($record) => $record->isAnswered),
 
                 Tables\Columns\TextColumn::make('created_at')
