@@ -2,5 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    \SocialiteProviders\Manager\ServiceProvider::class,
+    App\Providers\Filament\AdminPanelProvider::class,
+    SocialiteProviders\Manager\ServiceProvider::class,
 ];

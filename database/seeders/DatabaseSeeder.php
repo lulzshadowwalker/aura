@@ -31,7 +31,9 @@ class DatabaseSeeder extends Seeder
         // Create an admin user
         User::factory()->create([
             "name" => "Admin User",
-            "email" => "admin@perfumestore.com",
+            "email" => "admin@example.com",
+            "password" => "password",
+            "is_admin" => true,
         ]);
 
         // Create customers
