@@ -43,7 +43,8 @@ class Product extends Model implements HasMedia
             "id" => "integer",
             "is_active" => "boolean",
             "category_id" => "integer",
-            "sale_price" => "decimal",
+            "price" => "decimal:2",
+            "sale_price" => "decimal:2",
             "product_id" => "integer",
         ];
     }
