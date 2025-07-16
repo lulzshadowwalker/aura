@@ -59,7 +59,6 @@ class SupportMessageResource extends Resource
 
                 Tables\Columns\TextColumn::make('customer.user.name')
                     ->label('Customer')
-                    ->numeric()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')

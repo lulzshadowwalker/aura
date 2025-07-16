@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductQuestionResource\Pages;
-use App\Filament\Resources\ProductQuestionResource\RelationManagers;
-use App\Models\ProductQuestion;
+use App\Filament\Resources\ReviewResource\Pages;
+use App\Filament\Resources\ReviewResource\RelationManagers;
+use App\Models\Review;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProductQuestionResource extends Resource
+class ReviewResource extends Resource
 {
-    protected static ?string $model = ProductQuestion::class;
+    protected static ?string $model = Review::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,15 +23,14 @@ class ProductQuestionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('question')
+                Forms\Components\TextInput::make('rating')
                     ->required()
-                    ->columnSpanFull(),
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(5),
 
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255),
-
-                Forms\Components\Textarea::make('answer')
+                Forms\Components\Textarea::make('content')
+                    ->required()
                     ->columnSpanFull(),
 
                 Forms\Components\Select::make('product_id')
@@ -39,8 +38,7 @@ class ProductQuestionResource extends Resource
                     ->required(),
 
                 Forms\Components\Select::make('customer_id')
-                    ->relationship('customer.user', 'name')
-                    ->required(),
+                    ->relationship('customer.user', 'name'),
             ]);
     }
 
@@ -48,13 +46,10 @@ class ProductQuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('question')
-                    ->searchable()
+                Tables\Columns\TextColumn::make('rating')
+                    ->numeric()
                     ->sortable()
-                    ->limit(40),
+                    ->formatStateUsing(fn ($state) => str_repeat('★', $state) . str_repeat('☆', 5 - $state)),
 
                 Tables\Columns\TextColumn::make('product.name')
                     ->numeric()
@@ -62,14 +57,6 @@ class ProductQuestionResource extends Resource
 
                 Tables\Columns\TextColumn::make('customer.user.name')
                     ->sortable(),
-
-                Tables\Columns\IconColumn::make('is_answered')
-                    ->sortable()
-                    ->toggleable()
-                    ->label('Answered')
-                    ->boolean()
-                    ->alignCenter()
-                    ->getStateUsing(fn($record) => $record->isAnswered),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -85,14 +72,14 @@ class ProductQuestionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
+                Tables\Actions\ViewAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->defaultSort('created_at', 'desc');
+            ]);
     }
 
     public static function getRelations(): array
@@ -105,8 +92,8 @@ class ProductQuestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProductQuestions::route('/'),
-            'edit' => Pages\EditProductQuestion::route('/{record}/edit'),
+            'index' => Pages\ListReviews::route('/'),
+            'edit' => Pages\EditReview::route('/{record}/edit'),
         ];
     }
 }
