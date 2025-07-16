@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SupportMessageResource\Pages;
-use App\Filament\Resources\SupportMessageResource\RelationManagers;
-use App\Models\SupportMessage;
+use App\Filament\Resources\ProductQuestionResource\Pages;
+use App\Filament\Resources\ProductQuestionResource\RelationManagers;
+use App\Models\ProductQuestion;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SupportMessageResource extends Resource
+class ProductQuestionResource extends Resource
 {
-    protected static ?string $model = SupportMessage::class;
+    protected static ?string $model = ProductQuestion::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,25 +23,24 @@ class SupportMessageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('message')
+                Forms\Components\Textarea::make('question')
                     ->required()
                     ->columnSpanFull(),
 
-                Forms\Components\Select::make('customer_id')
-                    ->label('Customer')
-                    ->relationship('customer.user', 'name')
-                    ->searchable()
-                    ->required()
-                    ->preload()
-                    ->disabled()
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->maxLength(255),
+
+                Forms\Components\Textarea::make('answer')
                     ->columnSpanFull(),
+
+                Forms\Components\Select::make('product_id')
+                    ->relationship('product', 'name')
+                    ->required(),
+
+                Forms\Components\Select::make('customer_id')
+                    ->relationship('customer.user', 'name')
+                    ->required(),
             ]);
     }
 
@@ -49,18 +48,28 @@ class SupportMessageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
-                    ->searchable(),
-
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('customer.user.name')
-                    ->label('Customer')
+                Tables\Columns\TextColumn::make('question')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(40),
+
+                Tables\Columns\TextColumn::make('product.name')
                     ->numeric()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('customer.user.name')
+                    ->numeric()
+                    ->sortable(),
+
+                Tables\Columns\IconColumn::make('is_answered')
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Answered')
+                    ->boolean()
+                    ->getStateUsing(fn($record) => $record->isAnswered),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -76,7 +85,7 @@ class SupportMessageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->slideOver(),
+                Tables\Actions\EditAction::make()->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -96,8 +105,8 @@ class SupportMessageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSupportMessages::route('/'),
-            'edit' => Pages\EditSupportMessage::route('/{record}/edit'),
+            'index' => Pages\ListProductQuestions::route('/'),
+            'edit' => Pages\EditProductQuestion::route('/{record}/edit'),
         ];
     }
 }
