@@ -122,12 +122,16 @@
                                     <i class="fas fa-shopping-bag mr-2"></i>
                                     Add to Bag
                                 </button>
-                            </form
-                            <button class="btn btn-outline btn-lg btn-square"
-                                aria-label="Add to Favorites"
-                                title="Add to Favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                            </form>
+                            <form id="js-favorite" x-target action="{{ route('favorites.store') }}" method="post" data-tip="{{ $product->isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button class="btn btn-outline btn-lg btn-square"
+                                    aria-label="Add to Favorites"
+                                    title="Add to Favorites">
+                                    <i @class(["fas fa-heart", "text-red-400" => $product->isFavorite])></i>
+                                </button>
+                            </form>
                         </div>
 
                         <!-- Additional Info -->

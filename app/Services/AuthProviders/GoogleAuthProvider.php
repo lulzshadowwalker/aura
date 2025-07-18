@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class GoogleAuthProvider implements AuthProvider
 {
@@ -59,10 +60,15 @@ class GoogleAuthProvider implements AuthProvider
 
         Auth::login($user);
         DB::commit();
-        return redirect('/')->with('success', 'Logged in successfully!');
+        return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
     } catch (Exception $e) {
+        Log::error('Google login error: ' . $e->getMessage(), [
+            'user_id' => $googleUser->id ?? null,
+            'email' => $googleUser->getEmail() ?? null,
+        ]);
+
         DB::rollBack();
-        return redirect('/')->with('error', 'Failed to log in: ' . $e->getMessage());
+        return redirect('/')->with('error', 'Failed to log in. Please try again later.');
     }
 }
 
