@@ -48,6 +48,12 @@
           </div>
         @endif
       </section>
+
+      @if(!$loop->last)
+        <div class="my-16">
+          <x-banner-card :image="asset('assets/images/sample-' . ($loop->iteration % 3 + 1) . '.jpeg')" />
+        </div>
+      @endif
     @endforeach
   </div>
 </x-layout>
