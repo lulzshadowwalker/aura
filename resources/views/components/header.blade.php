@@ -18,7 +18,7 @@
 
         <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
           @foreach ($collections as $key => $collection)
-          <li><a href="#" class="text-sm">{{ $collection->name }}</a></li>
+          <li><a href="/#{{ $collection->slug }}" class="text-sm">{{ $collection->name }}</a></li>
           @endforeach
         </ul>
       </li>

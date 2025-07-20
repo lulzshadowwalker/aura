@@ -5,7 +5,7 @@
     <nav>
       <h6 class="footer-title">Collections</h6>
       @foreach ($collections as $collection)
-      <a class="link link-hover">{{ $collection->name }}</a>
+      <a href="/#{{ $collection->slug }}" class="link link-hover">{{ $collection->name }}</a>
       @endforeach
     </nav>
 

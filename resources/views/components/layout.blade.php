@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cookie">
+<html lang="en" data-theme="cookie" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">

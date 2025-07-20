@@ -23,7 +23,7 @@
   <div class="container mx-auto px-4 my-12 max-md:my-8">
     <h2 class="sr-only">Our Collections</h2>
     @foreach ($collections as $collection)
-      <section class="mb-16 last:mb-0">
+      <section id="{{ $collection->slug }}" class="mb-16 last:mb-0">
         <header class="mb-8">
           <h3 class="text-3xl lg:text-4xl font-light tracking-wide mb-2">{{ $collection->name }}</h3>
           <p class="text-lg text-base-content/70">{{ $collection->description }}</p>
