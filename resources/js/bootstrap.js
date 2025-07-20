@@ -4,6 +4,14 @@ import Alpine from "alpinejs";
 import ajax from "@imacrayon/alpine-ajax";
 import focus from '@alpinejs/focus'
 import lightbox from 'alpine-tailwind-lightbox'
+import posthog from 'posthog-js'
+
+posthog.init(import.meta.env.VITE_POSTHOG_API_KEY,
+    {
+        api_host: import.meta.env.VITE_POSTHOG_API_HOST,
+        person_profiles: 'always'
+    }
+)
 
 window.Alpine = Alpine;
 Alpine.plugin(ajax);
