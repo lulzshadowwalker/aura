@@ -13,9 +13,7 @@ use App\Http\Controllers\Web\CartItemController;
 
 Route::get("/", [HomeController::class, "index"])->name("home.index");
 
-Route::get("/products", function () {
-    throw new Exception("Products page not implemented yet");
-})->name("products.index");
+Route::get("/products", [ProductController::class, 'index'])->name("products.index");
 
 Route::get("/collections", function () {
     throw new Exception("Collections page not implemented yet");

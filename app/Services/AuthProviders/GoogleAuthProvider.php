@@ -63,8 +63,8 @@ class GoogleAuthProvider implements AuthProvider
         return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
     } catch (Exception $e) {
         Log::error('Google login error: ' . $e->getMessage(), [
-            'user_id' => $googleUser->id ?? null,
-            'email' => $googleUser->getEmail() ?? null,
+            'user_id' => $googleUser?->id ?? null,
+            'email' => $googleUser?->getEmail() ?? null,
         ]);
 
         DB::rollBack();
