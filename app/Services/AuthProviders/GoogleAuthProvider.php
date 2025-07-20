@@ -50,11 +50,11 @@ class GoogleAuthProvider implements AuthProvider
 
         if ($avatar = $googleUser->getAvatar()) {
             $user->addMediaFromUrl($avatar)
-                ->toMediaCollection();
+                ->toMediaCollection(User::MEDIA_COLLECTION_AVATAR);
         }
 
         // Create customer if not exists
-        if (!$user->customer) {
+        if (! $user->customer) {
             $user->customer()->create();
         }
 
