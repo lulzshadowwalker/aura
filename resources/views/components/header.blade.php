@@ -2,7 +2,10 @@
 
 <header class="navbar bg-base-100 container mx-auto">
   <div class="flex-1">
-    <a href="{{ route('home.index') }}" class="btn btn-ghost text-xl">Aura</a>
+    <a href="{{ route('home.index') }}" class="btn btn-ghost">
+    <img src="{{ asset('assets/images/logo.png') }}" alt="Northwind Logo" class="h-10">
+    <span class="text-xl font-semibold">Northwind</span>
+</a>
   </div>
 
   <div class="flex-none">
@@ -49,7 +52,7 @@
           </li>
         </ul>
       </div>
-      @else 
+      @else
       <x-auth-button />
       @endif
     </ul>
