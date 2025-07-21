@@ -33,6 +33,18 @@ class Product extends Model implements HasMedia
         "sale_price",
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function (self $product) {
+            // TODO: Implement a more robust slug generation
+            if (!$product->slug) {
+                $product->slug = str($product->name)->slug();
+            }
+        });
+    }
+
     /**
      * Get the attributes that should be cast.
      *
