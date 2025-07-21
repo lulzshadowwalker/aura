@@ -146,6 +146,11 @@
                             </form>
                         </div>
 
+                        <div class="flex items-center gap-4">
+                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5" />
+                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo" class="h-5 scale-210" />
+                        </div>
+
                         <!-- Additional Info -->
                         <div class="grid grid-cols-2 gap-4 text-sm text-gray-600">
                             <div class="flex items-center gap-2">
