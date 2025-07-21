@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string("sku")->unique();
             $table->json("description");
             $table->boolean("is_active");
-            $table->foreignId("category_id");
+            $table->foreignId("category_id")->constrained("categories");
             $table->timestamps();
         });
     }

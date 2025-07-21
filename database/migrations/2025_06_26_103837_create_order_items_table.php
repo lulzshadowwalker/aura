@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->decimal("subtotal");
             $table->decimal("total");
             $table->foreignId("order_id");
-            $table->foreignId("product_id");
+            $table->foreignId("product_id")->constrained("products");
             $table->timestamps();
         });
     }
