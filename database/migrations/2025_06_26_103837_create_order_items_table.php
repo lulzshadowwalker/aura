@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->decimal("unit_price");
             $table->decimal("subtotal");
             $table->decimal("total");
-            $table->foreignId("order_id");
-            $table->foreignId("product_id")->constrained("products");
+            $table->foreignId("order_id")->constrained("orders")->onDelete("restrict");
+            $table->foreignId("product_id")->constrained("products")->onDelete("restrict");
             $table->timestamps();
         });
     }
