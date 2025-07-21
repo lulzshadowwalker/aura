@@ -38,9 +38,14 @@ class Product extends Model implements HasMedia
         parent::boot();
 
         static::creating(function (self $product) {
-            // TODO: Implement a more robust slug generation
             if (!$product->slug) {
-                $product->slug = str($product->name)->slug();
+                $product->slug = static::generateUniqueSlug($product->name);
+            }
+        });
+
+        static::updating(function (self $product) {
+            if ($product->isDirty('name') && !$product->isDirty('slug')) {
+                $product->slug = static::generateUniqueSlug($product->name, $product->id);
             }
         });
     }
@@ -152,5 +157,21 @@ class Product extends Model implements HasMedia
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    protected static function generateUniqueSlug(string $name, ?int $excludeId = null): string
+    {
+        $baseSlug = str($name)->slug();
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (static::where('slug', $slug)
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+
+        return $slug;
     }
 }
