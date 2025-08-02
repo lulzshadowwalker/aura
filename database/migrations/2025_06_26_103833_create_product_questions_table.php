@@ -16,8 +16,8 @@ return new class extends Migration
             $table->text('question');
             $table->string('email')->nullable();
             $table->text('answer')->nullable();
-            $table->foreignId('product_id');
-            $table->foreignId('customer_id');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
             $table->timestamps();
         });
     }

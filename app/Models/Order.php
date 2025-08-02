@@ -40,9 +40,9 @@ class Order extends Model implements Payable
     {
         return [
             "id" => "integer",
-            "subtotal" => "decimal",
-            "discount_amount" => "decimal",
-            "total" => "decimal",
+            "subtotal" => "decimal:2",
+            "discount_amount" => "decimal:2",
+            "total" => "decimal:2",
             "price" => MoneyCast::class . ":total",
             "customer_id" => "integer",
         ];

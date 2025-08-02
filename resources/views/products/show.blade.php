@@ -34,35 +34,47 @@
 
                 <!-- Image Gallery -->
                 <div class="lg:col-span-7">
-                    <div class="grid grid-cols-5 gap-4">
-                        <!-- Thumbnail Column -->
-                        <div class="col-span-1 space-y-3">
-                            <template x-for="(image, index) in images" :key="index">
-                                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
-                                    :class="activeImageIndex === index ? 'border-primary shadow-lg' : 'border-gray-200 hover:border-gray-300'"
-                                    @click="activeImageIndex = index"
-                                    x-lightbox="image.url"
-                                    x-lightbox:group="product-gallery">
-                                    <img :src="image.thumb" :alt="`${productName} thumbnail ${index + 1}`"
-                                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                                </div>
-                            </template>
-                        </div>
+                    <template x-if="images.length > 0">
+                        <div class="grid grid-cols-5 gap-4">
+                            <!-- Thumbnail Column -->
+                            <div class="col-span-1 space-y-3">
+                                <template x-for="(image, index) in images" :key="index">
+                                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
+                                        :class="activeImageIndex === index ? 'border-primary shadow-lg' : 'border-gray-200 hover:border-gray-300'"
+                                        @click="activeImageIndex = index"
+                                        x-lightbox="image.url"
+                                        x-lightbox:group="product-gallery">
+                                        <img :src="image.thumb_url" :alt="`${productName} thumbnail ${index + 1}`"
+                                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                                    </div>
+                                </template>
+                            </div>
 
-                        <!-- Main Image -->
-                        <div class="col-span-4">
-                            <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
-                                @click="openLightbox(activeImageIndex)">
-                                <img :src="images[activeImageIndex].url" :alt="`${productName} main image`"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
-                                    <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <i class="fas fa-expand text-white text-2xl"></i>
+                            <!-- Main Image -->
+                            <div class="col-span-4">
+                                <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
+                                    @click="openLightbox(activeImageIndex)">
+                                    <img :src="images[activeImageIndex].url" :alt="`${productName} main image`"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                    <div
+                                        class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
+                                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <i class="fas fa-expand text-white text-2xl"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </template>
+
+                    <template x-if="images.length === 0">
+                        <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-image text-5xl"></i>
+                                <p class="mt-2">No images available</p>
+                            </div>
+                        </div>
+                    </template>
                 </div>
 
                 <!-- Product Details -->
@@ -122,12 +134,21 @@
                                     <i class="fas fa-shopping-bag mr-2"></i>
                                     Add to Bag
                                 </button>
-                            </form
-                            <button class="btn btn-outline btn-lg btn-square"
-                                aria-label="Add to Favorites"
-                                title="Add to Favorites">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                            </form>
+                            <form id="js-favorite" x-target action="{{ route('favorites.store') }}" method="post" data-tip="{{ $product->isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button class="btn btn-outline btn-lg btn-square"
+                                    aria-label="Add to Favorites"
+                                    title="Add to Favorites">
+                                    <i @class(["fas fa-heart", "text-red-400"=> $product->isFavorite])></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5" />
+                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo" class="h-5 scale-210" />
                         </div>
 
                         <!-- Additional Info -->
@@ -327,14 +348,6 @@
         </dialog>
 
         <!-- You May Also Like Section -->
-        @php
-            $otherProducts = [
-                ['name' => 'Layaly', 'image' => 'https://i.imgur.com/8YKjZsa.png', 'type' => 'Eau de Toilette', 'price' => 85],
-                ['name' => 'Desire', 'image' => 'https://i.imgur.com/n9GsysZ.png', 'type' => 'Eau de Parfum', 'price' => 150],
-                ['name' => 'Asrar', 'image' => 'https://i.imgur.com/5e3h1Ol.png', 'type' => 'Eau de Cologne', 'price' => 70],
-                ['name' => 'Prestige', 'image' => 'https://i.imgur.com/5aiNy9a.png', 'type' => 'Extrait de Parfum', 'price' => 220],
-            ];
-        @endphp
         <div class="bg-white border-t border-gray-200">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 <div class="text-center mb-8">
@@ -342,19 +355,8 @@
                     <p class="text-gray-600 font-light">Curated selections just for you</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($otherProducts as $product)
-                    <div class="group cursor-pointer">
-                        <div class="bg-gray-100 rounded-lg overflow-hidden mb-4 aspect-square">
-                            <img src="{{ $product['image'] }}"
-                                alt="{{ $product['name'] }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="text-center">
-                            <h4 class="font-medium text-gray-800 mb-1">{{ $product['name'] }}</h4>
-                            <p class="text-sm text-gray-500 mb-2">{{ $product['type'] }}</p>
-                            <p class="font-medium text-gray-900">${{ $product['amount'] }}.00</p>
-                        </div>
-                    </div>
+                    @foreach($relatedProducts as $relatedProduct)
+                    <x-product-card :product="$relatedProduct" />
                     @endforeach
                 </div>
             </div>
@@ -363,58 +365,36 @@
 
     <script>
         function productGallery() {
-            const galleries = {
-                'Layaly': [
-                    {
-                        url: 'https://i.imgur.com/8YKjZsa.png',
-                        thumb: 'https://i.imgur.com/8YKjZsa.png'
-                    }
-                ],
-                'Desire': [
-                    {
-                        url: 'https://i.imgur.com/n9GsysZ.png',
-                        thumb: 'https://i.imgur.com/n9GsysZ.png'
-                    }
-                ],
-                'Asrar': [
-                    {
-                        url: 'https://i.imgur.com/5e3h1Ol.png',
-                        thumb: 'https://i.imgur.com/5e3h1Ol.png'
-                    }
-                ],
-                'Prestige': [
-                    {
-                        url: 'https://i.imgur.com/5aiNy9a.png',
-                        thumb: 'https://i.imgur.com/5aiNy9a.png'
-                    }
-                ]
-            };
+            const productName = '{{ $product->name }}';
+            const images = @json($product - > images - > map(function($media) {
+                return [
+                    'url' => $media - > getUrl(),
+                    'thumb_url' => $media - > getUrl(),
+                ];
+            }));
 
-            const defaultImages = [
-                {
-                    url: 'https://images.unsplash.com/photo-1514557179557-9efc4d7949cc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0',
-                    thumb: 'https://images.unsplash.com/photo-1514557179557-9efc4d7949cc?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0'
-                },
-                {
-                    url: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0',
-                    thumb: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0'
-                },
-                {
-                    url: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0',
-                    thumb: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0'
-                },
-                {
-                    url: 'https://images.unsplash.com/photo-1514557179557-9efc4d7949cc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0',
-                    thumb: 'https://images.unsplash.com/photo-1514557179557-9efc4d7949cc?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0'
-                }
-            ];
-
-            const productName = '{{ is_array($product) ? $product['name'] : $product->name }}';
+            const defaultImages = [];
 
             return {
                 activeImageIndex: 0,
                 productName,
-                images: galleries[productName] || defaultImages
+                images: images.length > 0 ? images : defaultImages,
+                openLightbox(index) {
+                    const gallery = this.images.map(i => ({
+                        url: i.url
+                    }));
+                    const lightbox = new PhotoSwipeLightbox({
+                        dataSource: gallery,
+                        pswpModule: PhotoSwipe,
+                        mainClass: 'pswp--custom-bg',
+                        pswp__bg: {
+                            opacity: 0.8
+                        },
+                        index: index
+                    });
+                    lightbox.init();
+                    lightbox.loadAndOpen(index);
+                }
             }
         }
     </script>

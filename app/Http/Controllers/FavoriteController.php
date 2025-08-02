@@ -10,7 +10,14 @@ class FavoriteController extends Controller
     {
         //  TODO: Session and Customer favorites
         //  TODO: MigrateSessionFavoritesAction
-        $customer = \App\Models\Customer::first();
+        $customer = auth()->user()?->customer;
+
+        if (! $customer) {
+            //  TODO: Remove this, we should allow guests to add products to favorites
+            return redirect()
+                ->back()
+                ->with("warning", "Please login to add products to favorites");
+        }
 
         $exists = $customer
             ->favorites()

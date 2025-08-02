@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Product extends Model implements HasMedia
 {
@@ -29,9 +30,26 @@ class Product extends Model implements HasMedia
         "description",
         "is_active",
         "category_id",
-        "amount",
-        "sale_amount",
+        "price",
+        "sale_price",
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function (self $product) {
+            if (!$product->slug) {
+                $product->slug = static::generateUniqueSlug($product->name);
+            }
+        });
+
+        static::updating(function (self $product) {
+            if ($product->isDirty('name') && !$product->isDirty('slug')) {
+                $product->slug = static::generateUniqueSlug($product->name, $product->id);
+            }
+        });
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -83,12 +101,30 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGES);
+        $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(400)
+            ->height(400);
     }
 
     public function images(): Attribute
     {
         return Attribute::get(function () {
-            return $this->getMedia(self::MEDIA_COLLECTION_IMAGES);
+            $images = $this->getMedia(self::MEDIA_COLLECTION_IMAGES);
+            $cover = $this->getFirstMedia(self::MEDIA_COLLECTION_COVER);
+
+            if ($cover) {
+                if (!$images->contains("id", $cover->id)) {
+                    $images->prepend($cover);
+                }
+            }
+
+            return $images;
         });
     }
 
@@ -122,5 +158,21 @@ class Product extends Model implements HasMedia
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    protected static function generateUniqueSlug(string $name, ?int $excludeId = null): string
+    {
+        $baseSlug = str($name)->slug();
+        $slug = $baseSlug;
+        $counter = 1;
+
+        while (static::where('slug', $slug)
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+
+        return $slug;
     }
 }
