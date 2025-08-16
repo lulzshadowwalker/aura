@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be82da46-0cbb-40b8-bb1e-7f369a5a11b1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Http/Controllers/PaymentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Http/Requests/StorePaymentRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/MyFatoorahPaymentGatewayService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/../.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Customer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Customer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/PaymentGatewayService.php" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/PaymentGatewayService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/../composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/../config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/migrations/0001_01_01_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/migrations/0001_01_01_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/migrations/2025_06_26_103837_create_order_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/migrations/2025_06_26_103837_create_order_items_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/migrations/2025_07_13_124921_create_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../database/migrations/2025_07_13_124921_create_payments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/css/filament/filament/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css/filament/filament/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/js/filament/forms/components/date-time-picker.js" beforeDir="false" afterPath="$PROJECT_DIR$/../public/js/filament/forms/components/date-time-picker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/js/filament/tables/components/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/../public/js/filament/tables/components/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/components/cart-fab.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/components/cart-fab.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/components/product-card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/components/product-card.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/views/products/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/views/products/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/web.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="31MKr18VsEHbZiObDG3HwXWvKAD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "payments",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/lulzie/dev/aura/app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-PS-252.23892.419" />
+        <option value="bundled-php-predefined-a98d8de5180a-c72577f2c82f-com.jetbrains.php.sharedIndexes-PS-252.23892.419" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be82da46-0cbb-40b8-bb1e-7f369a5a11b1" name="Changes" comment="" />
+      <created>1755328697025</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755328697025</updated>
+      <workItem from="1755328698145" duration="408000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

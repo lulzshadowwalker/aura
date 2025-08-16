@@ -11,28 +11,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Support\Str;
 
-class User extends Authenticatable implements HasMedia, FilamentUser
+class User extends Authenticatable implements FilamentUser, HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = ["name", "email", "password", "is_admin"];
+    protected $fillable = ['name', 'email', 'password', 'is_admin'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
-    protected $hidden = ["password", "remember_token"];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Get the attributes that should be cast.
@@ -42,8 +42,8 @@ class User extends Authenticatable implements HasMedia, FilamentUser
     protected function casts(): array
     {
         return [
-            "email_verified_at" => "datetime",
-            "password" => "hashed",
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
         ];
     }
 
@@ -52,11 +52,11 @@ class User extends Authenticatable implements HasMedia, FilamentUser
         return $this->hasOne(Customer::class);
     }
 
-    const MEDIA_COLLECTION_AVATAR = "avatar";
+    const MEDIA_COLLECTION_AVATAR = 'avatar';
 
     public function registerMediaCollections(): void
     {
-        $name = Str::replace(" ", "+", $this->name);
+        $name = Str::replace(' ', '+', $this->name);
 
         $this->addMediaCollection(self::MEDIA_COLLECTION_AVATAR)
             ->singleFile()
@@ -66,7 +66,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
     public function avatar(): Attribute
     {
         return Attribute::get(
-            fn() => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_AVATAR) ?:
+            fn () => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_AVATAR) ?:
                 null
         );
     }

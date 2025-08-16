@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
@@ -23,14 +23,14 @@ class Product extends Model implements HasMedia
      * @var array
      */
     protected $fillable = [
-        "name",
-        "slug",
-        "sku",
-        "description",
-        "is_active",
-        "category_id",
-        "price",
-        "sale_price",
+        'name',
+        'slug',
+        'sku',
+        'description',
+        'is_active',
+        'category_id',
+        'price',
+        'sale_price',
     ];
 
     protected static function boot(): void
@@ -38,13 +38,13 @@ class Product extends Model implements HasMedia
         parent::boot();
 
         static::creating(function (self $product) {
-            if (!$product->slug) {
+            if (! $product->slug) {
                 $product->slug = static::generateUniqueSlug($product->name);
             }
         });
 
         static::updating(function (self $product) {
-            if ($product->isDirty('name') && !$product->isDirty('slug')) {
+            if ($product->isDirty('name') && ! $product->isDirty('slug')) {
                 $product->slug = static::generateUniqueSlug($product->name, $product->id);
             }
         });
@@ -58,16 +58,16 @@ class Product extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "is_active" => "boolean",
-            "category_id" => "integer",
-            "price" => "decimal:2",
-            "sale_price" => "decimal:2",
-            "product_id" => "integer",
+            'id' => 'integer',
+            'is_active' => 'boolean',
+            'category_id' => 'integer',
+            'price' => 'decimal:2',
+            'sale_price' => 'decimal:2',
+            'product_id' => 'integer',
         ];
     }
 
-    public array $translatable = ["name", "description"];
+    public array $translatable = ['name', 'description'];
 
     public function category(): BelongsTo
     {
@@ -94,8 +94,9 @@ class Product extends Model implements HasMedia
         return $this->hasMany(ProductQuestion::class);
     }
 
-    const MEDIA_COLLECTION_IMAGES = "product.images";
-    const MEDIA_COLLECTION_COVER = "product.cover";
+    const MEDIA_COLLECTION_IMAGES = 'product.images';
+
+    const MEDIA_COLLECTION_COVER = 'product.cover';
 
     public function registerMediaCollections(): void
     {
@@ -104,7 +105,7 @@ class Product extends Model implements HasMedia
             ->singleFile();
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
             ->width(400)
@@ -118,7 +119,7 @@ class Product extends Model implements HasMedia
             $cover = $this->getFirstMedia(self::MEDIA_COLLECTION_COVER);
 
             if ($cover) {
-                if (!$images->contains("id", $cover->id)) {
+                if (! $images->contains('id', $cover->id)) {
                     $images->prepend($cover);
                 }
             }
@@ -137,14 +138,14 @@ class Product extends Model implements HasMedia
     public function isFavorite(): Attribute
     {
         $customer = auth()->user()?->customer;
-        if (!$customer) {
-            return Attribute::get(fn(): bool => false);
+        if (! $customer) {
+            return Attribute::get(fn (): bool => false);
         }
 
         return Attribute::get(
-            fn(): bool => $customer
+            fn (): bool => $customer
                 ->favorites()
-                ->where("product_id", $this->id)
+                ->where('product_id', $this->id)
                 ->exists()
         );
     }
@@ -166,10 +167,10 @@ class Product extends Model implements HasMedia
         $counter = 1;
 
         while (static::where('slug', $slug)
-            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
             ->exists()
         ) {
-            $slug = $baseSlug . '-' . $counter++;
+            $slug = $baseSlug.'-'.$counter++;
         }
 
         return $slug;

@@ -16,7 +16,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = ["user_id"];
+    protected $fillable = ['user_id'];
 
     /**
      * Get the attributes that should be cast.
@@ -26,7 +26,7 @@ class Customer extends Model
     protected function casts(): array
     {
         return [
-            "id" => "integer",
+            'id' => 'integer',
         ];
     }
 

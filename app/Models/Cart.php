@@ -17,7 +17,7 @@ class Cart extends Model
      *
      * @var array
      */
-    protected $fillable = ["session_id", "customer_id"];
+    protected $fillable = ['session_id', 'customer_id'];
 
     /**
      * Get the attributes that should be cast.
@@ -27,8 +27,8 @@ class Cart extends Model
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "customer_id" => "integer",
+            'id' => 'integer',
+            'customer_id' => 'integer',
         ];
     }
 
@@ -44,7 +44,7 @@ class Cart extends Model
 
     public function isEmpty(): Attribute
     {
-        return Attribute::get(fn(): bool => $this->cartItems->isEmpty());
+        return Attribute::get(fn (): bool => $this->cartItems->isEmpty());
     }
 
     public function total(): Attribute

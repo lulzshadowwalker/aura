@@ -17,13 +17,13 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        "order_number",
-        "status",
-        "subtotal",
-        "discount_amount",
-        "total",
-        "promo_code",
-        "customer_id",
+        'order_number',
+        'status',
+        'subtotal',
+        'discount_amount',
+        'total',
+        'promo_code',
+        'customer_id',
     ];
 
     /**
@@ -34,11 +34,11 @@ class Order extends Model
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "subtotal" => "decimal:2",
-            "discount_amount" => "decimal:2",
-            "total" => "decimal:2",
-            "customer_id" => "integer",
+            'id' => 'integer',
+            'subtotal' => 'decimal:2',
+            'discount_amount' => 'decimal:2',
+            'total' => 'decimal:2',
+            'customer_id' => 'integer',
         ];
     }
 

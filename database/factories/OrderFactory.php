@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Customer;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
 {
@@ -27,17 +26,17 @@ class OrderFactory extends Factory
             ? fake()->randomFloat(2, 5, min(50, $subtotal * 0.3))
             : 0;
         $total = $subtotal - $discountAmount;
-        $statuses = ["yes", "no"];
-        $promoCodes = ["WELCOME10", "SUMMER20", "VIP15", null, null, null];
+        $statuses = ['yes', 'no'];
+        $promoCodes = ['WELCOME10', 'SUMMER20', 'VIP15', null, null, null];
 
         return [
-            "order_number" => "ORD-" . strtoupper(fake()->bothify("##??##??")),
-            "status" => fake()->randomElement($statuses),
-            "subtotal" => $subtotal,
-            "discount_amount" => $discountAmount,
-            "total" => $total,
-            "promo_code" => fake()->randomElement($promoCodes),
-            "customer_id" => fake()->boolean(80) ? Customer::factory() : null,
+            'order_number' => 'ORD-'.strtoupper(fake()->bothify('##??##??')),
+            'status' => fake()->randomElement($statuses),
+            'subtotal' => $subtotal,
+            'discount_amount' => $discountAmount,
+            'total' => $total,
+            'promo_code' => fake()->randomElement($promoCodes),
+            'customer_id' => fake()->boolean(80) ? Customer::factory() : null,
         ];
     }
 }
