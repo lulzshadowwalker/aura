@@ -16,7 +16,7 @@ class FavoriteController extends Controller
             //  TODO: Remove this, we should allow guests to add products to favorites
             return redirect()
                 ->back()
-                ->with('warning', 'Please login to add products to favorites');
+                ->with('warning', __('app.please-login-to-favorite'));
         }
 
         $exists = $customer
@@ -32,7 +32,7 @@ class FavoriteController extends Controller
 
             return redirect()
                 ->back()
-                ->with('success', 'Product removed from favorites');
+                ->with('success', __('app.product-removed-from-favorites'));
         }
 
         $customer->favorites()->create([
@@ -41,6 +41,6 @@ class FavoriteController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Product added to favorites');
+            ->with('success', __('app.product-added-to-favorites'));
     }
 }

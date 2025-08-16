@@ -21,7 +21,7 @@ class CheckoutController extends Controller
         // This could include fetching the user's cart, calculating totals, etc.
         $cart = $request->user()->customer->cart;
         if (! $cart) {
-            return redirect()->route('home.index', ['language' => $language])->with('warning', 'Please add items to your cart before proceeding to checkout.');
+            return redirect()->route('home.index', ['language' => $language])->with('warning', __('app.please-add-items-before-checkout'));
         }
 
         $paymentMethods = $this->service->paymentMethods($cart->total);
@@ -32,7 +32,7 @@ class CheckoutController extends Controller
                 'customer_id' => $request->user()->id,
             ]);
 
-            return redirect()->route('home.index', ['language' => $language])->with('warning', 'No payment methods available at the moment.');
+            return redirect()->route('home.index', ['language' => $language])->with('warning', __('app.no-payment-methods-warning'));
         }
 
         return view('checkout.index', compact('cart', 'paymentMethods'));
@@ -60,7 +60,7 @@ class CheckoutController extends Controller
 
         $cart = $request->user()->customer->carts()->first();
         if (! $cart) {
-            return redirect()->route('home.index', ['language' => $language])->with('warning', 'Your cart is empty.');
+            return redirect()->route('home.index', ['language' => $language])->with('warning', __('app.your-cart-is-empty-msg'));
         }
 
         try {
@@ -75,7 +75,7 @@ class CheckoutController extends Controller
                 'customer_id' => $request->user()->id,
             ]);
 
-            return redirect()->route('checkout.index', ['language' => $language])->with('error', 'An error occurred while processing your order. Please try again.');
+            return redirect()->route('checkout.index', ['language' => $language])->with('error', __('app.order-processing-error'));
         }
     }
 }

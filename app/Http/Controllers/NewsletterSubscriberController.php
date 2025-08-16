@@ -14,7 +14,7 @@ class NewsletterSubscriberController extends Controller
         if (NewsletterSubscriber::where('email', $request->input('email'))->exists()) {
             return redirect()
                 ->back()
-                ->with('warning', 'You are already subscribed to our newsletter.');
+                ->with('warning', __('app.already-subscribed'));
         }
 
         //  TODO: We might wanna attach this to the current user
@@ -22,6 +22,6 @@ class NewsletterSubscriberController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Thank you for subscribing to our newsletter!');
+            ->with('success', __('app.newsletter-thanks'));
     }
 }

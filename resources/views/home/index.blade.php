@@ -13,12 +13,12 @@
         <div class="text-neutral-content text-center relative z-10">
             <div class="max-w-md mx-auto">
                 <h1 class="mb-5 text-5xl font-bold drop-shadow-lg">
-                    A Breeze of Luxury
+                    {{ __('app.a-breeze-of-luxury') }}
                 </h1>
                 <p class="mb-5 drop-shadow-lg">
-                    Northwind perfumes blend luxury and authenticity to create an unforgettable fragrance experie
+                    {{ __('app.hero-description') }}
                 </p>
-                <button class="btn btn-primary btn-lg shadow-lg">Get Started</button>
+                <button class="btn btn-primary btn-lg shadow-lg">{{ __('app.get-started') }}</button>
             </div>
         </div>
     </section>
@@ -43,8 +43,8 @@
                     @if($collection->products->count() > 4)
                         <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
                            class="link link-hover flex items-center justify-end gap-1">
-                            View All {{ $collection->name }}
-                            <i data-lucide="move-right" class="w-5 h-5"></i>
+                            {{ trans('app.view-all', ['name' => $collection->name]) }}
+                            <i data-lucide="move-right" class="w-5 h-5 rtl:rotate-180"></i>
                         </a>
                     @endif
                 @else

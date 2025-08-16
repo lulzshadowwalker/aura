@@ -20,7 +20,7 @@ class CartItemController extends Controller
     {
         AddProductToCart::make()->execute($product);
 
-        return redirect()->back()->with('success', 'Product added to cart successfully.');
+        return redirect()->back()->with('success', __('app.product-added-to-cart'));
     }
 
     public function increment(string $language, CartItem $cartItem)
@@ -41,6 +41,6 @@ class CartItemController extends Controller
     {
         RemoveCartItem::make()->execute($cartItem);
 
-        return redirect()->back()->with('success', 'Item removed from cart successfully.');
+        return redirect()->back()->with('success', __('app.item-removed-from-cart'));
     }
 }

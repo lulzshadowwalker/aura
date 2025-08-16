@@ -10,7 +10,7 @@ class LanguageMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (
-            $request->has('language') &&
+            $request->language &&
             in_array($request->language, config('app.supported_locales'))
         ) {
             app()->setLocale($request->language);

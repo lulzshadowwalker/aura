@@ -16,6 +16,6 @@ class ProductQuestionController extends Controller
 
         return redirect()
             ->route('products.show', ['product' => $product->slug, 'language' => $language])
-            ->with('success', 'Question submitted successfully, we will get back to you soon.');
+            ->with('success', __('app.question-submitted'));
     }
 }

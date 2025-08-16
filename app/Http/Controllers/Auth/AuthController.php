@@ -21,9 +21,9 @@ class AuthController extends Controller
         ]);
 
         // For now, we'll just log the phone number
-        Log::info('OTP requested for: ' . $request->phone_number);
+        Log::info('OTP requested for: '.$request->phone_number);
 
-        return response()->json(['message' => 'OTP sent successfully']);
+        return response()->json(['message' => __('app.otp-sent-successfully')]);
     }
 
     public function redirectToGoogle()
@@ -39,6 +39,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         auth()->logout();
-        return redirect('/')->with('success', 'Logged out successfully!');
+
+        return redirect('/')->with('success', __('app.logged-out-successfully'));
     }
 }

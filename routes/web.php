@@ -15,6 +15,8 @@ use App\Http\Controllers\Web\CartItemController;
 use App\Http\Middleware\LanguageMiddleware;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', fn () => redirect('/en'));
+
 Route::prefix('{language}')->middleware(LanguageMiddleware::class)->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 

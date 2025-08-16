@@ -6,10 +6,10 @@
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-fire text-orange-300"></i>
-                        <span class="font-medium">Limited Time Offer - 25% Off!</span>
+                        <span class="font-medium">{{ __('app.limited-time-offer') }}</span>
                     </div>
                     <div class="flex gap-2 items-center">
-                        <span class="text-sm opacity-90">Ends in:</span>
+                        <span class="text-sm opacity-90">{{ __('app.ends-in') }}</span>
                         <div class="flex gap-1">
                             <div class="countdown font-mono text-sm bg-white/20 rounded px-2 py-1">
                                 <span style="--value:2;" aria-live="polite" aria-label="2">2</span>
@@ -74,7 +74,7 @@
                             class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl flex items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <i class="fas fa-image text-5xl"></i>
-                                <p class="mt-2">No images available</p>
+                                <p class="mt-2">{{ __('app.no-images-available') }}</p>
                             </div>
                         </div>
                     </template>
@@ -116,18 +116,18 @@
 
                         <!-- Fragrance Notes -->
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <h3 class="font-medium text-gray-800 mb-3">Fragrance Notes</h3>
+                            <h3 class="font-medium text-gray-800 mb-3">{{ __('app.fragrance-notes') }}</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
                                 <div>
-                                    <span class="font-medium text-primary">Top:</span>
+                                    <span class="font-medium text-primary">{{ __('app.top-notes') }}</span>
                                     <p class="text-gray-600">Damask rose, White musk</p>
                                 </div>
                                 <div>
-                                    <span class="font-medium text-primary">Heart:</span>
+                                    <span class="font-medium text-primary">{{ __('app.heart-notes') }}</span>
                                     <p class="text-gray-600">Violet</p>
                                 </div>
                                 <div>
-                                    <span class="font-medium text-primary">Base:</span>
+                                    <span class="font-medium text-primary">{{ __('app.base-notes') }}</span>
                                     <p class="text-gray-600">Cashmere woods</p>
                                 </div>
                             </div>
@@ -143,18 +143,18 @@
                                 <button
                                     class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
                                     <i class="fas fa-shopping-bag mr-2"></i>
-                                    Add to Bag
+                                    {{ __('app.add-to-bag') }}
                                 </button>
                             </form>
                             <form id="js-favorite" x-target
                                   action="{{ route('favorites.store', ['language' => app()->getLocale()]) }}"
                                   method="post"
-                                  data-tip="{{ $product->isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}">
+                                  data-tip="{{ $product->isFavorite ? __('app.remove-from-favorites') : __('app.add-to-favorites') }}">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <button class="btn btn-outline btn-lg btn-square"
-                                        aria-label="Add to Favorites"
-                                        title="Add to Favorites">
+                                        aria-label="{{ __('app.add-to-favorites') }}"
+                                        title="{{ __('app.add-to-favorites') }}">
                                     <i @class(["fas fa-heart", "text-red-400"=> $product->isFavorite])></i>
                                 </button>
                             </form>
@@ -169,19 +169,19 @@
                         <div class="grid grid-cols-2 gap-4 text-sm text-gray-600">
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-truck text-primary"></i>
-                                <span>Free shipping over $75</span>
+                                <span>{{ __('app.free-shipping-over', ['amount' => '$75']) }}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-undo text-primary"></i>
-                                <span>30-day returns</span>
+                                <span>{{ __('app.returns-days', ['days' => 30]) }}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-certificate text-primary"></i>
-                                <span>100% Authentic</span>
+                                <span>{{ __('app.authentic') }}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-gift text-primary"></i>
-                                <span>Gift wrapping available</span>
+                                <span>{{ __('app.gift-wrapping-available') }}</span>
                             </div>
                         </div>
                     </div>
@@ -193,15 +193,15 @@
         <div class="bg-gray-50/50 border-t border-gray-200">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">Product Inquiries</h2>
-                    <p class="text-gray-600 font-light">Your questions, answered with care.</p>
+                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">{{ __('app.product-inquiries') }}</h2>
+                    <p class="text-gray-600 font-light">{{ __('app.product-inquiries-lead') }}</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     @if ($product->productQuestions->count() > 0)
                         <div id="js-product-questions" class="card bg-base-100 shadow-sm border border-gray-200">
                             <div class="card-body">
-                                <h3 class="text-xl font-medium mb-4 text-gray-800">Frequently Asked Questions</h3>
+                                <h3 class="text-xl font-medium mb-4 text-gray-800">{{ __('app.faqs') }}</h3>
 
                                 <div class="space-y-2">
                                     @foreach ($product->productQuestions as $question)
@@ -213,12 +213,12 @@
                                             <div class="collapse-content">
                                                 <div class="flex justify-between items-start gap-4">
                                                     <p class="text-sm text-gray-600 {{ !$question->answer ? 'italic text-gray-500' : '' }}">
-                                                        {{ $question->answer ?? "Waiting for an answer..." }}
+                                                        {{ $question->answer ?? __('app.waiting-for-answer') }}
                                                     </p>
                                                     @if (!$question->answer)
                                                         <button
                                                             class="btn btn-sm btn-circle btn-ghost tooltip tooltip-left"
-                                                            data-tip="Notify me when answered">
+                                                            data-tip="{{ __('app.notify-when-answered') }}">
                                                             <i class="fas fa-bell text-primary"></i>
                                                         </button>
                                                     @endif
@@ -233,7 +233,7 @@
 
                     <div class="card bg-base-100 shadow-sm border border-gray-200">
                         <div class="card-body">
-                            <h3 class="text-xl font-medium mb-4 text-gray-800">Ask a Question</h3>
+                            <h3 class="text-xl font-medium mb-4 text-gray-800">{{ __('app.ask-a-question') }}</h3>
                             <form id="js-product-question-form"
                                   x-target="js-product-questions js-product-question-form"
                                   action="{{ route('products.questions.store', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
@@ -242,7 +242,7 @@
                                 @csrf
                                 <div class="form-control">
                                     <label class="label">
-                                        <span class="label-text font-medium">Email</span>
+                                        <span class="label-text font-medium">{{ __('app.email') }}</span>
                                     </label>
                                     <input name="email" type="email"
                                            placeholder="your@email.com"
@@ -252,16 +252,16 @@
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
-                                        <span class="label-text font-medium">Question</span>
+                                        <span class="label-text font-medium">{{ __('app.question') }}</span>
                                     </label>
                                     <textarea name="question"
                                               class="textarea textarea-bordered h-24 w-full validator"
-                                              placeholder="What would you like to know about this fragrance?"
+                                              placeholder="{{ __('app.what-would-you-like-to-know') }}"
                                               required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-full">
                                     <i class="fas fa-paper-plane mr-2"></i>
-                                    Submit Question
+                                    {{ __('app.submit-question') }}
                                 </button>
                             </form>
                         </div>
@@ -273,10 +273,10 @@
         <!-- Reviews Section -->
         <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
             <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl lg:text-4xl font-serif text-gray-800">Customer Reviews</h2>
+                <h2 class="text-3xl lg:text-4xl font-serif text-gray-800">{{ __('app.customer-reviews') }}</h2>
                 <button class="btn btn-primary btn-outline" onclick="review_modal.showModal()">
                     <i class="fas fa-star mr-2"></i>
-                    Write a Review
+                    {{ __('app.write-a-review') }}
                 </button>
             </div>
 
@@ -312,7 +312,7 @@
                         @empty
                             <div class="text-center py-8">
                                 <i class="fas fa-star text-gray-300 text-4xl mb-4"></i>
-                                <p class="text-gray-500">No reviews yet. Be the first to share your experience!</p>
+                                <p class="text-gray-500">{{ __('app.no-reviews-yet') }}</p>
                             </div>
                         @endforelse
                     </div>
@@ -326,12 +326,12 @@
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
-                <h3 class="font-bold text-lg mb-4">Write a Review</h3>
+                <h3 class="font-bold text-lg mb-4">{{ __('app.write-a-review') }}</h3>
                 <form x-data="{ rating: 0 }" class="space-y-4">
                     @csrf
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text font-medium">Rating</span>
+                            <span class="label-text font-medium">{{ __('app.rating') }}</span>
                         </label>
                         <div class="rating rating-lg">
                             @for ($i = 1; $i
@@ -346,18 +346,18 @@
                     </div>
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text font-medium">Your Review</span>
+                            <span class="label-text font-medium">{{ __('app.your-review') }}</span>
                         </label>
                         <textarea name="review"
                                   class="textarea textarea-bordered h-24"
-                                  placeholder="Share your experience with this fragrance..."
+                                  placeholder="{{ __('app.share-your-experience') }}"
                                   required></textarea>
                     </div>
                     <div class="modal-action">
-                        <button type="button" class="btn btn-ghost" onclick="review_modal.close()">Cancel</button>
+                        <button type="button" class="btn btn-ghost" onclick="review_modal.close()">{{ __('app.cancel') }}</button>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-star mr-2"></i>
-                            Submit Review
+                            {{ __('app.submit-review') }}
                         </button>
                     </div>
                 </form>
@@ -368,8 +368,8 @@
         <div class="bg-white border-t border-gray-200">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">Discover Other Essences</h2>
-                    <p class="text-gray-600 font-light">Curated selections just for you</p>
+                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">{{ __('app.discover-other-essences') }}</h2>
+                    <p class="text-gray-600 font-light">{{ __('app.curated-selections') }}</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($relatedProducts as $relatedProduct)

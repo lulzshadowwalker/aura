@@ -36,10 +36,10 @@ class PaymentController extends Controller
         try {
             $payment = $this->gateway->callback($request);
 
-            $language = $request->language ?? 'en';
+            $language = $request->language ?? app()->getLocale() ?? 'en';
 
             return redirect()->route('home.index', ['language' => $language])
-                ->with('success', 'Thank you for your order!')
+                ->with('success', __('app.thank-you-for-your-order'))
                 ->with('payment', $payment);
         } catch (Exception $e) {
             Log::emergency('Payment callback error: '.$e->getMessage(), [
@@ -47,8 +47,10 @@ class PaymentController extends Controller
                 'exception' => $e,
             ]);
 
+            $language = $request->language ?? app()->getLocale() ?? 'en';
+
             return redirect()->route('home.index', ['language' => $language])
-                ->with('error', 'An error occurred while processing your payment. Please try again later.');
+                ->with('error', __('app.payment-error'));
         }
     }
 }

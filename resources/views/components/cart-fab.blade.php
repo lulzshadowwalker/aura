@@ -39,7 +39,7 @@
         aria-modal="true">
         <!-- Header -->
         <header class="flex items-center justify-between p-6 border-b border-base-300">
-            <h2 id="slide-over-title" class="text-2xl font-light tracking-wide text-base-content">Your Bag</h2>
+            <h2 id="slide-over-title" class="text-2xl font-light tracking-wide text-base-content">{{ __('app.your-bag') }}</h2>
             <button @click="cartOpen = false" class="btn btn-ghost btn-circle" aria-label="Close cart">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
@@ -67,7 +67,7 @@
                             @method('delete')
                             <button type="submit"
                                     class="btn btn-ghost btn-xs tooltip tooltip-error tooltip-left rtl:tooltip-right"
-                                    data-tip="Remove item" aria-label="Remove item">
+                                    data-tip="{{ __('app.remove-item') }}" aria-label="{{ __('app.remove-item') }}">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
@@ -79,7 +79,7 @@
                                 @csrf
                                 <button type="submit"
                                         class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
-                                        data-tip="Decrease quantity" aria-label="Decrease quantity">-
+                                        data-tip="{{ __('app.decrease-quantity') }}" aria-label="{{ __('app.decrease-quantity') }}">-
                                 </button>
                             </form>
 
@@ -91,7 +91,7 @@
                                 @csrf
                                 <button type="submit"
                                         class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
-                                        data-tip="Increase quantity" aria-label="Increase quantity">+
+                                        data-tip="{{ __('app.increase-quantity') }}" aria-label="{{ __('app.increase-quantity') }}">+
                                 </button>
                             </form>
                         </div>
@@ -103,15 +103,14 @@
         <!-- Footer -->
         <footer id="js-cart-footer" class="p-6 border-t border-base-300">
             <div class="flex justify-between items-center mb-4">
-                <span class="text-lg font-light text-base-content">Subtotal</span>
+                <span class="text-lg font-light text-base-content">{{ __('app.subtotal') }}</span>
                 <span class="text-xl font-bold text-base-content inline-flex items-center">{{ $cart->total->getAmount() }} <x-sar/></span>
             </div>
             <a href="{{ route('checkout.index', ['language' => app()->getLocale()]) }}" class="btn btn-primary w-full">
-                Proceed to Checkout
+                {{ __('app.proceed-to-checkout') }}
             </a>
             <div class="text-center mt-4">
-                <button @click="cartOpen = false" class="link link-hover text-sm text-base-content/70">or Continue
-                    Shopping
+                <button @click="cartOpen = false" class="link link-hover text-sm text-base-content/70">{{ __('app.or-continue-shopping') }}
                 </button>
             </div>
         </footer>

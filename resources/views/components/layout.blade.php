@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cookie" class="scroll-smooth">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" data-theme="cookie"
+      class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-<x-marquee text="short content" />
+<x-marquee :text="__('app.marquee')"/>
 <x-header :collections="$collections"/>
 <main class="flex-1">
     {{ $slot }}

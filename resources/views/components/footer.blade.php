@@ -3,42 +3,42 @@
 <div class="bg-base-200">
     <footer class="footer sm:footer-horizontal text-base-content p-10 container mx-auto">
         <nav>
-            <h6 class="footer-title">Collections</h6>
+            <h6 class="footer-title">{{ __('app.collections') }}</h6>
             @foreach ($collections as $collection)
                 <a href="/#{{ $collection->slug }}" class="link link-hover">{{ $collection->name }}</a>
             @endforeach
         </nav>
 
         <nav>
-            <h6 class="footer-title">Legal</h6>
-            <a href="{{ route('terms.index', ['language' => app()->getLocale()]) }}" class="link link-hover">Terms and
-                Conditions</a>
-            <a href="{{ route('return-policy.index', ['language' => app()->getLocale()]) }}" class="link link-hover">Return
-                Policy</a>
+            <h6 class="footer-title">{{ __('app.legal') }}</h6>
+            <a href="{{ route('terms.index', ['language' => app()->getLocale()]) }}"
+               class="link link-hover">{{ __('app.terms-and-conditions') }}</a>
+            <a href="{{ route('return-policy.index', ['language' => app()->getLocale()]) }}"
+               class="link link-hover">{{ __('app.return-policy') }}</a>
         </nav>
 
         <nav>
-            <h6 class="footer-title">Support</h6>
+            <h6 class="footer-title">{{ __('app.support') }}</h6>
             <a class="link link-hover"
-               href="{{ route('contact.index', ['language' => app()->getLocale()]) }}">Contact</a>
+               href="{{ route('contact.index', ['language' => app()->getLocale()]) }}">{{ __('app.contact') }}</a>
         </nav>
 
         <form id="js-newsletter-form" x-target
               action="{{ route('newsletter-subscribers.store', ['language' => app()->getLocale()]) }}" method="post"
               class="md:ms-auto" x-data="{ default: '{{ auth()->user()?->email }}', email: '' }">
             @csrf
-            <h6 class="footer-title">Newsletter</h6>
+            <h6 class="footer-title">{{ __('app.newsletter') }}</h6>
             <fieldset class="w-80">
                 <div class="join">
                     <input
                         name="email"
                         type="email"
-                        placeholder="email@example.com"
+                        placeholder="{{ __('app.email-placeholder') }}"
                         class="input input-bordered join-item validator"
                         x-model="email"
                         required
                     />
-                    <button class="btn btn-primary join-item">Subscribe
+                    <button class="btn btn-primary join-item">{{ __('app.subscribe') }}
                         <x-spinner/>
                     </button>
                 </div>
@@ -52,9 +52,7 @@
         <aside class="grid-flow-col items-center gap-4">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Northwind Logo" class="h-14 w-14">
             <p>
-                Northwind
-                <br>
-                © {{ date('Y') }} All rights reserved.
+                © {{ date('Y') }} {{ __('app.northwind') }}. {{ __('app.all-rights-reserved') }}
             </p>
         </aside>
         <nav class="md:place-self-center md:justify-self-start">
