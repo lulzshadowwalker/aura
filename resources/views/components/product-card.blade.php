@@ -24,8 +24,7 @@
         </div>
 
         <span class="min-w-fit flex items-center">
-            <!-- $20.00 -->
-            {{ $product->price }} <x-sar />
+            {{ $product->price->getAmount() }} <x-sar />
         </span>
     </div>
 </a>

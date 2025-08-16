@@ -6,6 +6,7 @@ use Brick\Math\RoundingMode;
 use Brick\Money\Money;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
 class MoneyCast implements CastsAttributes
 {
@@ -30,7 +31,7 @@ class MoneyCast implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         if (!$value instanceof Money) {
-            throw new \InvalidArgumentException('The given value is not an instance of Brick\Money\Money.');
+            throw new InvalidArgumentException('The given value is not an instance of Brick\Money\Money.');
         }
 
         return [
