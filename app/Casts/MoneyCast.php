@@ -27,6 +27,8 @@ class MoneyCast implements CastsAttributes
             return null;
         }
 
+        $amount = $attributes[$this->column];
+
         return Money::of(
             $amount,
             self::currency,
