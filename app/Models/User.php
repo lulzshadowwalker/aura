@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
      *
      * @var list<string>
      */
-    protected $fillable = ["name", "email", "password", "is_admin"];
+    protected $fillable = ["name", "email", "password", "is_admin", "phone"];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,6 +45,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
         return [
             "email_verified_at" => "datetime",
             "password" => "hashed",
+            "phone" => E164PhoneNumberCast::class,
         ];
     }
 

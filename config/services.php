@@ -41,4 +41,10 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI')
     ],
 
+    'myfatoorah' => [
+        'api_key' => env('MYFATOORAH_API_KEY'),
+        'vc_code' => env('MYFATOORAH_VC_CODE'),
+        'is_test' => env('MYFATOORAH_IS_TEST', config('app.env') !== 'production'),
+    ],
+
 ];

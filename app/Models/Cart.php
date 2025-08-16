@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Brick\Math\BigDecimal;
+use Brick\Math\RoundingMode as MathRoundingMode;
+use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use RoundingMode;
 
 class Cart extends Model
 {
@@ -50,9 +54,14 @@ class Cart extends Model
     public function total(): Attribute
     {
         return Attribute::get(function () {
-            return $this->cartItems->sum(function (CartItem $item) {
-                return $item->quantity * $item->product->price;
-            });
+            $amount = $this->cartItems->reduce(function (BigDecimal $carry, CartItem $item) {
+                return $carry->plus(
+                    $item->product->price->getAmount()->multipliedBy($item->quantity)
+                );
+            }, BigDecimal::zero());
+
+            $currency = $this->cartItems->first()?->product?->price?->getCurrency()->getCurrencyCode() ?? 'SAR';
+            return Money::of($amount, $currency, roundingMode: MathRoundingMode::HALF_UP);
         });
     }
 }

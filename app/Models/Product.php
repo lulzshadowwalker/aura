@@ -100,8 +100,11 @@ class Product extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
+        $fallback = 'https://placehold.co/400x225.png?text=' . str_replace(' ', '%20', $this->getTranslation('name', 'en'));
+
         $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGES);
         $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
+            ->useFallbackUrl($fallback)
             ->singleFile();
     }
 
@@ -129,6 +132,13 @@ class Product extends Model implements HasMedia
     }
 
     public function cover(): Attribute
+    {
+        return Attribute::get(function () {
+            return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_COVER);
+        });
+    }
+
+    public function coverFile(): Attribute
     {
         return Attribute::get(function () {
             return $this->getFirstMedia(self::MEDIA_COLLECTION_COVER);

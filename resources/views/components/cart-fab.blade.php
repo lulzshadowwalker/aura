@@ -50,7 +50,7 @@
             <!-- Sample Cart Item 1 -->
             @foreach ($cart?->cartItems ?? [] as $item)
             <div class="flex items-start space-x-4">
-                <img src="https://i.imgur.com/n9GsysZ.png" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300">
+                <img src="{{ $item->product->cover }}" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300">
                 <div class="flex-1">
                     <h3 class="text-lg font-semibold text-base-content text-pretty">{{ $item->product->name }}</h3>
                     <p class="text-sm font-light text-neutral-500 line-clamp-2">{{ $item->product->description }}</p>
@@ -89,7 +89,7 @@
                 <span class="text-lg font-light text-base-content">Subtotal</span>
                 <span class="text-xl font-bold text-base-content">{{ $cart->total }} SAR</span>
             </div>
-            <a href="/checkout" class="btn btn-primary w-full">
+            <a href="{{ route('checkout.index') }}" class="btn btn-primary w-full">
                 Proceed to Checkout
             </a>
             <div class="text-center mt-4">

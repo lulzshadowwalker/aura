@@ -27,5 +27,4 @@ Alpine.plugin(lightbox)
 Alpine.start();
 
 window.axios = axios;
-
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";

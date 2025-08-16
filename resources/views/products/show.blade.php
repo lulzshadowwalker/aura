@@ -366,10 +366,10 @@
     <script>
         function productGallery() {
             const productName = '{{ $product->name }}';
-            const images = @json($product - > images - > map(function($media) {
+            const images = @json($product->images->map(function($media) {
                 return [
-                    'url' => $media - > getUrl(),
-                    'thumb_url' => $media - > getUrl(),
+                    'url' => $media->getUrl(),
+                    'thumb_url' => $media->getUrl(),
                 ];
             }));
 

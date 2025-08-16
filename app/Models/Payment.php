@@ -39,6 +39,7 @@ class Payment extends Model
             'details' => 'array',
             'price' => MoneyCast::class,
             'external_reference' => 'string',
+            'currency' => 'string',
         ];
     }
 

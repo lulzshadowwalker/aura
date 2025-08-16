@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('gateway', PaymentGateway::values());
             $table->json('details')->nullable();
             $table->decimal('amount', 15, 2);
-            $table->foreignId('currency');
+            $table->string('currency');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
