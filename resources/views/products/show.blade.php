@@ -141,7 +141,7 @@
                                 <button class="btn btn-outline btn-lg btn-square"
                                     aria-label="Add to Favorites"
                                     title="Add to Favorites">
-                                    <i @class(["fas fa-heart", "text-red-400" => $product->isFavorite])></i>
+                                    <i @class(["fas fa-heart", "text-red-400"=> $product->isFavorite])></i>
                                 </button>
                             </form>
                         </div>
@@ -356,7 +356,7 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($relatedProducts as $relatedProduct)
-                        <x-product-card :product="$relatedProduct" />
+                    <x-product-card :product="$relatedProduct" />
                     @endforeach
                 </div>
             </div>
@@ -366,7 +366,7 @@
     <script>
         function productGallery() {
             const productName = '{{ $product->name }}';
-            const images = @json($product->images->map(function ($media) {
+            const images = @json($product->images->map(function($media) {
                 return [
                     'url' => $media->getUrl(),
                     'thumb_url' => $media->getUrl(),
@@ -380,12 +380,16 @@
                 productName,
                 images: images.length > 0 ? images : defaultImages,
                 openLightbox(index) {
-                    const gallery = this.images.map(i => ({ url: i.url }));
+                    const gallery = this.images.map(i => ({
+                        url: i.url
+                    }));
                     const lightbox = new PhotoSwipeLightbox({
                         dataSource: gallery,
                         pswpModule: PhotoSwipe,
                         mainClass: 'pswp--custom-bg',
-                        pswp__bg: { opacity: 0.8 },
+                        pswp__bg: {
+                            opacity: 0.8
+                        },
                         index: index
                     });
                     lightbox.init();

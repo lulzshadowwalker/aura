@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -17,15 +18,17 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements FilamentUser, HasMedia
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, InteractsWithMedia, Notifiable;
+
+    const MEDIA_COLLECTION_AVATAR = 'avatar';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = ['name', 'email', 'password', 'is_admin'];
+    protected $fillable = ['name', 'email', 'password', 'is_admin', 'phone'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,8 +54,6 @@ class User extends Authenticatable implements FilamentUser, HasMedia
     {
         return $this->hasOne(Customer::class);
     }
-
-    const MEDIA_COLLECTION_AVATAR = 'avatar';
 
     public function registerMediaCollections(): void
     {

@@ -21,6 +21,7 @@
         "@alpinejs/focus": "^3.14.9",
         "@imacrayon/alpine-ajax": "^0.12.3",
         "alpine-tailwind-lightbox": "^1.1.0",
-        "posthog-js": "^1.257.0"
+        "posthog-js": "^1.257.0",
+        "puppeteer": "^24.12.1"
     }
 }

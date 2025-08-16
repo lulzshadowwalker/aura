@@ -21,8 +21,8 @@ class ProductFactory extends BaseFactory
     {
         return [
             'name' => $this->localized(fn (): string => fake()->sentence(2, 3)),
-            'price' => fake()->randomFloat(2, 10, 100),
-            'sale_price' => fake()->optional(0.3, null)->randomFloat(2, 5, 50),
+            'amount' => fake()->randomFloat(2, 10, 100),
+            'sale_amount' => fake()->optional(0.3, null)->randomFloat(2, 5, 50),
             'slug' => fake()->unique()->slug(),
             'sku' => fake()->unique()->word(),
             'description' => $this->localized(

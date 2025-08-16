@@ -1,15 +1,20 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterSubscriberController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductQuestionController;
 use App\Http\Controllers\ReturnPolicyController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\Web\CartItemController;
+use App\Models\Order;
+use App\Services\MyFatoorahPaymentGatewayService;
+use Brick\Money\Money;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -61,9 +66,39 @@ Route::post('/cart/items/{cartItem}/increment', [CartItemController::class, 'inc
 Route::post('/cart/items/{cartItem}/decrement', [CartItemController::class, 'decrement'])->name('cart.items.decrement');
 Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.items.remove');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/otp', [AuthController::class, 'sendOtp'])->name('otp');
     Route::get('/google', [AuthController::class, 'redirectToGoogle'])->name('google');
     Route::get('/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.callback');
+});
+
+Route::get('/promocode', function () {
+    throw new Exception('Promocode functionality not implemented yet');
+})->name('cart.apply-promo');
+
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+// Route::post('/payments/methods', [PaymentMethodController::class, 'index'])->name('payments.methods.index');
+Route::post('/payments', [PaymentController::class, 'store'])->middleware('auth')->name('payments.store');
+Route::get('/payments/callback', [PaymentController::class, 'callback'])->name('payments.callback');
+
+Route::get('/opts', function () {
+    $service = app(MyFatoorahPaymentGatewayService::class);
+
+    return $service->paymentMethods(Money::of(100, 'USD'));
+});
+
+Route::get('/foo/{id}', function ($id) {
+    $service = app(MyFatoorahPaymentGatewayService::class);
+
+    [$payment, $url] = $service->start(
+        Order::first(),
+        $id,
+    );
+
+    return redirect()->away($url);
+    // return PaymentResource::make($payment)->url($url);
 });

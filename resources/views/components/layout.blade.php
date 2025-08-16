@@ -11,23 +11,23 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-    <x-header :collections="$collections" />
-    <main class="flex-1">
-        {{ $slot }}
-    </main>
-    <x-flash-messages />
-    <x-footer :collections="$collections" />
-    <x-cart-fab />
+<x-marquee text="short content" />
+<x-header :collections="$collections"/>
+<main class="flex-1">
+    {{ $slot }}
+</main>
+<x-flash-messages/>
+<x-footer :collections="$collections"/>
+<x-cart-fab/>
 
-    <!-- FontAwesomeIcons -->
-    <script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>
+<!-- FontAwesomeIcons -->
+<script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>
 
-    <!-- NOTE: Use fontawesome going forward as we will deprecate lucide icons at some point -->
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+<!-- NOTE: Use fontawesome going forward as we will deprecate lucide icons at some point -->
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script> lucide.createIcons(); </script>
+@stack('scripts')
 </body>
 
 </html>
