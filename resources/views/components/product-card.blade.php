@@ -23,9 +23,9 @@
             <p class="mt-1 font-light text-neutral-500 dark:text-neutral-400 tracking-wide line-clamp-3">{{ $product->description }}</p>
         </div>
 
-        <span class="min-w-fit">
+        <span class="min-w-fit flex items-center">
             <!-- $20.00 -->
-            {{ $product->price }} SAR
+            {{ $product->price }} <x-sar />
         </span>
     </div>
 </a>

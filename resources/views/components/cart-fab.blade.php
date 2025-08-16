@@ -54,7 +54,7 @@
                 <div class="flex-1">
                     <h3 class="text-lg font-semibold text-base-content text-pretty">{{ $item->product->name }}</h3>
                     <p class="text-sm font-light text-neutral-500 line-clamp-2">{{ $item->product->description }}</p>
-                    <p class="text-lg font-bold text-base-content mt-2">{{ $item->product->price }} SAR</p>
+                    <p class="text-lg font-bold text-base-content mt-2 flex items-center">{{ $item->product->price->getAmount() }} <x-sar /></p>
                 </div>
                 <div class="flex flex-col items-end justify-between h-24">
                     <form x-target="js-cart-fab" action="{{ route('cart.items.remove', $item->id) }}" method="post" class="mb-2">
@@ -87,7 +87,7 @@
         <footer id="js-cart-footer" class="p-6 border-t border-base-300">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg font-light text-base-content">Subtotal</span>
-                <span class="text-xl font-bold text-base-content">{{ $cart->total }} SAR</span>
+                <span class="text-xl font-bold text-base-content inline-flex items-center">{{ $cart->total->getAmount() }} <x-sar /></span>
             </div>
             <a href="{{ route('checkout.index') }}" class="btn btn-primary w-full">
                 Proceed to Checkout
