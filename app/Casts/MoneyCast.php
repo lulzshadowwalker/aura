@@ -19,7 +19,13 @@ class MoneyCast implements CastsAttributes
 
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        $amount = $attributes[$this->column];
+        if ($value instanceof Money) {
+            return $value;
+        }
+
+        if (! $value) {
+            return null;
+        }
 
         return Money::of(
             $amount,
