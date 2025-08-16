@@ -11,6 +11,6 @@ class TermsControllerTest extends TestCase
 
     public function test_it_renders_the_page(): void
     {
-        $this->get(route("terms.index"))->assertOk();
+        $this->get(route('terms.index', ['language' => app()->getLocale()]))->assertOk();
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\NewsletterSubscriber;
+use Illuminate\Http\Request;
 
 class NewsletterSubscriberController extends Controller
 {
-    public function store(Request $request)
+    public function store(string $language, Request $request)
     {
         $request->validate(['email' => 'required|email']);
 
@@ -18,10 +18,10 @@ class NewsletterSubscriberController extends Controller
         }
 
         //  TODO: We might wanna attach this to the current user
-        NewsletterSubscriber::create([ 'email' => $request->input('email') ]);
+        NewsletterSubscriber::create(['email' => $request->input('email')]);
 
         return redirect()
-                ->back()
-                ->with('success', 'Thank you for subscribing to our newsletter!');
+            ->back()
+            ->with('success', 'Thank you for subscribing to our newsletter!');
     }
 }

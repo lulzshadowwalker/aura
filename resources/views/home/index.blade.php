@@ -40,7 +40,7 @@
                     </div>
 
                     @if($collection->products->count() > 4)
-                        <a href="{{ route('collections.show', $collection->slug) }}"
+                        <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
                            class="link link-hover flex items-center justify-end gap-1">
                             View All {{ $collection->name }}
                             <i data-lucide="move-right" class="w-5 h-5"></i>

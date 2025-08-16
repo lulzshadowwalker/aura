@@ -39,23 +39,25 @@
                             <!-- Thumbnail Column -->
                             <div class="col-span-1 space-y-3">
                                 <template x-for="(image, index) in images" :key="index">
-                                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
+                                    <div
+                                        class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
                                         :class="activeImageIndex === index ? 'border-primary shadow-lg' : 'border-gray-200 hover:border-gray-300'"
                                         @click="activeImageIndex = index"
                                         x-lightbox="image.url"
                                         x-lightbox:group="product-gallery">
                                         <img :src="image.thumb_url" :alt="`${productName} thumbnail ${index + 1}`"
-                                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                                             class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                                     </div>
                                 </template>
                             </div>
 
                             <!-- Main Image -->
                             <div class="col-span-4">
-                                <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
+                                <div
+                                    class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
                                     @click="openLightbox(activeImageIndex)">
                                     <img :src="images[activeImageIndex].url" :alt="`${productName} main image`"
-                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                     <div
                                         class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
                                         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -68,7 +70,8 @@
                     </template>
 
                     <template x-if="images.length === 0">
-                        <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl flex items-center justify-center">
+                        <div
+                            class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl flex items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <i class="fas fa-image text-5xl"></i>
                                 <p class="mt-2">No images available</p>
@@ -95,11 +98,15 @@
                             <div class="rating rating-sm">
                                 @for ($i = 1; $i
                                 <= 5; $i++)
-                                    <input type="radio" class="mask mask-star-2 bg-orange-400"
-                                    {{ $i <= 4 ? 'checked' : '' }} disabled />
-                                @endfor
-                            </div>
-                            <span class="text-sm text-gray-600">({{ $product->reviews->count() }} reviews)</span>
+                            <input type="radio" class="mask mask-star-2 bg-orange-400"
+{{ $i <= 4 ? 'checked' : '' }} disabled />
+
+
+
+
+                        @endfor
+                        </div>
+                        <span class="text-sm text-gray-600">({{ $product->reviews->count() }} reviews)</span>
                         </div> -->
 
                         <!-- Description -->
@@ -128,27 +135,34 @@
 
                         <!-- Add to Cart -->
                         <div class="flex items-center gap-3">
-                            <form x-target="js-cart-fab js-cart-slideover" action="{{ route('cart.items.add', $product->slug) }}" method="POST" class="flex justify-stretch w-full">
+                            <form x-target="js-cart-fab js-cart-slideover"
+                                  action="{{ route('cart.items.add', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
+                                  method="POST"
+                                  class="flex justify-stretch w-full">
                                 @csrf
-                                <button class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
+                                <button
+                                    class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
                                     <i class="fas fa-shopping-bag mr-2"></i>
                                     Add to Bag
                                 </button>
                             </form>
-                            <form id="js-favorite" x-target action="{{ route('favorites.store') }}" method="post" data-tip="{{ $product->isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}">
+                            <form id="js-favorite" x-target
+                                  action="{{ route('favorites.store', ['language' => app()->getLocale()]) }}"
+                                  method="post"
+                                  data-tip="{{ $product->isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <button class="btn btn-outline btn-lg btn-square"
-                                    aria-label="Add to Favorites"
-                                    title="Add to Favorites">
+                                        aria-label="Add to Favorites"
+                                        title="Add to Favorites">
                                     <i @class(["fas fa-heart", "text-red-400"=> $product->isFavorite])></i>
                                 </button>
                             </form>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5" />
-                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo" class="h-5 scale-210" />
+                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5"/>
+                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo" class="h-5 scale-210"/>
                         </div>
 
                         <!-- Additional Info -->
@@ -185,64 +199,65 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     @if ($product->productQuestions->count() > 0)
-                    <div id="js-product-questions" class="card bg-base-100 shadow-sm border border-gray-200">
-                        <div class="card-body">
-                            <h3 class="text-xl font-medium mb-4 text-gray-800">Frequently Asked Questions</h3>
+                        <div id="js-product-questions" class="card bg-base-100 shadow-sm border border-gray-200">
+                            <div class="card-body">
+                                <h3 class="text-xl font-medium mb-4 text-gray-800">Frequently Asked Questions</h3>
 
-                            <div class="space-y-2">
-                                @foreach ($product->productQuestions as $question)
-                                <div class="collapse collapse-plus bg-gray-50 border border-gray-200">
-                                    <input type="radio" name="faq-accordion" @checked($loop->first) />
-                                    <div class="collapse-title font-medium text-gray-800">
-                                        {{ $question->question }}
-                                    </div>
-                                    <div class="collapse-content">
-                                        <div class="flex justify-between items-start gap-4">
-                                            <p class="text-sm text-gray-600 {{ !$question->answer ? 'italic text-gray-500' : '' }}">
-                                                {{ $question->answer ?? "Waiting for an answer..." }}
-                                            </p>
-                                            @if (!$question->answer)
-                                            <button class="btn btn-sm btn-circle btn-ghost tooltip tooltip-left"
-                                                data-tip="Notify me when answered">
-                                                <i class="fas fa-bell text-primary"></i>
-                                            </button>
-                                            @endif
+                                <div class="space-y-2">
+                                    @foreach ($product->productQuestions as $question)
+                                        <div class="collapse collapse-plus bg-gray-50 border border-gray-200">
+                                            <input type="radio" name="faq-accordion" @checked($loop->first) />
+                                            <div class="collapse-title font-medium text-gray-800">
+                                                {{ $question->question }}
+                                            </div>
+                                            <div class="collapse-content">
+                                                <div class="flex justify-between items-start gap-4">
+                                                    <p class="text-sm text-gray-600 {{ !$question->answer ? 'italic text-gray-500' : '' }}">
+                                                        {{ $question->answer ?? "Waiting for an answer..." }}
+                                                    </p>
+                                                    @if (!$question->answer)
+                                                        <button
+                                                            class="btn btn-sm btn-circle btn-ghost tooltip tooltip-left"
+                                                            data-tip="Notify me when answered">
+                                                            <i class="fas fa-bell text-primary"></i>
+                                                        </button>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
                         </div>
-                    </div>
                     @endif
 
                     <div class="card bg-base-100 shadow-sm border border-gray-200">
                         <div class="card-body">
                             <h3 class="text-xl font-medium mb-4 text-gray-800">Ask a Question</h3>
                             <form id="js-product-question-form"
-                                x-target="js-product-questions js-product-question-form"
-                                action="{{ route('products.questions.store', $product->slug) }}"
-                                method="POST"
-                                class="space-y-4">
+                                  x-target="js-product-questions js-product-question-form"
+                                  action="{{ route('products.questions.store', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
+                                  method="POST"
+                                  class="space-y-4">
                                 @csrf
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text font-medium">Email</span>
                                     </label>
                                     <input name="email" type="email"
-                                        placeholder="your@email.com"
-                                        class="input input-bordered w-full validator"
-                                        required
-                                        value="{{ old('email', auth()->user()->email ?? '') }}" />
+                                           placeholder="your@email.com"
+                                           class="input input-bordered w-full validator"
+                                           required
+                                           value="{{ old('email', auth()->user()->email ?? '') }}"/>
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text font-medium">Question</span>
                                     </label>
                                     <textarea name="question"
-                                        class="textarea textarea-bordered h-24 w-full validator"
-                                        placeholder="What would you like to know about this fragrance?"
-                                        required></textarea>
+                                              class="textarea textarea-bordered h-24 w-full validator"
+                                              placeholder="What would you like to know about this fragrance?"
+                                              required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-full">
                                     <i class="fas fa-paper-plane mr-2"></i>
@@ -269,34 +284,36 @@
                 <div class="card-body">
                     <div class="space-y-6">
                         @forelse ($product->reviews->take(2) as $review)
-                        <div class="flex gap-4 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-medium">
-                                    {{ strtoupper(substr($review->customer->user->name, 0, 1)) }}
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-2">
-                                    <div class="flex items-center gap-3">
-                                        <h4 class="font-medium text-gray-800">{{ $review->customer->user->name }}</h4>
-                                        <div class="rating rating-sm">
-                                            @for ($i = 1; $i
-                                            <= 5; $i++)
-                                                <input type="radio" class="mask mask-star-2 bg-orange-400"
-                                                {{ $i <= $review->rating ? 'checked' : '' }} disabled />
-                                            @endfor
-                                        </div>
+                            <div class="flex gap-4 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-medium">
+                                        {{ strtoupper(substr($review->customer->user->name, 0, 1)) }}
                                     </div>
-                                    <span class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span>
                                 </div>
-                                <p class="text-gray-700 leading-relaxed">{{ $review->content }}</p>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <h4 class="font-medium text-gray-800">{{ $review->customer->user->name }}</h4>
+                                            <div class="rating rating-sm">
+                                                @for ($i = 1; $i
+                                                <= 5; $i++)
+                                                    <input type="radio" class="mask mask-star-2 bg-orange-400"
+                                                           {{ $i <= $review->rating ? 'checked' : '' }} disabled/>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <span
+                                            class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed">{{ $review->content }}</p>
+                                </div>
                             </div>
-                        </div>
                         @empty
-                        <div class="text-center py-8">
-                            <i class="fas fa-star text-gray-300 text-4xl mb-4"></i>
-                            <p class="text-gray-500">No reviews yet. Be the first to share your experience!</p>
-                        </div>
+                            <div class="text-center py-8">
+                                <i class="fas fa-star text-gray-300 text-4xl mb-4"></i>
+                                <p class="text-gray-500">No reviews yet. Be the first to share your experience!</p>
+                            </div>
                         @endforelse
                     </div>
                 </div>
@@ -320,10 +337,10 @@
                             @for ($i = 1; $i
                             <= 5; $i++)
                                 <input type="radio" name="rating"
-                                class="mask mask-star-2 bg-orange-400"
-                                value="{{ $i }}"
-                                @click="rating = {{ $i }}"
-                                aria-label="{{ $i }} stars" />
+                                       class="mask mask-star-2 bg-orange-400"
+                                       value="{{ $i }}"
+                                       @click="rating = {{ $i }}"
+                                       aria-label="{{ $i }} stars"/>
                             @endfor
                         </div>
                     </div>
@@ -332,9 +349,9 @@
                             <span class="label-text font-medium">Your Review</span>
                         </label>
                         <textarea name="review"
-                            class="textarea textarea-bordered h-24"
-                            placeholder="Share your experience with this fragrance..."
-                            required></textarea>
+                                  class="textarea textarea-bordered h-24"
+                                  placeholder="Share your experience with this fragrance..."
+                                  required></textarea>
                     </div>
                     <div class="modal-action">
                         <button type="button" class="btn btn-ghost" onclick="review_modal.close()">Cancel</button>
@@ -356,7 +373,7 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($relatedProducts as $relatedProduct)
-                    <x-product-card :product="$relatedProduct" />
+                        <x-product-card :product="$relatedProduct"/>
                     @endforeach
                 </div>
             </div>

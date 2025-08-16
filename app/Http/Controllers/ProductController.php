@@ -12,7 +12,7 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($request->has('search')) {
-            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->input('search')) . '%']);
+            $query->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($request->input('search')).'%']);
         }
 
         if ($request->has('sort')) {
@@ -29,7 +29,7 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    public function show(Product $product)
+    public function show(string $language, Product $product)
     {
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)

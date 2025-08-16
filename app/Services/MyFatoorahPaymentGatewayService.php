@@ -70,8 +70,8 @@ class MyFatoorahPaymentGatewayService implements PaymentGatewayService
         $fields = [
             'InvoiceValue' => (string) $amount,
             'CustomerName' => $user->fullName,
-            'CallBackUrl' => route('payments.callback', ['lang' => app()->getLocale()]),
-            'ErrorUrl' => route('payments.callback', ['lang' => app()->getLocale()]),
+            'CallBackUrl' => route('payments.callback', ['language' => app()->getLocale()]),
+            'ErrorUrl' => route('payments.callback', ['language' => app()->getLocale()]),
 
             'DisplayCurrencyIso' => $currencyCode,
 

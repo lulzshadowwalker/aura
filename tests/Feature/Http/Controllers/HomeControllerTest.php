@@ -13,6 +13,6 @@ class HomeControllerTest extends TestCase
     public function test_it_renders_the_page(): void
     {
         Collection::factory()->count(3)->create();
-        $this->get(route('home.index'))->assertOk();
+        $this->get(route('home.index', ['language' => app()->getLocale()]))->assertOk();
     }
 }

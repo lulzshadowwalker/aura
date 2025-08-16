@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\PaymentGatewayService;
 use App\Http\Requests\StorePaymentRequest;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -35,16 +36,18 @@ class PaymentController extends Controller
         try {
             $payment = $this->gateway->callback($request);
 
-            return redirect()->route('home.index')
+            $language = $request->language ?? 'en';
+
+            return redirect()->route('home.index', ['language' => $language])
                 ->with('success', 'Thank you for your order!')
                 ->with('payment', $payment);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::emergency('Payment callback error: '.$e->getMessage(), [
                 'request' => $request->all(),
                 'exception' => $e,
             ]);
 
-            return redirect()->route('home.index')
+            return redirect()->route('home.index', ['language' => $language])
                 ->with('error', 'An error occurred while processing your payment. Please try again later.');
         }
     }

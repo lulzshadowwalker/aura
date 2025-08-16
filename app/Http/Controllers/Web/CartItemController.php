@@ -16,30 +16,31 @@ class CartItemController extends Controller
         //
     }
 
-    public function store(Product $product)
+    public function store(string $language, Product $product)
     {
         AddProductToCart::make()->execute($product);
 
         return redirect()->back()->with('success', 'Product added to cart successfully.');
     }
 
-    public function increment(CartItem $cartItem)
+    public function increment(string $language, CartItem $cartItem)
     {
         AddProductToCart::make()->execute($cartItem->product);
 
         return redirect()->back();
     }
 
-    public function decrement(CartItem $cartItem)
+    public function decrement(string $language, CartItem $cartItem)
     {
         DecrementCartItem::make()->execute($cartItem);
 
         return redirect()->back();
     }
 
-    public function destroy(CartItem $cartItem)
+    public function destroy(string $language, CartItem $cartItem)
     {
         RemoveCartItem::make()->execute($cartItem);
+
         return redirect()->back()->with('success', 'Item removed from cart successfully.');
-    }   
+    }
 }

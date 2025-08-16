@@ -6,7 +6,7 @@ use App\Http\Requests\StoreFavoriteRequest;
 
 class FavoriteController extends Controller
 {
-    public function store(StoreFavoriteRequest $request)
+    public function store(string $language, StoreFavoriteRequest $request)
     {
         //  TODO: Session and Customer favorites
         //  TODO: MigrateSessionFavoritesAction
@@ -16,31 +16,31 @@ class FavoriteController extends Controller
             //  TODO: Remove this, we should allow guests to add products to favorites
             return redirect()
                 ->back()
-                ->with("warning", "Please login to add products to favorites");
+                ->with('warning', 'Please login to add products to favorites');
         }
 
         $exists = $customer
             ->favorites()
-            ->where("product_id", $request->product_id)
+            ->where('product_id', $request->product_id)
             ->exists();
 
         if ($exists) {
             $customer
                 ->favorites()
-                ->where("product_id", $request->product_id)
+                ->where('product_id', $request->product_id)
                 ->delete();
 
             return redirect()
                 ->back()
-                ->with("success", "Product removed from favorites");
+                ->with('success', 'Product removed from favorites');
         }
 
         $customer->favorites()->create([
-            "product_id" => $request->product_id,
+            'product_id' => $request->product_id,
         ]);
 
         return redirect()
             ->back()
-            ->with("success", "Product added to favorites");
+            ->with('success', 'Product added to favorites');
     }
 }

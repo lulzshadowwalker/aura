@@ -11,6 +11,6 @@ class ReturnPolicyControllerTest extends TestCase
 
     public function test_it_renders_the_page(): void
     {
-        $this->get(route("return-policy.index"))->assertOk();
+        $this->get(route('return-policy.index', ['language' => 'en']))->assertOk();
     }
 }

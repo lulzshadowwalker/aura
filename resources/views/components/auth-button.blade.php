@@ -19,12 +19,13 @@
                             <label class="label">
                                 <span class="label-text">Phone Number</span>
                             </label>
-                            <input type="tel" name="phone_number" placeholder="e.g. +1234567890" class="input input-bordered w-full" />
+                            <input type="tel" name="phone_number" placeholder="e.g. +1234567890"
+                                   class="input input-bordered w-full"/>
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">Send OTP</button>
                     </form>
                     <div class="divider">OR</div>
-                    <a href="{{ route('auth.google') }}" class="btn w-full">
+                    <a href="{{ route('auth.google', ['language' => app()->getLocale()]) }}" class="btn w-full">
                         <i class="fab fa-google"></i>
                         Continue with Google
                     </a>
@@ -45,12 +46,13 @@
                             <label class="label">
                                 <span class="label-text">Phone Number</span>
                             </label>
-                            <input type="tel" name="phone_number" placeholder="e.g. +1234567890" class="input input-bordered w-full" />
+                            <input type="tel" name="phone_number" placeholder="e.g. +1234567890"
+                                   class="input input-bordered w-full"/>
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">Send OTP</button>
                     </form>
                     <div class="divider">OR</div>
-                    <a href="{{ route('auth.google') }}" class="btn w-full">
+                    <a href="{{ route('auth.google', ['language' => app()->getLocale()]) }}" class="btn w-full">
                         <i class="fab fa-google"></i>
                         Continue with Google
                     </a>
@@ -68,18 +70,18 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const otpLoginForm = document.getElementById('otp-login-form');
-        otpLoginForm.addEventListener('submit', function(e) {
+        otpLoginForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = new FormData(this);
-            fetch('{{ route("auth.otp") }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
+            fetch('{{ route("auth.otp", ["language" => app()->getLocale()]) }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
@@ -89,16 +91,16 @@
         });
 
         const otpRegisterForm = document.getElementById('otp-register-form');
-        otpRegisterForm.addEventListener('submit', function(e) {
+        otpRegisterForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = new FormData(this);
-            fetch('{{ route("auth.otp") }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
+            fetch('{{ route("auth.otp", ["language" => app()->getLocale()]) }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {

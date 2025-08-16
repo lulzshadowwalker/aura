@@ -14,29 +14,29 @@ class ContactControllerTest extends TestCase
 
     public function test_it_renders_the_page(): void
     {
-        $this->get(route('contact.index'))->assertOk();
+        $this->get(route('contact.index', ['language' => app()->getLocale()]))->assertOk();
     }
 
     public function test_it_stores_a_message(): void
     {
-        $this->post(route('contact.store'), [
+        $this->post(route('contact.store', ['language' => app()->getLocale()]), [
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'message' => 'Hello, world!',
         ])
-            ->assertRedirect(route('contact.index'))
+            ->assertRedirect(route('contact.index', ['language' => app()->getLocale()]))
             ->assertSessionHas('success', 'Message sent successfully');
     }
 
     public function test_it_validates_the_form(): void
     {
-        $this->from(route('contact.index'))
-            ->post(route('contact.store'), [
+        $this->from(route('contact.index', ['language' => app()->getLocale()]))
+            ->post(route('contact.store', ['language' => app()->getLocale()]), [
                 'name' => '',
                 'email' => '',
                 'message' => '',
             ])
-            ->assertRedirect(route('contact.index'))
+            ->assertRedirect(route('contact.index', ['language' => app()->getLocale()]))
             ->assertSessionHasErrors(['name', 'email', 'message']);
     }
 
@@ -45,7 +45,7 @@ class ContactControllerTest extends TestCase
         $user = User::factory()->has(Customer::factory())->create();
         auth()->login($user);
 
-        $this->get(route('contact.index'))
+        $this->get(route('contact.index', ['language' => app()->getLocale()]))
             ->assertOk()
             ->assertSee($user->name)
             ->assertSee($user->email);
@@ -55,7 +55,7 @@ class ContactControllerTest extends TestCase
     {
         $faqs = Faq::factory()->count(5)->create();
 
-        $this->get(route('contact.index'))
+        $this->get(route('contact.index', ['language' => app()->getLocale()]))
             ->assertOk()
             ->assertSee($faqs[0]->question)
             ->assertSee($faqs[0]->answer);

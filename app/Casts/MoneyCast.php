@@ -23,11 +23,10 @@ class MoneyCast implements CastsAttributes
             return $value;
         }
 
-        if (! $value) {
+        $amount = $attributes[$this->column];
+        if (! $amount) {
             return null;
         }
-
-        $amount = $attributes[$this->column];
 
         return Money::of(
             $amount,

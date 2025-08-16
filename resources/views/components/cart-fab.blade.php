@@ -10,15 +10,15 @@
 
     <!-- Overlay -->
     <div x-show="cartOpen"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black/50 z-50"
-        @click="cartOpen = false"
-        style="display: none;">
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black/50 z-50"
+         @click="cartOpen = false"
+         style="display: none;">
     </div>
 
     <!-- Slide-over Cart -->
@@ -49,37 +49,54 @@
         <div id="js-cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
             <!-- Sample Cart Item 1 -->
             @foreach ($cart?->cartItems ?? [] as $item)
-            <div class="flex items-start space-x-4">
-                <img src="{{ $item->product->cover }}" alt="Perfume Bottle" class="w-24 h-24 object-cover rounded-lg border border-base-300">
-                <div class="flex-1">
-                    <h3 class="text-lg font-semibold text-base-content text-pretty">{{ $item->product->name }}</h3>
-                    <p class="text-sm font-light text-neutral-500 line-clamp-2">{{ $item->product->description }}</p>
-                    <p class="text-lg font-bold text-base-content mt-2 flex items-center">{{ $item->product->price->getAmount() }} <x-sar /></p>
-                </div>
-                <div class="flex flex-col items-end justify-between h-24">
-                    <form x-target="js-cart-fab" action="{{ route('cart.items.remove', $item->id) }}" method="post" class="mb-2">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-ghost btn-xs tooltip tooltip-error tooltip-left rtl:tooltip-right" data-tip="Remove item" aria-label="Remove item">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </form>
-
-                    <div class="flex items-center space-x-3">
-                        <form x-target="js-cart-items js-cart-footer" action="{{ route('cart.items.decrement', $item->id) }}" method="post">
+                <div class="flex items-start space-x-4">
+                    <img src="{{ $item->product->cover }}" alt="Perfume Bottle"
+                         class="w-24 h-24 object-cover rounded-lg border border-base-300">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-base-content text-pretty">{{ $item->product->name }}</h3>
+                        <p class="text-sm font-light text-neutral-500 line-clamp-2">{{ $item->product->description }}</p>
+                        <p class="text-lg font-bold text-base-content mt-2 flex items-center">{{ $item->product->price->getAmount() }}
+                            <x-sar/>
+                        </p>
+                    </div>
+                    <div class="flex flex-col items-end justify-between h-24">
+                        <form x-target="js-cart-fab"
+                              action="{{ route('cart.items.remove', ['cartItem' => $item->id, 'language' => app()->getLocale()]) }}"
+                              method="post" class="mb-2">
                             @csrf
-                            <button type="submit" class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right" data-tip="Decrease quantity" aria-label="Decrease quantity">-</button>
+                            @method('delete')
+                            <button type="submit"
+                                    class="btn btn-ghost btn-xs tooltip tooltip-error tooltip-left rtl:tooltip-right"
+                                    data-tip="Remove item" aria-label="Remove item">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </form>
 
-                        <span class="text-md font-semibold">{{ $item->quantity }}</span>
+                        <div class="flex items-center space-x-3">
+                            <form x-target="js-cart-items js-cart-footer"
+                                  action="{{ route('cart.items.decrement', ['cartItem' => $item->id, 'language' => app()->getLocale()]) }}"
+                                  method="post">
+                                @csrf
+                                <button type="submit"
+                                        class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
+                                        data-tip="Decrease quantity" aria-label="Decrease quantity">-
+                                </button>
+                            </form>
 
-                        <form x-target="js-cart-items js-cart-footer" action="{{ route('cart.items.increment', $item->id) }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right" data-tip="Increase quantity" aria-label="Increase quantity">+</button>
-                        </form>
+                            <span class="text-md font-semibold">{{ $item->quantity }}</span>
+
+                            <form x-target="js-cart-items js-cart-footer"
+                                  action="{{ route('cart.items.increment', ['cartItem' => $item->id, 'language' => app()->getLocale()]) }}"
+                                  method="post">
+                                @csrf
+                                <button type="submit"
+                                        class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
+                                        data-tip="Increase quantity" aria-label="Increase quantity">+
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
 
@@ -87,13 +104,15 @@
         <footer id="js-cart-footer" class="p-6 border-t border-base-300">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg font-light text-base-content">Subtotal</span>
-                <span class="text-xl font-bold text-base-content inline-flex items-center">{{ $cart->total->getAmount() }} <x-sar /></span>
+                <span class="text-xl font-bold text-base-content inline-flex items-center">{{ $cart->total->getAmount() }} <x-sar/></span>
             </div>
-            <a href="{{ route('checkout.index') }}" class="btn btn-primary w-full">
+            <a href="{{ route('checkout.index', ['language' => app()->getLocale()]) }}" class="btn btn-primary w-full">
                 Proceed to Checkout
             </a>
             <div class="text-center mt-4">
-                <button @click="cartOpen = false" class="link link-hover text-sm text-base-content/70">or Continue Shopping</button>
+                <button @click="cartOpen = false" class="link link-hover text-sm text-base-content/70">or Continue
+                    Shopping
+                </button>
             </div>
         </footer>
     </div>
