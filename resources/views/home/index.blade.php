@@ -48,9 +48,9 @@
                 @endif
             </section>
 
-            @if (!$loop->last)
+            @if (!$loop->last && $loop->iteration <= 3)
                 <div class="my-16">
-                    <x-banner-card :image="asset('assets/images/sample-' . (($loop->iteration % 3) + 1) . '.webp')" />
+                    <x-banner-card :image="asset('assets/images/sample-' . ((($loop->iteration - 1) % 3) + 1) . '.webp')" />
                 </div>
             @endif
         @endforeach
