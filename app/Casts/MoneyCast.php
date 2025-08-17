@@ -23,7 +23,7 @@ class MoneyCast implements CastsAttributes
             return $value;
         }
 
-        $amount = $attributes[$this->column];
+        $amount = $attributes[$this->column] ?? null;
         if (! $amount) {
             return null;
         }
