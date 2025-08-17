@@ -42,6 +42,10 @@ class Collection extends Model implements Sortable
     {
         parent::boot();
 
+        static::addGlobalScope('sorting', function ($query) {
+            $query->ordered();
+        });
+
         static::creating(function (self $collection) {
             if (! $collection->slug) {
                 $collection->slug = static::generateUniqueSlug($collection->name);
