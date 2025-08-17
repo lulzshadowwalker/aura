@@ -64,7 +64,7 @@ class Product extends Model implements HasMedia
             'id' => 'integer',
             'is_active' => 'boolean',
             'category_id' => 'integer',
-            'sale_price' => MoneyCast::class.':sale_amount',
+            'sale_price' => MoneyCast::class . ':sale_amount',
             'price' => MoneyCast::class,
             'product_id' => 'integer',
         ];
@@ -103,7 +103,7 @@ class Product extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $fallback = 'https://placehold.co/400x225.png?text='.str_replace(' ', '%20', $this->getTranslation('name', 'en'));
+        $fallback = 'https://placehold.co/400x225.png?text=' . str_replace(' ', '%20', $this->getTranslation('name', 'en'));
 
         $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGES);
         $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
@@ -152,11 +152,11 @@ class Product extends Model implements HasMedia
     {
         $customer = auth()->user()?->customer;
         if (! $customer) {
-            return Attribute::get(fn (): bool => false);
+            return Attribute::get(fn(): bool => false);
         }
 
         return Attribute::get(
-            fn (): bool => $customer
+            fn(): bool => $customer
                 ->favorites()
                 ->where('product_id', $this->id)
                 ->exists()
@@ -180,10 +180,10 @@ class Product extends Model implements HasMedia
         $counter = 1;
 
         while (static::where('slug', $slug)
-            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
             ->exists()
         ) {
-            $slug = $baseSlug.'-'.$counter++;
+            $slug = $baseSlug . '-' . $counter++;
         }
 
         return $slug;
