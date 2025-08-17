@@ -22,7 +22,8 @@
                     @endforeach
                 </ul>
             </li>
-            <li><a href="{{ route('products.index', ['language' => app()->getLocale()]) }}">{{ __('app.products') }}</a></li>
+            <li><a href="{{ route('products.index', ['language' => app()->getLocale()]) }}">{{ __('app.products') }}</a>
+            </li>
 
             <!-- Language Switcher -->
             @php
@@ -34,8 +35,8 @@
             <li class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-sm">{{ strtoupper(app()->getLocale()) }}</div>
                 <ul tabindex="0" class="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-28 p-2 shadow">
-                    <li><a href="{{ url('/' . $enPath) }}">EN</a></li>
-                    <li><a href="{{ url('/' . $arPath) }}">AR</a></li>
+                    <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
+                    <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
                 </ul>
             </li>
 
