@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Collection extends Model
+class Collection extends Model implements Sortable
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, SortableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +19,11 @@ class Collection extends Model
      * @var array
      */
     protected $fillable = ["name", "slug", "description", "is_active"];
+
+    public $sortable = [
+        'order_column_name' => 'sorting',
+        'sort_when_creating' => true,
+    ];
 
     /**
      * Get the attributes that should be cast.

@@ -17,4 +17,9 @@ class ListCollections extends ListRecords
                 ->slideOver(),
         ];
     }
+
+    public function reorderTable(array $order): void
+    {
+        static::getResource()::getModel()::setNewOrder($order);
+    }
 }

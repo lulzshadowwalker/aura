@@ -60,12 +60,16 @@ class CollectionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('sorting', '#')
+                    ->toggleable()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('name')
                     ->label('Collection Name')
                     ->searchable()
                     ->sortable()
                     ->limit(50)
-                    ->tooltip(fn (Collection $record) => $record->name),
+                    ->tooltip(fn(Collection $record) => $record->name),
 
                 Tables\Columns\TextColumn::make('products_count')->counts('products')
                     ->label('Products')
@@ -108,7 +112,9 @@ class CollectionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('created_at', 'desc');
+            ])
+            ->reorderable('sorting')
+            ->defaultSort('sorting');
     }
 
     public static function getRelations(): array
