@@ -37,12 +37,18 @@ class MoneyCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        if (! $value instanceof Money) {
-            throw new InvalidArgumentException('The given value is not an instance of Brick\Money\Money.');
+        if ($value instanceof Money) {
+            return [
+                $this->column => $value->getAmount(),
+            ];
         }
 
-        return [
-            $this->column => $value->getAmount(),
-        ];
+        if (is_numeric($value)) {
+            return [
+                $this->column => (string) $value,
+            ];
+        }
+
+        throw new InvalidArgumentException('The given value is not a valid money representation.');
     }
 }
