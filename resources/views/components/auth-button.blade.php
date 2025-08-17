@@ -7,7 +7,7 @@
         <div class="modal-box">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        aria-label="{{ __('app.close') }}">✕
+                    aria-label="{{ __('app.close') }}">✕
                 </button>
             </form>
 
@@ -16,13 +16,13 @@
                 <h3 class="font-bold text-lg">{{ __('app.login') }}</h3>
                 <div class="py-4">
                     <p class="mb-4">{{ __('app.enter-phone-for-otp') }}</p>
-                    <form id="otp-login-form">
+                    <form id="otp-login-form" onsubmit="handleOtpSubmit(event, 'login')">
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">{{ __('app.phone-number') }}</span>
                             </label>
                             <input type="tel" name="phone_number" placeholder="{{ __('app.example-phone') }}"
-                                   class="input input-bordered w-full"/>
+                                class="input input-bordered w-full" />
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">{{ __('app.send-otp') }}</button>
                     </form>
@@ -43,13 +43,13 @@
                 <h3 class="font-bold text-lg">{{ __('app.register') }}</h3>
                 <div class="py-4">
                     <p class="mb-4">{{ __('app.enter-phone-to-register') }}</p>
-                    <form id="otp-register-form">
+                    <form id="otp-register-form" onsubmit="handleOtpSubmit(event, 'register')">
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">{{ __('app.phone-number') }}</span>
                             </label>
                             <input type="tel" name="phone_number" placeholder="{{ __('app.example-phone') }}"
-                                   class="input input-bordered w-full"/>
+                                class="input input-bordered w-full" />
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">{{ __('app.send-otp') }}</button>
                     </form>
@@ -71,44 +71,30 @@
     </dialog>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const otpLoginForm = document.getElementById('otp-login-form');
-        otpLoginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            fetch('{{ route("auth.otp", ["language" => app()->getLocale()]) }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        alert(data.message);
-                    }
-                });
-        });
+@push('scripts')
+    <script>
+        function handleOtpSubmit(event, type) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
 
-        const otpRegisterForm = document.getElementById('otp-register-form');
-        otpRegisterForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            fetch('{{ route("auth.otp", ["language" => app()->getLocale()]) }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
+            fetch('{{ route('auth.otp', ['language' => app()->getLocale()]) }}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
                         alert(data.message);
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
                 });
-        });
-    });
-</script>
+        }
+    </script>
+@endpush
