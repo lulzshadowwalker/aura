@@ -19,7 +19,7 @@
 
     {{-- Collections --}}
     <div class="container mx-auto px-4 my-12 max-md:my-8">
-        <h2 class="sr-only">Our Collections</h2>
+        <h2 class="sr-only">{{ __('app.our-collections') }}</h2>
         @foreach ($collections as $collection)
             <section id="{{ $collection->slug }}" class="mb-16 last:mb-0">
                 <header class="mb-8">
@@ -43,7 +43,7 @@
                     @endif
                 @else
                     <div class="text-center py-12">
-                        <p class="text-base-content/60">No products available in this collection yet.</p>
+                        <p class="text-base-content/60">{{ __('app.no-products-in-collection') }}</p>
                     </div>
                 @endif
             </section>
