@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'marquee' => 'Coming Soon… The Launch of Northwind’s Luxurious Collection.',
+    'marquee' => 'Northwind Saudi brand launching soon',
 
     // Generic
     'home' => 'Home',
