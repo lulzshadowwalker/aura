@@ -39,25 +39,23 @@
                             <!-- Thumbnail Column -->
                             <div class="col-span-1 space-y-3">
                                 <template x-for="(image, index) in images" :key="index">
-                                    <div
-                                        class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
-                                        :class="activeImageIndex === index ? 'border-primary shadow-lg' : 'border-gray-200 hover:border-gray-300'"
-                                        @click="activeImageIndex = index"
-                                        x-lightbox="image.url"
+                                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300"
+                                        :class="activeImageIndex === index ? 'border-primary shadow-lg' :
+                                            'border-gray-200 hover:border-gray-300'"
+                                        @click="activeImageIndex = index" x-lightbox="image.url"
                                         x-lightbox:group="product-gallery">
                                         <img :src="image.thumb_url" :alt="`${productName} thumbnail ${index + 1}`"
-                                             class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                                            class="w-full h-full object-contain transition-transform duration-300 hover:scale-105 p-4">
                                     </div>
                                 </template>
                             </div>
 
                             <!-- Main Image -->
                             <div class="col-span-4">
-                                <div
-                                    class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
+                                <div class="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden shadow-xl cursor-pointer group relative"
                                     @click="openLightbox(activeImageIndex)">
                                     <img :src="images[activeImageIndex].url" :alt="`${productName} main image`"
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                        class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-12">
                                     <div
                                         class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
                                         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -96,15 +94,10 @@
                         <!-- Rating & Reviews -->
                         <!-- <div class="flex items-center gap-4">
                             <div class="rating rating-sm">
-                                @for ($i = 1; $i
-                                <= 5; $i++)
-                            <input type="radio" class="mask mask-star-2 bg-orange-400"
+                                @for ($i = 1; $i <= 5; $i++)
+<input type="radio" class="mask mask-star-2 bg-orange-400"
 {{ $i <= 4 ? 'checked' : '' }} disabled />
-
-
-
-
-                        @endfor
+@endfor
                         </div>
                         <span class="text-sm text-gray-600">({{ $product->reviews->count() }} reviews)</span>
                         </div> -->
@@ -136,9 +129,8 @@
                         <!-- Add to Cart -->
                         <div class="flex items-center gap-3">
                             <form x-target="js-cart-fab js-cart-slideover"
-                                  action="{{ route('cart.items.add', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
-                                  method="POST"
-                                  class="flex justify-stretch w-full">
+                                action="{{ route('cart.items.add', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
+                                method="POST" class="flex justify-stretch w-full">
                                 @csrf
                                 <button
                                     class="btn btn-primary btn-lg flex-grow shadow-lg hover:shadow-xl transition-all duration-300">
@@ -147,22 +139,23 @@
                                 </button>
                             </form>
                             <form id="js-favorite" x-target
-                                  action="{{ route('favorites.store', ['language' => app()->getLocale()]) }}"
-                                  method="post"
-                                  data-tip="{{ $product->isFavorite ? __('app.remove-from-favorites') : __('app.add-to-favorites') }}">
+                                action="{{ route('favorites.store', ['language' => app()->getLocale()]) }}"
+                                method="post"
+                                data-tip="{{ $product->isFavorite ? __('app.remove-from-favorites') : __('app.add-to-favorites') }}">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <button class="btn btn-outline btn-lg btn-square"
-                                        aria-label="{{ __('app.add-to-favorites') }}"
-                                        title="{{ __('app.add-to-favorites') }}">
-                                    <i @class(["fas fa-heart", "text-red-400"=> $product->isFavorite])></i>
+                                    aria-label="{{ __('app.add-to-favorites') }}"
+                                    title="{{ __('app.add-to-favorites') }}">
+                                    <i @class(['fas fa-heart', 'text-red-400' => $product->isFavorite])></i>
                                 </button>
                             </form>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5"/>
-                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo" class="h-5 scale-210"/>
+                            <img src="{{ asset('assets/images/tabby.png') }}" alt="Tabby Logo" class="h-5" />
+                            <img src="{{ asset('assets/images/tamara.png') }}" alt="Tamara Logo"
+                                class="h-5 scale-210" />
                         </div>
 
                         <!-- Additional Info -->
@@ -193,7 +186,8 @@
         <div class="bg-gray-50/50 border-t border-gray-200">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">{{ __('app.product-inquiries') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">{{ __('app.product-inquiries') }}
+                    </h2>
                     <p class="text-gray-600 font-light">{{ __('app.product-inquiries-lead') }}</p>
                 </div>
 
@@ -212,7 +206,8 @@
                                             </div>
                                             <div class="collapse-content">
                                                 <div class="flex justify-between items-start gap-4">
-                                                    <p class="text-sm text-gray-600 {{ !$question->answer ? 'italic text-gray-500' : '' }}">
+                                                    <p
+                                                        class="text-sm text-gray-600 {{ !$question->answer ? 'italic text-gray-500' : '' }}">
                                                         {{ $question->answer ?? __('app.waiting-for-answer') }}
                                                     </p>
                                                     @if (!$question->answer)
@@ -235,29 +230,24 @@
                         <div class="card-body">
                             <h3 class="text-xl font-medium mb-4 text-gray-800">{{ __('app.ask-a-question') }}</h3>
                             <form id="js-product-question-form"
-                                  x-target="js-product-questions js-product-question-form"
-                                  action="{{ route('products.questions.store', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
-                                  method="POST"
-                                  class="space-y-4">
+                                x-target="js-product-questions js-product-question-form"
+                                action="{{ route('products.questions.store', ['product' => $product->slug, 'language' => app()->getLocale()]) }}"
+                                method="POST" class="space-y-4">
                                 @csrf
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text font-medium">{{ __('app.email') }}</span>
                                     </label>
-                                    <input name="email" type="email"
-                                           placeholder="your@email.com"
-                                           class="input input-bordered w-full validator"
-                                           required
-                                           value="{{ old('email', auth()->user()->email ?? '') }}"/>
+                                    <input name="email" type="email" placeholder="your@email.com"
+                                        class="input input-bordered w-full validator" required
+                                        value="{{ old('email', auth()->user()->email ?? '') }}" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text font-medium">{{ __('app.question') }}</span>
                                     </label>
-                                    <textarea name="question"
-                                              class="textarea textarea-bordered h-24 w-full validator"
-                                              placeholder="{{ __('app.what-would-you-like-to-know') }}"
-                                              required></textarea>
+                                    <textarea name="question" class="textarea textarea-bordered h-24 w-full validator"
+                                        placeholder="{{ __('app.what-would-you-like-to-know') }}" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-full">
                                     <i class="fas fa-paper-plane mr-2"></i>
@@ -294,12 +284,12 @@
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between mb-2">
                                         <div class="flex items-center gap-3">
-                                            <h4 class="font-medium text-gray-800">{{ $review->customer->user->name }}</h4>
+                                            <h4 class="font-medium text-gray-800">{{ $review->customer->user->name }}
+                                            </h4>
                                             <div class="rating rating-sm">
-                                                @for ($i = 1; $i
-                                                <= 5; $i++)
+                                                @for ($i = 1; $i <= 5; $i++)
                                                     <input type="radio" class="mask mask-star-2 bg-orange-400"
-                                                           {{ $i <= $review->rating ? 'checked' : '' }} disabled/>
+                                                        {{ $i <= $review->rating ? 'checked' : '' }} disabled />
                                                 @endfor
                                             </div>
                                         </div>
@@ -334,13 +324,10 @@
                             <span class="label-text font-medium">{{ __('app.rating') }}</span>
                         </label>
                         <div class="rating rating-lg">
-                            @for ($i = 1; $i
-                            <= 5; $i++)
-                                <input type="radio" name="rating"
-                                       class="mask mask-star-2 bg-orange-400"
-                                       value="{{ $i }}"
-                                       @click="rating = {{ $i }}"
-                                       aria-label="{{ $i }} stars"/>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <input type="radio" name="rating" class="mask mask-star-2 bg-orange-400"
+                                    value="{{ $i }}" @click="rating = {{ $i }}"
+                                    aria-label="{{ $i }} stars" />
                             @endfor
                         </div>
                     </div>
@@ -348,13 +335,12 @@
                         <label class="label">
                             <span class="label-text font-medium">{{ __('app.your-review') }}</span>
                         </label>
-                        <textarea name="review"
-                                  class="textarea textarea-bordered h-24"
-                                  placeholder="{{ __('app.share-your-experience') }}"
-                                  required></textarea>
+                        <textarea name="review" class="textarea textarea-bordered h-24" placeholder="{{ __('app.share-your-experience') }}"
+                            required></textarea>
                     </div>
                     <div class="modal-action">
-                        <button type="button" class="btn btn-ghost" onclick="review_modal.close()">{{ __('app.cancel') }}</button>
+                        <button type="button" class="btn btn-ghost"
+                            onclick="review_modal.close()">{{ __('app.cancel') }}</button>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-star mr-2"></i>
                             {{ __('app.submit-review') }}
@@ -368,12 +354,13 @@
         <div class="bg-white border-t border-gray-200">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">{{ __('app.discover-other-essences') }}</h2>
+                    <h2 class="text-3xl lg:text-4xl font-serif text-gray-800 mb-2">
+                        {{ __('app.discover-other-essences') }}</h2>
                     <p class="text-gray-600 font-light">{{ __('app.curated-selections') }}</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($relatedProducts as $relatedProduct)
-                        <x-product-card :product="$relatedProduct"/>
+                    @foreach ($relatedProducts as $relatedProduct)
+                        <x-product-card :product="$relatedProduct" />
                     @endforeach
                 </div>
             </div>
@@ -383,12 +370,13 @@
     <script>
         function productGallery() {
             const productName = '{{ $product->name }}';
-            const images = @json($product->images->map(function($media) {
-                return [
-                    'url' => $media->getUrl(),
-                    'thumb_url' => $media->getUrl(),
-                ];
-            }));
+            const images = @json(
+                $product->images->map(function ($media) {
+                    return [
+                        'url' => $media->getUrl(),
+                        'thumb_url' => $media->getUrl(),
+                    ];
+                }));
 
             const defaultImages = [];
 
