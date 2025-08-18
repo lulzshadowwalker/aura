@@ -6,6 +6,7 @@ use Brick\Math\RoundingMode;
 use Brick\Money\Money;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 
 class MoneyCast implements CastsAttributes
@@ -48,6 +49,12 @@ class MoneyCast implements CastsAttributes
                 $this->column => (string) $value,
             ];
         }
+
+        Log::error('The given value is not a valid money representation.', [
+            'value' => $value,
+            'attributes' => $attributes,
+            'model_class' => get_class($model),
+        ]);
 
         throw new InvalidArgumentException('The given value is not a valid money representation.');
     }

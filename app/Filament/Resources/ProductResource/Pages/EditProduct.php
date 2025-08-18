@@ -16,4 +16,21 @@ class EditProduct extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    /**
+     * Mutate form data before filling the form, for Livewire compatibility.
+     */
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $before = $data;
+        if (isset($data['amount'])) {
+            $data['price'] = $data['amount'];
+        }
+
+        if (isset($data['sale_amount'])) {
+            $data['sale_price'] = $data['sale_amount'];
+        }
+
+        return $data;
+    }
 }
