@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\Translatable\HasTranslations;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Translatable\HasTranslations;
 
 class Collection extends Model implements Sortable
 {
@@ -18,7 +18,7 @@ class Collection extends Model implements Sortable
      *
      * @var array
      */
-    protected $fillable = ["name", "slug", "description", "is_active"];
+    protected $fillable = ['name', 'slug', 'description', 'is_active'];
 
     public $sortable = [
         'order_column_name' => 'sorting',
@@ -33,8 +33,8 @@ class Collection extends Model implements Sortable
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "is_active" => "boolean",
+            'id' => 'integer',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -59,7 +59,7 @@ class Collection extends Model implements Sortable
         });
     }
 
-    public array $translatable = ["name", "description"];
+    public array $translatable = ['name', 'description'];
 
     public function products(): BelongsToMany
     {
@@ -73,10 +73,10 @@ class Collection extends Model implements Sortable
         $counter = 1;
 
         while (static::where('slug', $slug)
-            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
             ->exists()
         ) {
-            $slug = $baseSlug . '-' . $counter++;
+            $slug = $baseSlug.'-'.$counter++;
         }
 
         return $slug;

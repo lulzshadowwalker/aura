@@ -8,8 +8,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 
 class CollectionResource extends Resource
 {
@@ -69,7 +69,7 @@ class CollectionResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->limit(50)
-                    ->tooltip(fn(Collection $record) => $record->name),
+                    ->tooltip(fn (Collection $record) => $record->name),
 
                 Tables\Columns\TextColumn::make('products_count')->counts('products')
                     ->label('Products')
@@ -101,7 +101,7 @@ class CollectionResource extends Resource
                         true => 'Active',
                         false => 'Inactive',
                     ])
-                    ->multiple()
+                    ->multiple(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()->slideOver(),
