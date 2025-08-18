@@ -38,6 +38,13 @@ class MoneyCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
+        // Handle null values gracefully
+        if ($value === null) {
+            return [
+                $this->column => null,
+            ];
+        }
+
         if ($value instanceof Money) {
             return [
                 $this->column => $value->getAmount(),
