@@ -25,6 +25,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->authGuard('admin')
             ->default()
             ->defaultThemeMode(ThemeMode::Light)
             ->id('admin')
