@@ -8,8 +8,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class ProductQuestionResource extends Resource
@@ -17,6 +17,8 @@ class ProductQuestionResource extends Resource
     protected static ?string $model = ProductQuestion::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
+
+    protected static ?string $navigationGroup = 'Customer Engagement';
 
     public static function form(Form $form): Form
     {
@@ -118,7 +120,7 @@ class ProductQuestionResource extends Resource
                         true: fn (Builder $query) => $query->whereNotNull('answer'),
                         false: fn (Builder $query) => $query->whereNull('answer'),
                         blank: fn (Builder $query) => $query,
-                    )
+                    ),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()->slideOver(),

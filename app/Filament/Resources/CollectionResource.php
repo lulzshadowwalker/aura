@@ -17,6 +17,8 @@ class CollectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
+    protected static ?string $navigationGroup = 'Shop Management';
+
     public static function form(Form $form): Form
     {
         return $form

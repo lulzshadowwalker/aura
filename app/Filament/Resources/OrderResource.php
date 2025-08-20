@@ -9,14 +9,16 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $navigationGroup = 'Shop Management';
 
     public static function form(Form $form): Form
     {

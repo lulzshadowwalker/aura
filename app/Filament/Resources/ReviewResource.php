@@ -8,14 +8,16 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
+
+    protected static ?string $navigationGroup = 'Customer Engagement';
 
     public static function form(Form $form): Form
     {
@@ -65,7 +67,7 @@ class ReviewResource extends Resource
                 Tables\Columns\TextColumn::make('rating')
                     ->numeric()
                     ->sortable()
-                    ->formatStateUsing(fn ($state) => str_repeat('★', $state) . str_repeat('☆', 5 - $state)),
+                    ->formatStateUsing(fn ($state) => str_repeat('★', $state).str_repeat('☆', 5 - $state)),
 
                 Tables\Columns\TextColumn::make('product.name')
                     ->sortable()

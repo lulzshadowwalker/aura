@@ -16,12 +16,14 @@ class FaqResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
+    protected static ?string $navigationGroup = 'Support & Content';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make("FAQ Details")
-                    ->description("Manage the question and answer for the FAQ.")
+                Forms\Components\Section::make('FAQ Details')
+                    ->description('Manage the question and answer for the FAQ.')
                     ->aside()
                     ->schema([
                         Forms\Components\TextInput::make('question')

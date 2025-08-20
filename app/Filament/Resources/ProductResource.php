@@ -5,20 +5,22 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Table;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static ?string $navigationGroup = 'Shop Management';
 
     public static function form(Form $form): Form
     {
