@@ -12,13 +12,13 @@
                 <p class="mb-5 drop-shadow-lg">
                     {{ __('app.hero-description') }}
                 </p>
-                <button class="btn btn-primary btn-lg shadow-lg">{{ __('app.get-started') }}</button>
+                <a href="#collections" class="btn btn-primary btn-lg shadow-lg">{{ __('app.get-started') }}</a>
             </div>
         </div>
     </section>
 
     {{-- Collections --}}
-    <div class="container mx-auto px-4 my-12 max-md:my-8">
+    <div id="collections" class="container mx-auto px-4 my-12 max-md:my-8">
         <h2 class="sr-only">{{ __('app.our-collections') }}</h2>
         @foreach ($collections as $collection)
             <section id="{{ $collection->slug }}" class="mb-16 last:mb-0">

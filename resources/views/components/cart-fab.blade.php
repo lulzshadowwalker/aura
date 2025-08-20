@@ -78,7 +78,7 @@
                         {{ __('app.start-shopping') }}
                     </a>
 
-                    <a href="{{ route('home.index', ['language' => app()->getLocale()]) . '#featured' }}"
+                    <a href="{{ route('home.index', ['language' => app()->getLocale()]) . '#collections' }}"
                        @click="cartOpen = false"
                        class="btn btn-outline btn-sm flex-1 text-xs w-full">
                         {{ __('app.explore-collections') }}
