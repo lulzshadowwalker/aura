@@ -41,7 +41,9 @@
                 </form>
 
                 @if ($cartItem)
-                    <div class="btn btn-sm btn-circle btn-disabled text-black">{{ $cartItem->quantity }}</div>
+                    <div class="btn btn-sm btn-secondary btn-circle btn-disabled text-black">
+                        {{ $cartItem->quantity }}
+                    </div>
 
                     <form
                         x-target="js-cart-fab js-cart-slideover {{ $id }}"
