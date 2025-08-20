@@ -7,7 +7,7 @@
                  style="transform-style: preserve-3d;"/>
 
             @php
-                $id ="js-product-card-cart-actions-" . (isset($collection) ? 'c' . $collection->id . '-p' . $product->id : 'p-' . $product->id);
+                $id = "js-product-card-cart-actions-" . (isset($collection) ? 'c' . $collection->id . '-p' . $product->id : 'p-' . $product->id);
             @endphp
             <div id="{{ $id }}" class="absolute top-2 end-2 flex flex-col items-center gap-1">
                 <form
@@ -33,7 +33,6 @@
                     method="post"
                     class="tooltip"
                     data-tip="Add to Cart">
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                     @csrf
                     <button class="btn btn-sm btn-circle" aria-label="Add to Cart">
                         <i class="fa fa-plus"></i>
@@ -47,13 +46,13 @@
 
                     <form
                         x-target="js-cart-fab js-cart-slideover {{ $id }}"
-                        action="{{ $cartItem->quantity > 1 ? route('cart.items.decrement', ['cartItem' => $cartItem->id, 'language' => app()->getLocale()]) : route('cart.items.remove', ['cartItem' => $cartItem->id, 'language' => app()->getLocale()]) }}"
+                        action="{{ ! $cartItem->last ? route('cart.items.decrement', ['cartItem' => $cartItem->id, 'language' => app()->getLocale()]) : route('cart.items.remove', ['cartItem' => $cartItem->id, 'language' => app()->getLocale()]) }}"
                         method="post"
                         class="tooltip tooltip-bottom"
                         data-tip="{{ $cartItem->last ? "Delete from Cart" : "Decrease from Cart" }}"
                     >
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                         @csrf
+                        @method($cartItem->last ? 'delete' : 'post')
                         <button @class([
                             "btn btn-sm btn-circle",
                             "btn-error" => true,
