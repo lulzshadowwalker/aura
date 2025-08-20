@@ -17,6 +17,52 @@
         </div>
     </section>
 
+    {{-- About North Wind --}}
+    <section class="py-20 lg:py-32 bg-gradient-to-b from-base-100 to-base-200 relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-16 lg:mb-20">
+                    <div class="inline-flex items-center gap-4 mb-6">
+                        <div class="w-12 lg:w-16 h-px bg-gradient-to-r from-transparent to-primary"></div>
+                        <h2 class="text-2xl tracking-[0.2em] uppercase text-base-content">
+                            {{ __('app.about-north-wind') }}
+                        </h2>
+                        <div class="w-12 lg:w-16 h-px bg-gradient-to-l from-transparent to-primary"></div>
+                    </div>
+                </div>
+
+                <!-- Brand Story Content -->
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-8">
+                        <p class="text-lg leading-relaxed text-base-content/90 font-light tracking-wide text-center">
+                            {{ __('app.brand-story') }}
+                        </p>
+
+                        <!-- Decorative Quote -->
+                        <div class="relative ps-8 lg:ps-12 max-w-3xl mx-auto">
+                            <div
+                                class="absolute start-0 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary/20 rounded-full"></div>
+                            <p class="text-xl italic text-primary font-medium leading-relaxed tracking-wide">
+                                {{ __('app.brand-story-tagline') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Decorative Line -->
+                <div class="flex justify-center mt-16 lg:mt-20">
+                    <div
+                        class="w-24 lg:w-32 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-40 h-40 bg-primary/3 rounded-full blur-3xl"></div>
+    </section>
+
     {{-- Collections --}}
     <div id="collections" class="container mx-auto px-4 my-12 max-md:my-8">
         <h2 class="sr-only">{{ __('app.our-collections') }}</h2>
