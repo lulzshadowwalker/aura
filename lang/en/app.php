@@ -83,6 +83,13 @@ return [
     'proceed-to-checkout' => 'Proceed to Checkout',
     'or-continue-shopping' => 'or Continue Shopping',
 
+    // Empty Cart State
+    'empty-bag-title' => 'Your bag is empty',
+    'empty-bag-description' => 'Discover our exclusive collection of luxury perfumes and find your perfect fragrance.',
+    'start-shopping' => 'Start Shopping',
+    'explore-collections' => 'Explore Collections',
+    'browse-all-products' => 'Browse All Products',
+
     // Contact page
     'contact-title' => 'Contact',
     'get-in-touch' => 'Get in Touch',

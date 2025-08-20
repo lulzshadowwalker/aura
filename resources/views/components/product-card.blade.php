@@ -1,6 +1,6 @@
 @props(['product', 'collection', 'cart'])
 <a href="{{ route('products.show', ['product' => $product->slug, 'language' => app()->getLocale()]) }}">
-    <div class="card bg-base-100 border border-neutral-300 aspect-square">
+    <div class="card border border-neutral-300 aspect-square">
         <div class="card-body flex items-center justify-center bg-gray-200 group relative">
             <img src="{{ $product->cover }}" alt="{{ $product->name }} Perfume Bottle"
                  class="max-h-70 object-contain transition-transform duration-700 ease-in-out group-hover:-rotate-y-15"

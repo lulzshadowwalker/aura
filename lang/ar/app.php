@@ -83,6 +83,13 @@ return [
     'proceed-to-checkout' => 'الانتقال إلى الدفع',
     'or-continue-shopping' => 'أو متابعة التسوق',
 
+    // Empty Cart State
+    'empty-bag-title' => 'حقيبتك فارغة',
+    'empty-bag-description' => 'اكتشف مجموعتنا الحصرية من العطور الفاخرة واعثر على عطرك المثالي.',
+    'start-shopping' => 'ابدأ التسوق',
+    'explore-collections' => 'استكشف المجموعات',
+    'browse-all-products' => 'تصفح جميع المنتجات',
+
     // Contact page
     'contact-title' => 'اتصل بنا',
     'get-in-touch' => 'تواصل معنا',
