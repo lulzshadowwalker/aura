@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            // ->authGuard('admin')
+             ->authGuard('admin')
             ->default()
             ->defaultThemeMode(ThemeMode::Light)
             ->brandLogo(asset('assets/images/logo.png'))
