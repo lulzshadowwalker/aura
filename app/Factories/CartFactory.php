@@ -9,10 +9,10 @@ class CartFactory
     public static function make()
     {
         $cart = match (auth()->guest()) {
-            true => Cart::firstOrCreate([
+            true => Cart::with('cartItems')->firstOrCreate([
                 'session_id' => session()->getId(),
             ]),
-            false => Cart::firstOrCreate([
+            false => Cart::with('cartItems')->firstOrCreate([
                 'customer_id' => auth()->user()->customer->id,
             ]),
         };

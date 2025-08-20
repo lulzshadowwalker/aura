@@ -2,7 +2,7 @@
     {{-- Hero --}}
     <section class="hero min-h-screen relative overflow-hidden">
         <video class="absolute inset-0 w-full h-full object-cover" src="{{ asset('assets/videos/hero.mp4') }}" autoplay
-            loop muted playsinline></video>
+               loop muted playsinline></video>
         <div class="bg-gradient-to-t from-black/60 to-black/0 absolute inset-0 z-10"></div>
         <div class="text-neutral-content text-center relative z-10">
             <div class="max-w-md mx-auto">
@@ -30,13 +30,13 @@
                 @if ($collection->products->isNotEmpty())
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                         @foreach ($collection->products->take(4) as $product)
-                            <x-product-card :product="$product" :collection="$collection" />
+                            <x-product-card :product="$product" :collection="$collection" :cart="$cart"/>
                         @endforeach
                     </div>
 
                     @if ($collection->products->count() > 4)
                         <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
-                            class="link link-hover flex items-center justify-end gap-1">
+                           class="link link-hover flex items-center justify-end gap-1">
                             {{ trans('app.view-all', ['name' => $collection->name]) }}
                             <i data-lucide="move-right" class="w-5 h-5 rtl:rotate-180"></i>
                         </a>
@@ -50,7 +50,8 @@
 
             @if (!$loop->last && $loop->iteration <= 3)
                 <div class="my-16">
-                    <x-banner-card :image="asset('assets/images/sample-' . ((($loop->iteration - 1) % 3) + 1) . '.webp')" />
+                    <x-banner-card
+                        :image="asset('assets/images/sample-' . ((($loop->iteration - 1) % 3) + 1) . '.webp')"/>
                 </div>
             @endif
         @endforeach

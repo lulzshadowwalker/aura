@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Factories\CartFactory;
 use App\Models\Collection;
 
 class HomeController extends Controller
@@ -9,6 +10,8 @@ class HomeController extends Controller
     public function index()
     {
         $collections = Collection::all();
-        return view("home.index", compact("collections"));
+        $cart = CartFactory::make();
+
+        return view('home.index', compact('collections', 'cart'));
     }
 }

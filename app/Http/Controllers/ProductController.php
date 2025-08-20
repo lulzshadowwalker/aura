@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Factories\CartFactory;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,9 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
+        $cart = CartFactory::make();
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'cart'));
     }
 
     public function show(string $language, Product $product)
@@ -35,7 +37,8 @@ class ProductController extends Controller
             ->where('id', '!=', $product->id)
             ->limit(4)
             ->get();
+        $cart = CartFactory::make();
 
-        return view('products.show', compact('product', 'relatedProducts'));
+        return view('products.show', compact('product', 'relatedProducts', 'cart'));
     }
 }

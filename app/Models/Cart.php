@@ -22,27 +22,9 @@ class Cart extends Model
      */
     protected $fillable = ['session_id', 'customer_id'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'id' => 'integer',
-            'customer_id' => 'integer',
-        ];
-    }
-
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    public function cartItems(): HasMany
-    {
-        return $this->hasMany(CartItem::class);
     }
 
     public function isEmpty(): Attribute
@@ -63,5 +45,34 @@ class Cart extends Model
 
             return Money::of($amount, $currency, roundingMode: MathRoundingMode::HALF_UP);
         });
+    }
+
+    public function hasProduct(Product $product): boolean
+    {
+        return $this->cartItems()->where('product_id', $product->id)->exists();
+    }
+
+    public function cartItems(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    /** Returns cart item matching product if any */
+    public function cartItem(Product $product): ?CartItem
+    {
+        return $this->cartItems()->where('product_id', $product->id)->first();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+            'customer_id' => 'integer',
+        ];
     }
 }

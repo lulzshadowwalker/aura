@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CartItem extends Model
 {
     use HasFactory;
-    
+
     protected $touches = ['cart'];
 
     /**
@@ -23,6 +24,24 @@ class CartItem extends Model
         'product_id',
     ];
 
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /** Returns true if the cart item has quantity of one */
+    public function last(): Attribute
+    {
+        return Attribute::get(function (): bool {
+            return $this->quantity === 1;
+        });
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -35,15 +54,5 @@ class CartItem extends Model
             'cart_id' => 'integer',
             'product_id' => 'integer',
         ];
-    }
-
-    public function cart(): BelongsTo
-    {
-        return $this->belongsTo(Cart::class);
-    }
-
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
     }
 }

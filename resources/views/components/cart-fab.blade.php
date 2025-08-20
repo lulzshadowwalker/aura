@@ -2,7 +2,7 @@
     <!-- Cart FAB -->
     <div class="fixed bottom-6 right-6 z-40">
         <button @click="cartOpen = true" class="btn btn-primary btn-circle btn-lg shadow-lg" aria-label="Open cart">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <i class="fa fa-bag-shopping"></i>
             <!-- Cart count -->
             <div class="badge badge-secondary absolute -top-3 -end-3">{{ $cart?->cartItems->count() ?? 0 }}</div>
         </button>
@@ -39,7 +39,8 @@
         aria-modal="true">
         <!-- Header -->
         <header class="flex items-center justify-between p-6 border-b border-base-300">
-            <h2 id="slide-over-title" class="text-2xl font-light tracking-wide text-base-content">{{ __('app.your-bag') }}</h2>
+            <h2 id="slide-over-title"
+                class="text-2xl font-light tracking-wide text-base-content">{{ __('app.your-bag') }}</h2>
             <button @click="cartOpen = false" class="btn btn-ghost btn-circle" aria-label="Close cart">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
@@ -79,7 +80,8 @@
                                 @csrf
                                 <button type="submit"
                                         class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
-                                        data-tip="{{ __('app.decrease-quantity') }}" aria-label="{{ __('app.decrease-quantity') }}">-
+                                        data-tip="{{ __('app.decrease-quantity') }}"
+                                        aria-label="{{ __('app.decrease-quantity') }}">-
                                 </button>
                             </form>
 
@@ -91,7 +93,8 @@
                                 @csrf
                                 <button type="submit"
                                         class="btn btn-ghost btn-xs tooltip tooltip-left rtl:tooltip-right"
-                                        data-tip="{{ __('app.increase-quantity') }}" aria-label="{{ __('app.increase-quantity') }}">+
+                                        data-tip="{{ __('app.increase-quantity') }}"
+                                        aria-label="{{ __('app.increase-quantity') }}">+
                                 </button>
                             </form>
                         </div>
@@ -110,7 +113,8 @@
                 {{ __('app.proceed-to-checkout') }}
             </a>
             <div class="text-center mt-4">
-                <button @click="cartOpen = false" class="link link-hover text-sm text-base-content/70">{{ __('app.or-continue-shopping') }}
+                <button @click="cartOpen = false"
+                        class="link link-hover text-sm text-base-content/70">{{ __('app.or-continue-shopping') }}
                 </button>
             </div>
         </footer>
