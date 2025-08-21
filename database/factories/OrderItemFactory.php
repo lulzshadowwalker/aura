@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderItemFactory extends Factory
 {
@@ -34,13 +33,13 @@ class OrderItemFactory extends Factory
         $subtotal = round($quantity * $unitPrice, 2);
 
         return [
-            "product_name" => "Perfume",
-            "quantity" => $quantity,
-            "unit_price" => $unitPrice,
-            "subtotal" => $subtotal,
-            "total" => $subtotal,
-            "order_id" => Order::factory(),
-            "product_id" => Product::factory(),
+            'product_name' => 'Perfume',
+            'quantity' => $quantity,
+            'unit_price' => $unitPrice,
+            'subtotal' => $subtotal,
+            'total' => $subtotal,
+            'order_id' => Order::factory(),
+            'product_id' => Product::factory(),
         ];
     }
 }
