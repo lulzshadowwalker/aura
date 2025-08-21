@@ -60,6 +60,10 @@ class Cart extends Model
     /** Returns cart item matching product if any */
     public function cartItem(Product $product): ?CartItem
     {
+        if ($this->relationLoaded('cartItems')) {
+            return $this->cartItems->firstWhere('product_id', $product->id);
+        }
+
         return $this->cartItems()->where('product_id', $product->id)->first();
     }
 

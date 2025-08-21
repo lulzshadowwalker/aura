@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contracts\PaymentGatewayService;
+use App\Services\MyFatoorahPaymentGatewayService;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use SocialiteProviders\Google\Provider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,8 +18,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Contracts\PaymentGatewayService::class,
-            \App\Services\MyFatoorahPaymentGatewayService::class
+            PaymentGatewayService::class,
+            MyFatoorahPaymentGatewayService::class
         );
     }
 
@@ -24,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
-            $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
+        Event::listen(function (SocialiteWasCalled $event) {
+            $event->extendSocialite('google', Provider::class);
         });
 
         Gate::define('viewPulse', function ($user) {

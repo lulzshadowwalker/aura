@@ -18,6 +18,12 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, InteractsWithMedia;
 
+    const MEDIA_COLLECTION_IMAGES = 'product.images';
+
+    const MEDIA_COLLECTION_COVER = 'product.cover';
+
+    public array $translatable = ['name', 'description'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,24 +58,21 @@ class Product extends Model implements HasMedia
         });
     }
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected static function generateUniqueSlug(string $name, ?int $excludeId = null): string
     {
-        return [
-            'id' => 'integer',
-            'is_active' => 'boolean',
-            'category_id' => 'integer',
-            'sale_price' => MoneyCast::class.':sale_amount',
-            'price' => MoneyCast::class,
-            'product_id' => 'integer',
-        ];
-    }
+        $baseSlug = str($name)->slug();
+        $slug = $baseSlug;
+        $counter = 1;
 
-    public array $translatable = ['name', 'description'];
+        while (static::where('slug', $slug)
+            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
+            ->exists()
+        ) {
+            $slug = $baseSlug.'-'.$counter++;
+        }
+
+        return $slug;
+    }
 
     public function category(): BelongsTo
     {
@@ -86,19 +89,10 @@ class Product extends Model implements HasMedia
         return $this->hasMany(Review::class);
     }
 
-    public function favorites(): HasMany
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
     public function productQuestions(): HasMany
     {
         return $this->hasMany(ProductQuestion::class);
     }
-
-    const MEDIA_COLLECTION_IMAGES = 'product.images';
-
-    const MEDIA_COLLECTION_COVER = 'product.cover';
 
     public function registerMediaCollections(): void
     {
@@ -149,17 +143,23 @@ class Product extends Model implements HasMedia
 
     public function isFavorite(): Attribute
     {
-        $customer = auth()->user()?->customer;
-        if (! $customer) {
-            return Attribute::get(fn (): bool => false);
-        }
+        return Attribute::get(function () {
+            $customer = auth()->user()?->customer;
+            if (! $customer) {
+                return false;
+            }
 
-        return Attribute::get(
-            fn (): bool => $customer
-                ->favorites()
-                ->where('product_id', $this->id)
-                ->exists()
-        );
+            if ($this->relationLoaded('favorites')) {
+                return $this->favorites->contains(fn ($fav) => (int) $fav->customer_id === (int) $customer->id);
+            }
+
+            return $this->favorites()->where('customer_id', $customer->id)->exists();
+        });
+    }
+
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
     }
 
     public function cartItems(): HasMany
@@ -172,19 +172,20 @@ class Product extends Model implements HasMedia
         return $this->hasMany(OrderItem::class);
     }
 
-    protected static function generateUniqueSlug(string $name, ?int $excludeId = null): string
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
     {
-        $baseSlug = str($name)->slug();
-        $slug = $baseSlug;
-        $counter = 1;
-
-        while (static::where('slug', $slug)
-            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
-            ->exists()
-        ) {
-            $slug = $baseSlug.'-'.$counter++;
-        }
-
-        return $slug;
+        return [
+            'id' => 'integer',
+            'is_active' => 'boolean',
+            'category_id' => 'integer',
+            'sale_price' => MoneyCast::class.':sale_amount',
+            'price' => MoneyCast::class,
+            'product_id' => 'integer',
+        ];
     }
 }

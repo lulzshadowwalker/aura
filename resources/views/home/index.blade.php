@@ -75,18 +75,16 @@
 
                 @if ($collection->products->isNotEmpty())
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-                        @foreach ($collection->products->take(4) as $product)
+                        @foreach ($collection->products as $product)
                             <x-product-card :product="$product" :collection="$collection" :cart="$cart"/>
                         @endforeach
                     </div>
 
-                    @if ($collection->products->count() > 4)
-                        <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
-                           class="link link-hover flex items-center justify-end gap-1">
-                            {{ trans('app.view-all', ['name' => $collection->name]) }}
-                            <i data-lucide="move-right" class="w-5 h-5 rtl:rotate-180"></i>
-                        </a>
-                    @endif
+                    <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
+                       class="link link-hover flex items-center justify-end gap-1">
+                        {{ trans('app.view-all', ['name' => $collection->name]) }}
+                        <i data-lucide="move-right" class="w-5 h-5 rtl:rotate-180"></i>
+                    </a>
                 @else
                     <div class="text-center py-12">
                         <p class="text-base-content/60">{{ __('app.no-products-in-collection') }}</p>

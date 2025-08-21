@@ -6,17 +6,31 @@ use App\Models\Cart;
 
 class CartFactory
 {
-    public static function make()
-    {
-        $cart = match (auth()->guest()) {
-            true => Cart::with('cartItems')->firstOrCreate([
-                'session_id' => session()->getId(),
-            ]),
-            false => Cart::with('cartItems')->firstOrCreate([
-                'customer_id' => auth()->user()->customer->id,
-            ]),
-        };
+    protected static ?Cart $cached = null;
 
-        return $cart;
+    public static function make(): Cart
+    {
+        if (self::$cached) {
+            return self::$cached;
+        }
+
+        $attrs = auth()->guest()
+            ? ['session_id' => session()->getId()]
+            : ['customer_id' => auth()->user()->customer->id];
+
+        // Try to get existing cart with relations
+        $cart = Cart::query()
+            ->where($attrs)
+            ->with(['cartItems.product'])
+            ->first();
+
+        if (! $cart) {
+            $cart = Cart::create($attrs);
+        }
+
+        // Ensure relations are loaded without extra duplicate queries later
+        $cart->loadMissing(['cartItems.product']);
+
+        return self::$cached = $cart;
     }
 }

@@ -23,6 +23,7 @@
         "laravel/tinker": "^2.10.1",
         "myfatoorah/library": "^2.2",
         "outerweb/filament-translatable-fields": "^2.1",
+        "predis/predis": "^3.2",
         "propaganistas/laravel-phone": "^6.0",
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/zoho": "^4.1",
@@ -32,6 +33,7 @@
         "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.16",
         "fakerphp/faker": "^1.23",
         "laravel-shift/blueprint": "^2.12",
         "laravel/pail": "^1.2.2",
