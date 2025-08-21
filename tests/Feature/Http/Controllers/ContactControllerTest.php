@@ -25,7 +25,7 @@ class ContactControllerTest extends TestCase
             'message' => 'Hello, world!',
         ])
             ->assertRedirect(route('contact.index', ['language' => app()->getLocale()]))
-            ->assertSessionHas('success', 'Message sent successfully');
+            ->assertSessionHas('success', 'Thank you for your message!');
     }
 
     public function test_it_validates_the_form(): void

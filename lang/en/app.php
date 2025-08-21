@@ -104,7 +104,7 @@ return [
     'your-email' => 'your@email.com',
     'message' => 'Message',
     'how-can-we-help' => 'How can we help you?',
-    'send-message' => 'Send Message',
+    'send-message-success' => 'Thank you for your message!',
     'contact-information' => 'Contact Information',
     'email-us-tip' => 'Email us for any inquiries',
     'open-in-maps' => 'Open location in Google Maps',

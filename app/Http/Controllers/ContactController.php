@@ -24,6 +24,6 @@ class ContactController extends Controller
 
         return redirect()
             ->route('contact.index', ['language' => $language])
-            ->with('success', __('app.send-message'));
+            ->with('success', __('app.send-message-success'));
     }
 }

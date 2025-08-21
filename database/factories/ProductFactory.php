@@ -24,7 +24,6 @@ class ProductFactory extends BaseFactory
             'amount' => fake()->randomFloat(2, 10, 100),
             'sale_amount' => fake()->optional(0.3, null)->randomFloat(2, 5, 50),
             'slug' => fake()->unique()->slug(),
-            'sku' => fake()->unique()->word(),
             'description' => $this->localized(
                 fn (): string => fake()->sentence(18, 28)
             ),

@@ -27,7 +27,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Product Details')
-                    ->description('Manage product information, SKU, and visibility.')
+                    ->description('Manage product information, and visibility.')
                     ->aside()
                     ->schema([
                         Forms\Components\TextInput::make('name')
@@ -38,10 +38,6 @@ class ProductResource extends Resource
                             ->required()
                             ->translatable()
                             ->columnSpanFull(),
-
-                        Forms\Components\TextInput::make('sku')
-                            ->label('SKU')
-                            ->required(),
 
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
@@ -125,11 +121,6 @@ class ProductResource extends Resource
                     ->sortable()
                     ->limit(40)
                     ->tooltip(fn (Product $record) => $record->name),
-
-                Tables\Columns\TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable()
-                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('price')
                     ->money('sar')

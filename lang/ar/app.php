@@ -104,7 +104,7 @@ return [
     'your-email' => 'your@email.com',
     'message' => 'الرسالة',
     'how-can-we-help' => 'كيف يمكننا مساعدتك؟',
-    'send-message' => 'إرسال الرسالة',
+    'send-message-success' => 'تم إرسال رسالتك بنجاح! سنعاود التواصل معك قريبًا.',
     'contact-information' => 'معلومات التواصل',
     'email-us-tip' => 'راسلنا لأي استفسار',
     'open-in-maps' => 'فتح الموقع في خرائط جوجل',

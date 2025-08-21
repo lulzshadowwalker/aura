@@ -44,7 +44,6 @@ class CreateOrderFromCart
 
                 OrderItem::create([
                     'product_name' => $product->name,
-                    'sku' => $product->sku,
                     'quantity' => $cartItem->quantity,
                     'unit_price' => $unitPrice->toFloat(),
                     'subtotal' => $itemSubtotal->toFloat(),
