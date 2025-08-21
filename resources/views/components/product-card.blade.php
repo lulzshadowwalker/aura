@@ -4,7 +4,7 @@
         <div class="card-body flex items-center justify-center group relative">
             <img src="{{ $product->getFirstMediaUrl('product.cover', 'thumb') }}"
                  srcset="{{ $product->getFirstMedia('product.cover')?->getSrcset('thumb') }}"
-                 sizes="(min-width: 440px) 132px, calc(50vw - 80px)" alt="{{ $product->name }} Perfume Bottle"
+                 sizes="(min-width: 440px) 264px, calc(50vw - 80px)" alt="{{ $product->name }} Perfume Bottle"
                  class="max-h-70 object-contain transition-transform duration-700 ease-in-out group-hover:-rotate-y-15"
                  style="transform-style: preserve-3d;"/>
 
