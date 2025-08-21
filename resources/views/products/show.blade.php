@@ -45,7 +45,8 @@
                                             'border-gray-200 hover:border-gray-300'"
                                         @click="activeImageIndex = index" x-lightbox="image.url"
                                         x-lightbox:group="product-gallery">
-                                        <img :src="image.thumb_url" :alt="`${productName} thumbnail ${index + 1}`"
+                                        <img :src="image.thumb_url"
+                                             :alt="`${productName} thumbnail ${index + 1}`"
                                              class="w-full h-full object-contain transition-transform duration-300 hover:scale-105 p-4">
                                     </div>
                                 </template>
@@ -99,6 +100,23 @@
                                 @for ($i = 1; $i <= 5; $i++)
                             <input type="radio" class="mask mask-star-2 bg-orange-400"
 {{ $i <= 4 ? 'checked' : '' }} disabled />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                         @endfor
                         </div>
@@ -378,8 +396,8 @@
             const images = @json(
                 $product->images->map(function ($media) {
                     return [
-                        'url' => $media->getUrl(),
-                        'thumb_url' => $media->getUrl(),
+                        'url' => $media->getUrl('catalog'),
+                        'thumb_url' => $media->getUrl('thumb'),
                     ];
                 }));
 

@@ -107,8 +107,34 @@ class Product extends Model implements HasMedia
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(400)
-            ->height(400);
+            ->width(500)
+            ->height(500)
+            ->sharpen(10)
+            ->format('webp')
+            ->withResponsiveImages()
+            ->performOnCollections(self::MEDIA_COLLECTION_COVER);
+
+        $this->addMediaConversion('catalog')
+            ->width(1200)
+            ->quality(85)
+            ->format('webp')
+            ->withResponsiveImages()
+            ->performOnCollections(self::MEDIA_COLLECTION_COVER);
+
+        $this->addMediaConversion('catalog')
+            ->width(1200)
+            ->quality(85)
+            ->format('webp')
+            ->withResponsiveImages()
+            ->performOnCollections(self::MEDIA_COLLECTION_IMAGES);
+
+        $this->addMediaConversion('thumb')
+            ->width(350)
+            ->height(350)
+            ->sharpen(10)
+            ->format('webp')
+            ->withResponsiveImages()
+            ->performOnCollections(self::MEDIA_COLLECTION_IMAGES);
     }
 
     public function images(): Attribute
@@ -130,7 +156,7 @@ class Product extends Model implements HasMedia
     public function cover(): Attribute
     {
         return Attribute::get(function () {
-            return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_COVER);
+            return $this->getFirstMediaUrl(self::MEDIA_COLLECTION_COVER, 'thumb');
         });
     }
 
