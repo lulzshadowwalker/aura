@@ -20,3 +20,8 @@
 [aria-busy] .spinner {
     display: inline-block !important;
 }
+
+body {
+    /* TODO: Find a better solution */
+    overflow-x: hidden;
+}

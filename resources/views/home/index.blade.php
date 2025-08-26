@@ -1,18 +1,21 @@
 <x-layout>
     {{-- Hero --}}
-    <section class="hero min-h-screen relative overflow-hidden">
-        <video class="absolute inset-0 w-full h-full object-cover" src="{{ asset('assets/videos/hero.mp4') }}" autoplay
-            loop muted playsinline></video>
-        <div class="bg-gradient-to-t from-black/60 to-black/0 absolute inset-0 z-10"></div>
-        <div class="text-neutral-content text-center relative z-10">
-            <div class="max-w-md mx-auto">
-                <h1 class="mb-5 text-5xl font-bold drop-shadow-lg">
+    <section class="hero relative overflow-hidden" style="aspect-ratio: 1.8;">
+        <div class="absolute inset-0 w-full h-full">
+            <video class="w-full h-full object-cover" src="{{ asset('assets/videos/hero.mp4') }}" autoplay loop muted
+                playsinline style="aspect-ratio: 1.8;"></video>
+            <div class="bg-gradient-to-t from-black/60 to-black/0 absolute inset-0 z-10"></div>
+        </div>
+        <div class="flex items-center justify-center absolute inset-0 z-20">
+            <div class="text-neutral-content text-center px-2 max-w-xs sm:px-4 sm:max-w-md mx-auto">
+                <h1 class="mb-4 text-2xl sm:text-4xl md:text-5xl font-bold drop-shadow-lg">
                     {{ __('app.a-breeze-of-luxury') }}
                 </h1>
-                <p class="mb-5 drop-shadow-lg">
+                <p class="mb-4 drop-shadow-lg text-sm sm:text-base md:text-lg">
                     {{ __('app.hero-description') }}
                 </p>
-                <a href="#collections" class="btn btn-primary btn-lg shadow-lg">{{ __('app.get-started') }}</a>
+                <a href="#collections"
+                    class="btn btn-primary btn-md sm:btn-lg shadow-lg">{{ __('app.get-started') }}</a>
             </div>
         </div>
     </section>
