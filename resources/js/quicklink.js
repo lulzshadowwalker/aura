@@ -1,5 +1,5 @@
-import { listen } from 'quicklink';
+// import { listen } from 'quicklink';
 
-window.addEventListener('load', function() {
-    listen();
-});
+// window.addEventListener('load', function() {
+//     listen();
+// });
