@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -16,7 +17,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory, HasTranslations, InteractsWithMedia;
+    use HasFactory, HasTranslations, InteractsWithMedia, Searchable;
 
     const MEDIA_COLLECTION_IMAGES = 'product.images';
 
@@ -65,10 +66,10 @@ class Product extends Model implements HasMedia
         $counter = 1;
 
         while (static::where('slug', $slug)
-            ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
             ->exists()
         ) {
-            $slug = $baseSlug.'-'.$counter++;
+            $slug = $baseSlug . '-' . $counter++;
         }
 
         return $slug;
@@ -96,7 +97,7 @@ class Product extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $fallback = 'https://placehold.co/400x225.png?text='.str_replace(' ', '%20', $this->getTranslation('name', 'en'));
+        $fallback = 'https://placehold.co/400x225.png?text=' . str_replace(' ', '%20', $this->getTranslation('name', 'en'));
 
         $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGES);
         $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
@@ -176,7 +177,7 @@ class Product extends Model implements HasMedia
             }
 
             if ($this->relationLoaded('favorites')) {
-                return $this->favorites->contains(fn ($fav) => (int) $fav->customer_id === (int) $customer->id);
+                return $this->favorites->contains(fn($fav) => (int) $fav->customer_id === (int) $customer->id);
             }
 
             return $this->favorites()->where('customer_id', $customer->id)->exists();
@@ -209,9 +210,33 @@ class Product extends Model implements HasMedia
             'id' => 'integer',
             'is_active' => 'boolean',
             'category_id' => 'integer',
-            'sale_price' => MoneyCast::class.':sale_amount',
+            'sale_price' => MoneyCast::class . ':sale_amount',
             'price' => MoneyCast::class,
             'product_id' => 'integer',
+        ];
+    }
+
+    public function searchableAs(): string
+    {
+        return 'products_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (string) $this->id,
+
+            'name_en' => $this->getTranslation('name', 'en'),
+            'name_ar' => $this->getTranslation('name', 'ar'),
+
+            'description_en' => $this->getTranslation('description', 'en'),
+            'description_ar' => $this->getTranslation('description', 'ar'),
+
+            'category_en' => $this->category?->getTranslation('name', 'en'),
+            'category_ar' => $this->category?->getTranslation('name', 'ar'),
+
+            'created_at' => $this->created_at->timestamp,
+            'updated_at' => $this->updated_at->timestamp,
         ];
     }
 }

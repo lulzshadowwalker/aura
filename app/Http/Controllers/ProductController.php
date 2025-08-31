@@ -10,18 +10,14 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::query();
-
-        if ($request->has('search')) {
-            $query->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($request->input('search')).'%']);
-        }
+        $query = Product::search($request->search ?? '');
 
         if ($request->has('sort')) {
             $sort = $request->input('sort');
             if ($sort === 'name_asc') {
-                $query->orderBy('name', 'asc');
+                $query->orderBy('name_' . app()->getLocale(), 'asc');
             } elseif ($sort === 'name_desc') {
-                $query->orderBy('name', 'desc');
+                $query->orderBy('name_' . app()->getLocale(), 'desc');
             }
         }
 
