@@ -50,8 +50,7 @@
                 @endphp
                 <li>
                     <details>
-                        <summary>{{ strtoupper(app()->getLocale()) }} -
-                            {{ app()->getLocale() === 'en' ? 'English' : 'العربية' }}</summary>
+                        <summary class="text-2xl">{{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}</summary>
                         <ul class="p-2">
                             <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
                             <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
