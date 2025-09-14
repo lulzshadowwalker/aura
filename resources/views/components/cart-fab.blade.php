@@ -1,6 +1,6 @@
 <div id="js-cart-fab" x-data="{ cartOpen: false }" @keydown.escape.window="cartOpen = false">
     <!-- Cart FAB -->
-    <div class="fixed bottom-6 right-6 z-40">
+    <div class="fixed bottom-6 end-6 z-40">
         <button @click="cartOpen = true" class="btn btn-primary btn-circle btn-lg shadow-lg" aria-label="Open cart">
             <i class="fa fa-bag-shopping"></i>
             <!-- Cart count -->
