@@ -56,7 +56,8 @@
                     @endphp
                     <li>
                         <details>
-                            <summary class="text-2xl">{{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}</summary>
+                            <summary class="text-2xl">
+                                {{ app()->getLocale() === 'en' ? '🇬🇧 English' : '🇸🇦 العربية' }}</summary>
                             <ul class="p-2">
                                 <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
                                 <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
@@ -127,8 +128,19 @@
 
             <!-- Language Switcher -->
             <li class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-sm">
-                    {{ strtoupper(app()->getLocale()) }}
+                <div tabindex="0" role="button" class="btn btn-ghost btn-sm text-2xl">
+                    {{-- {{ strtoupper(app()->getLocale()) }} --}}
+                    @php
+                        $segments = request()->segments();
+                        if (count($segments) === 0) {
+                            $segments = [app()->getLocale()];
+                        }
+                        $segments[0] = 'en';
+                        $enPath = implode('/', $segments);
+                        $segments[0] = 'ar';
+                        $arPath = implode('/', $segments);
+                    @endphp
+                    {{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24">
                         <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
