@@ -58,10 +58,15 @@
                     <li>
                         <details>
                             <summary class="text-2xl">
-                                {{ app()->getLocale() === 'en' ? '🇬🇧 English' : '🇸🇦 العربية' }}</summary>
+                                @if (app()->getLocale() === 'en')
+                                    <span class="fi fi-gb"></span> English
+                                @else
+                                    <span class="fi fi-sa"></span> العربية
+                                @endif
+                            </summary>
                             <ul class="p-2">
-                                <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
-                                <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
+                                <li><a href="{{ url('/' . $enPath) }}"><span class="fi fi-gb"></span> English</a></li>
+                                <li><a href="{{ url('/' . $arPath) }}"><span class="fi fi-sa"></span> العربية</a></li>
                             </ul>
                         </details>
                     </li>
@@ -141,15 +146,19 @@
                         $segments[0] = 'ar';
                         $arPath = implode('/', $segments);
                     @endphp
-                    {{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}
+                    @if (app()->getLocale() === 'en')
+                        <span class="fi fi-gb"></span>
+                    @else
+                        <span class="fi fi-sa"></span>
+                    @endif
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24">
                         <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                     </svg>
                 </div>
                 <ul tabindex="0" class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-32 p-2 shadow">
-                    <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
-                    <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
+                    <li><a href="{{ url('/' . $enPath) }}"><span class="fi fi-gb"></span> English</a></li>
+                    <li><a href="{{ url('/' . $arPath) }}"><span class="fi fi-sa"></span> العربية</a></li>
                 </ul>
             </li>
 
@@ -171,9 +180,11 @@
                         <li><a class="text-sm">{{ __('app.settings') }}</a></li>
                         <li>
                             <form method="post"
-                                action="{{ route('auth.logout', ['language' => app()->getLocale()]) }}" class="w-full">
+                                action="{{ route('auth.logout', ['language' => app()->getLocale()]) }}"
+                                class="w-full">
                                 @csrf
-                                <button type="submit" class="text-sm w-full text-left">{{ __('app.logout') }}</button>
+                                <button type="submit"
+                                    class="text-sm w-full text-left">{{ __('app.logout') }}</button>
                             </form>
                         </li>
                     </ul>

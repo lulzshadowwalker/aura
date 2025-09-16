@@ -25,6 +25,8 @@
     <title>{{ isset($title) && $title ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
