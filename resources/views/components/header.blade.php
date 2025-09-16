@@ -9,89 +9,96 @@
 
     <!-- Mobile Menu Toggle -->
     <div class="flex-none md:hidden">
-        <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-square btn-ghost">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    class="inline-block w-5 h-5 stroke-current">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
-                </svg>
-            </div>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href="{{ route('home.index', ['language' => app()->getLocale()]) }}">{{ __('app.home') }}</a>
-                </li>
+        <div class="flex items-center gap-2">
+            <a href="#collections" class="btn btn-primary btn-sm shadow-lg">{{ __('app.get-started') }}</a>
 
-                <!-- Collections Submenu -->
-                <li>
-                    <details>
-                        <summary>{{ __('app.collections') }}</summary>
-                        <ul class="p-2">
-                            @foreach ($collections as $key => $collection)
-                                <li><a href="/#{{ $collection->slug }}" class="text-sm">{{ $collection->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </details>
-                </li>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-square btn-ghost">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        class="inline-block w-5 h-5 stroke-current">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16">
+                        </path>
+                    </svg>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="{{ route('home.index', ['language' => app()->getLocale()]) }}">{{ __('app.home') }}</a>
+                    </li>
 
-                <li><a
-                        href="{{ route('products.index', ['language' => app()->getLocale()]) }}">{{ __('app.products') }}</a>
-                </li>
+                    <!-- Collections Submenu -->
+                    <li>
+                        <details>
+                            <summary>{{ __('app.collections') }}</summary>
+                            <ul class="p-2">
+                                @foreach ($collections as $key => $collection)
+                                    <li><a href="/#{{ $collection->slug }}" class="text-sm">{{ $collection->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </details>
+                    </li>
 
-                <!-- Language Switcher in Mobile Menu -->
-                @php
-                    $segments = request()->segments();
-                    if (count($segments) === 0) {
-                        $segments = [app()->getLocale()];
-                    }
-                    $segments[0] = 'en';
-                    $enPath = implode('/', $segments);
-                    $segments[0] = 'ar';
-                    $arPath = implode('/', $segments);
-                @endphp
-                <li>
-                    <details>
-                        <summary class="text-2xl">{{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}</summary>
-                        <ul class="p-2">
-                            <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
-                            <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
-                        </ul>
-                    </details>
-                </li>
+                    <li><a
+                            href="{{ route('products.index', ['language' => app()->getLocale()]) }}">{{ __('app.products') }}</a>
+                    </li>
 
-                <!-- Auth Section in Mobile Menu -->
-                @if (auth()->check())
-                    <div class="divider my-2"></div>
-                    <li class="menu-title">
-                        <div class="flex items-center gap-2">
-                            <div class="avatar">
-                                <div class="w-8 rounded-full">
-                                    <img alt="User Avatar" src="{{ auth()->user()->avatar }}" />
+                    <!-- Language Switcher in Mobile Menu -->
+                    @php
+                        $segments = request()->segments();
+                        if (count($segments) === 0) {
+                            $segments = [app()->getLocale()];
+                        }
+                        $segments[0] = 'en';
+                        $enPath = implode('/', $segments);
+                        $segments[0] = 'ar';
+                        $arPath = implode('/', $segments);
+                    @endphp
+                    <li>
+                        <details>
+                            <summary class="text-2xl">{{ app()->getLocale() === 'en' ? '🇬🇧' : '🇸🇦' }}</summary>
+                            <ul class="p-2">
+                                <li><a href="{{ url('/' . $enPath) }}">🇬🇧 English</a></li>
+                                <li><a href="{{ url('/' . $arPath) }}">🇸🇦 العربية</a></li>
+                            </ul>
+                        </details>
+                    </li>
+
+                    <!-- Auth Section in Mobile Menu -->
+                    @if (auth()->check())
+                        <div class="divider my-2"></div>
+                        <li class="menu-title">
+                            <div class="flex items-center gap-2">
+                                <div class="avatar">
+                                    <div class="w-8 rounded-full">
+                                        <img alt="User Avatar" src="{{ auth()->user()->avatar }}" />
+                                    </div>
                                 </div>
+                                <span class="text-xs">{{ auth()->user()->name ?? 'User' }}</span>
                             </div>
-                            <span class="text-xs">{{ auth()->user()->name ?? 'User' }}</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="justify-between text-sm">
-                            {{ __('app.profile') }}
-                            <span class="badge badge-sm">{{ __('app.new') }}</span>
-                        </a>
-                    </li>
-                    <li><a class="text-sm">{{ __('app.settings') }}</a></li>
-                    <li>
-                        <form method="post" action="{{ route('auth.logout', ['language' => app()->getLocale()]) }}"
-                            class="w-full">
-                            @csrf
-                            <button type="submit" class="text-sm w-full text-left">{{ __('app.logout') }}</button>
-                        </form>
-                    </li>
-                @else
-                    <div class="divider my-2"></div>
-                    <li>
-                        <x-auth-button />
-                    </li>
-                @endif
-            </ul>
+                        </li>
+                        <li>
+                            <a class="justify-between text-sm">
+                                {{ __('app.profile') }}
+                                <span class="badge badge-sm">{{ __('app.new') }}</span>
+                            </a>
+                        </li>
+                        <li><a class="text-sm">{{ __('app.settings') }}</a></li>
+                        <li>
+                            <form method="post"
+                                action="{{ route('auth.logout', ['language' => app()->getLocale()]) }}" class="w-full">
+                                @csrf
+                                <button type="submit" class="text-sm w-full text-left">{{ __('app.logout') }}</button>
+                            </form>
+                        </li>
+                    @else
+                        <div class="divider my-2"></div>
+                        <li>
+                            <x-auth-button />
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
     </div>
 
