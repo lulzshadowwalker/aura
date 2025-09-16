@@ -1,7 +1,8 @@
 @props(['collections'])
 <header class="navbar bg-base-100 container mx-auto px-4 2xl:!max-w-395">
-    <div class="flex-1">
-        <a href="{{ route('home.index', ['language' => app()->getLocale()]) }}" class="btn btn-ghost">
+    <div class="flex-1 min-w-0">
+        <a href="{{ route('home.index', ['language' => app()->getLocale()]) }}"
+            class="btn btn-ghost justify-start p-0 md:px-4">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Northwind Logo" class="h-8 md:h-12">
             <span class="text-lg md:text-xl font-semibold hidden sm:inline">{{ __('app.northwind') }}</span>
         </a>
@@ -9,7 +10,7 @@
 
     <!-- Mobile Menu Toggle -->
     <div class="flex-none md:hidden">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 justify-end">
             <a href="#collections" class="btn btn-primary btn-sm shadow-lg">{{ __('app.get-started') }}</a>
 
             <div class="dropdown dropdown-end">
