@@ -38,6 +38,7 @@ return [
     'subscribe' => 'Subscribe',
     'email-placeholder' => 'email@example.com',
     'all-rights-reserved' => 'All rights reserved.',
+    'powered-by' => 'Powered by Bayanata',
 
     // Home
     'a-breeze-of-luxury' => 'A Breeze of Luxury',

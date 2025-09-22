@@ -38,6 +38,7 @@ return [
     'subscribe' => 'اشترك',
     'email-placeholder' => 'email@example.com',
     'all-rights-reserved' => 'جميع الحقوق محفوظة.',
+    'powered-by' => 'بدعم من بياناتا',
 
     // Home
     'a-breeze-of-luxury' => 'رياح الشمال تحمل لكم الفخامة',

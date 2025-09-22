@@ -51,9 +51,17 @@
     <footer class="footer text-base-content container mx-auto px-10 py-4">
         <aside class="grid-flow-col items-center gap-4">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Northwind Logo" class="h-14 w-14">
-            <p>
-                © {{ date('Y') }} {{ __('app.northwind') }}. {{ __('app.all-rights-reserved') }}
-            </p>
+            <div>
+                <p>
+                    © {{ date('Y') }} {{ __('app.northwind') }}. {{ __('app.all-rights-reserved') }}
+                </p>
+                <p>
+                    <a href="https://bayanata.com" target="_blank" rel="noopener noreferrer"
+                        class="link link-hover">
+                        {{ __('app.powered-by') }}
+                    </a>
+                </p>
+            </div>
         </aside>
         <nav class="md:place-self-center md:justify-self-start">
             <div class="grid grid-flow-col gap-4">
