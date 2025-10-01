@@ -81,6 +81,8 @@ return [
 
     // Cart FAB
     'your-bag' => 'Your Bag',
+    'item' => 'item',
+    'items' => 'items',
     'remove-item' => 'Remove item',
     'decrease-quantity' => 'Decrease quantity',
     'increase-quantity' => 'Increase quantity',

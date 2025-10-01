@@ -81,6 +81,8 @@ return [
 
     // Cart FAB
     'your-bag' => 'حقيبتك',
+    'item' => 'عنصر',
+    'items' => 'عناصر',
     'remove-item' => 'إزالة العنصر',
     'decrease-quantity' => 'تقليل الكمية',
     'increase-quantity' => 'زيادة الكمية',

@@ -1,10 +1,31 @@
 <div id="js-cart-fab" x-data="{ cartOpen: false }" @keydown.escape.window="cartOpen = false">
-    <!-- Cart FAB -->
-    <div class="fixed bottom-6 end-6 z-40">
-        <button @click="cartOpen = true" class="btn btn-primary btn-circle btn-lg shadow-lg" aria-label="Open cart">
-            <i class="fa fa-bag-shopping"></i>
-            <!-- Cart count -->
-            <div class="badge badge-secondary absolute -top-3 -end-3">{{ $cart?->cartItems->count() ?? 0 }}</div>
+    <!-- Cart FAB - Vertical Side-mounted -->
+    <div class="fixed top-1/2 right-0 -translate-y-1/2 z-40">
+        <button @click="cartOpen = true"
+            class="btn btn-primary rounded-r-none rounded-l-xl shadow-lg px-3 py-6 h-auto min-h-0 flex flex-col items-center justify-center gap-2 group hover:bg-primary-focus transition-all duration-300 relative"
+            aria-label="Open cart">
+            {{-- <!-- Cart count indicator -->
+            @if (($cart?->cartItems->count() ?? 0) > 0)
+                <div
+                    class="badge badge-secondary absolute -top-2 -left-4 text-2xs font-bold rotate-270 w-6 h-6 flex items-center justify-center">
+                    {{ $cart?->cartItems->count() ?? 0 }}
+                </div>
+            @endif --}}
+
+            <!-- Shopping bag icon -->
+            <i class="fa fa-bag-shopping text-lg mb-1 rotate-270"></i>
+
+            <!-- Vertical text -->
+            <div class="flex flex-col items-center">
+                <span
+                    class="text-base font-medium leading-none writing-mode-vertical-rl text-orientation-mixed rotate-180"
+                    style="writing-mode: vertical-rl; text-orientation: mixed;">
+                    {{ __('app.your-bag') }}
+                </span>
+            </div>
+
+            <!-- Hover indicator -->
+            <i class="fa fa-chevron-left text-xs group-hover:-translate-x-1 transition-transform duration-300 mt-1"></i>
         </button>
     </div>
 
