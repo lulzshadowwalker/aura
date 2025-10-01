@@ -15,14 +15,12 @@
                 <!-- Section Header -->
                 <div class="text-center mb-4">
                     <div class="inline-flex items-center gap-4 mb-6">
-                        <div class="w-12 lg:w-16 h-px bg-gradient-to-r from-transparent to-primary"></div>
                         <h2 class="text-2xl tracking-[0.2em] uppercase text-base-content sr-only">
                             {{ __('app.about-north-wind') }}
                         </h2>
 
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="{{ __('app.about-north-wind') }}"
+                        <img src="{{ asset('assets/images/logo-outline.png') }}" alt="{{ __('app.about-north-wind') }}"
                             class="w-24 lg:w-32" />
-                        <div class="w-12 lg:w-16 h-px bg-gradient-to-l from-transparent to-primary"></div>
                     </div>
                 </div>
 
@@ -35,9 +33,6 @@
 
                         <!-- Decorative Quote -->
                         <div class="relative ps-8 lg:ps-12 max-w-3xl mx-auto">
-                            <div
-                                class="absolute start-0 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary/20 rounded-full">
-                            </div>
                             <p class="text-xl italic text-primary font-medium leading-relaxed tracking-wide">
                                 {{ __('app.brand-story-tagline') }}
                             </p>
@@ -65,7 +60,8 @@
         @foreach ($collections as $collection)
             <section id="{{ $collection->slug }}" class="mb-16 last:mb-0">
                 <header class="mb-8">
-                    <h3 class="text-3xl lg:text-4xl font-light tracking-wide mb-2">{{ $collection->name }}</h3>
+                    <h3 class="text-3xl lg:text-4xl font-light tracking-wide mb-2 _font-zain">{{ $collection->name }}
+                    </h3>
                     <p class="text-lg text-base-content/70">{{ $collection->description }}</p>
                 </header>
 
@@ -77,9 +73,10 @@
                     </div>
 
                     <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
-                        class="link link-hover flex items-center justify-end gap-1">
+                        class="btn btn-outline btn-sm mt-6 group transition-all duration-300 hover:btn-primary flex max-w-fit ms-auto">
                         {{ trans('app.view-all', ['name' => $collection->name]) }}
-                        <i data-lucide="move-right" class="w-5 h-5 rtl:rotate-180"></i>
+                        <i
+                            class="fa fa-arrow-right transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"></i>
                     </a>
                 @else
                     <div class="text-center py-12">

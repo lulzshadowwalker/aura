@@ -11,7 +11,7 @@
     <!-- Mobile Menu Toggle -->
     <div class="flex-none md:hidden">
         <div class="flex items-center gap-2 justify-end">
-            <a href="#collections" class="btn btn-primary btn-sm shadow-lg">{{ __('app.get-started') }}</a>
+            <a href="#collections" class="btn btn-primary shadow-lg">{{ __('app.get-started') }}</a>
 
             <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-square btn-ghost">
@@ -23,25 +23,27 @@
                     </svg>
                 </div>
                 <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="{{ route('home.index', ['language' => app()->getLocale()]) }}">{{ __('app.home') }}</a>
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-56">
+                    <li><a href="{{ route('home.index', ['language' => app()->getLocale()]) }}"
+                            class="text-sm py-2">{{ __('app.home') }}</a>
                     </li>
 
                     <!-- Collections Submenu -->
                     <li>
                         <details>
-                            <summary>{{ __('app.collections') }}</summary>
-                            <ul class="p-2">
+                            <summary class="text-sm py-2">{{ __('app.collections') }}</summary>
+                            <ul class="p-1">
                                 @foreach ($collections as $key => $collection)
-                                    <li><a href="/#{{ $collection->slug }}" class="text-sm">{{ $collection->name }}</a>
+                                    <li><a href="/#{{ $collection->slug }}"
+                                            class="text-xs py-1.5">{{ $collection->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </details>
                     </li>
 
-                    <li><a
-                            href="{{ route('products.index', ['language' => app()->getLocale()]) }}">{{ __('app.products') }}</a>
+                    <li><a href="{{ route('products.index', ['language' => app()->getLocale()]) }}"
+                            class="text-sm py-2">{{ __('app.products') }}</a>
                     </li>
 
                     <!-- Language Switcher in Mobile Menu -->
@@ -57,50 +59,55 @@
                     @endphp
                     <li>
                         <details>
-                            <summary class="text-2xl">
+                            <summary class="text-sm py-2 flex items-center gap-2">
                                 @if (app()->getLocale() === 'en')
                                     <span class="fi fi-gb"></span> English
                                 @else
                                     <span class="fi fi-sa"></span> العربية
                                 @endif
                             </summary>
-                            <ul class="p-2">
-                                <li><a href="{{ url('/' . $enPath) }}"><span class="fi fi-gb"></span> English</a></li>
-                                <li><a href="{{ url('/' . $arPath) }}"><span class="fi fi-sa"></span> العربية</a></li>
+                            <ul class="p-1">
+                                <li><a href="{{ url('/' . $enPath) }}"
+                                        class="text-xs py-1.5 flex items-center gap-2"><span class="fi fi-gb"></span>
+                                        English</a></li>
+                                <li><a href="{{ url('/' . $arPath) }}"
+                                        class="text-xs py-1.5 flex items-center gap-2"><span class="fi fi-sa"></span>
+                                        العربية</a></li>
                             </ul>
                         </details>
                     </li>
 
                     <!-- Auth Section in Mobile Menu -->
                     @if (auth()->check())
-                        <div class="divider my-2"></div>
+                        <div class="divider my-1"></div>
                         <li class="menu-title">
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2 py-1">
                                 <div class="avatar">
-                                    <div class="w-8 rounded-full">
+                                    <div class="w-6 rounded-full">
                                         <img alt="User Avatar" src="{{ auth()->user()->avatar }}" />
                                     </div>
                                 </div>
-                                <span class="text-xs">{{ auth()->user()->name ?? 'User' }}</span>
+                                <span class="text-xs font-medium">{{ auth()->user()->name ?? 'User' }}</span>
                             </div>
                         </li>
                         <li>
-                            <a class="justify-between text-sm">
+                            <a class="justify-between text-sm py-2">
                                 {{ __('app.profile') }}
-                                <span class="badge badge-sm">{{ __('app.new') }}</span>
+                                <span class="badge badge-xs">{{ __('app.new') }}</span>
                             </a>
                         </li>
-                        <li><a class="text-sm">{{ __('app.settings') }}</a></li>
+                        <li><a class="text-sm py-2">{{ __('app.settings') }}</a></li>
                         <li>
                             <form method="post"
                                 action="{{ route('auth.logout', ['language' => app()->getLocale()]) }}" class="w-full">
                                 @csrf
-                                <button type="submit" class="text-sm w-full text-left">{{ __('app.logout') }}</button>
+                                <button type="submit"
+                                    class="text-sm py-2 w-full text-left">{{ __('app.logout') }}</button>
                             </form>
                         </li>
                     @else
-                        <div class="divider my-2"></div>
-                        <li>
+                        <div class="divider my-1"></div>
+                        <li class="px-1 py-1">
                             <x-auth-button />
                         </li>
                     @endif

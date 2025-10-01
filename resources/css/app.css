@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 
 @source "../**/*.blade.php";
 @source "../**/*.js";
@@ -8,10 +7,41 @@
 @source "../../node_modules/alpine-tailwind-lightbox/src/template.html";
 
 @plugin "@tailwindcss/typography";
-@plugin "daisyui" {
-    themes:
-        light --default,
-        /* dark --prefersdark, */ cookie;
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    prefersdark: false;
+    color-scheme: "dark";
+    --color-base-100: oklch(98% 0.002 247.839);
+    --color-base-200: oklch(96% 0.003 264.542);
+    --color-base-300: oklch(92% 0.006 264.531);
+    --color-base-content: oklch(21% 0.034 264.665);
+    --color-primary: oklch(0.429 0.162 266.6);
+    --color-primary-content: oklch(96% 0.016 293.756);
+    --color-secondary: #181e2e;
+    --color-secondary-content: oklch(96% 0.016 293.756);
+    --color-accent: #d6b160;
+    --color-accent-content: oklch(98% 0.002 247.839);
+    --color-neutral: oklch(37% 0.034 259.733);
+    --color-neutral-content: oklch(98% 0.002 247.839);
+    --color-info: oklch(68% 0.169 237.323);
+    --color-info-content: oklch(97% 0.013 236.62);
+    --color-success: oklch(70% 0.14 182.503);
+    --color-success-content: oklch(98% 0.014 180.72);
+    --color-warning: oklch(70% 0.213 47.604);
+    --color-warning-content: oklch(98% 0.016 73.684);
+    --color-error: oklch(63% 0.237 25.331);
+    --color-error-content: oklch(97% 0.013 17.38);
+    --radius-selector: 2rem;
+    --radius-field: 2rem;
+    --radius-box: 2rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 1;
 }
 
 .spinner {
@@ -27,6 +57,19 @@ body {
     overflow-x: hidden;
 }
 
+html[lang="en"] body {
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
 html[lang="ar"] body {
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
+}
+
+html[lang="ar"] ._font-zain {
+    font-family: "Zain", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
