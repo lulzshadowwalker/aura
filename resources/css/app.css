@@ -76,3 +76,24 @@ html[lang="en"] ._font-zain {
     font-optical-sizing: auto;
     font-weight: 500;
 }
+
+/* NOTE: This is a helper utility for debugging overflowing content */
+/* * {
+    outline: 1px solid red;
+}
+
+* * {
+    outline: 1px solid green;
+}
+
+* * * {
+    outline: 1px solid orange;
+}
+
+* * * * {
+    outline: 1px solid blue;
+}
+
+* * * * * {
+    outline: 1px solid purple;
+} */

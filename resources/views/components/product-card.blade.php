@@ -1,11 +1,11 @@
 @props(['product', 'collection', 'cart'])
-<a href="{{ route('products.show', ['product' => $product->slug, 'language' => app()->getLocale()]) }}">
-    <div class="card aspect-square">
-        <div class="card-body flex items-center justify-center group relative">
+<a href="{{ route('products.show', ['product' => $product->slug, 'language' => app()->getLocale()]) }}" class="block">
+    <div class="card aspect-square overflow-hidden">
+        <div class="card-body flex items-center justify-center group relative p-4">
             <img src="{{ $product->getFirstMediaUrl('product.cover', 'thumb') }}"
                 srcset="{{ $product->getFirstMedia('product.cover')?->getSrcset('thumb') }}"
                 sizes="(min-width: 440px) 264px, calc(50vw - 80px)" alt="{{ $product->name }} Perfume Bottle"
-                class="max-h-70 object-contain transition-transform duration-700 ease-in-out group-hover:-rotate-y-15"
+                class="max-h-60 w-auto object-contain transition-transform duration-700 ease-in-out group-hover:-rotate-y-15"
                 style="transform-style: preserve-3d;" />
 
             @php
@@ -13,7 +13,7 @@
                     'js-product-card-cart-actions-' .
                     (isset($collection) ? 'c' . $collection->id . '-p' . $product->id : 'p-' . $product->id);
             @endphp
-            <div id="{{ $id }}" class="absolute top-2 end-2 flex flex-col items-center gap-1">
+            <div id="{{ $id }}" class="absolute top-2 end-2 flex flex-col items-center gap-1 z-10">
                 <form x-target="{{ $id }}"
                     action="{{ route('favorites.store', ['language' => app()->getLocale()]) }}" method="post"
                     class="tooltip"
@@ -28,7 +28,7 @@
                     </button>
                 </form>
 
-                <div class="divider !my-0"></div>
+                <div class="divider !my-0 w-6"></div>
 
                 @php $cartItem = $cart->cartItem($product); @endphp
 
@@ -62,15 +62,23 @@
         </div>
     </div>
 
-    <div class="flex items-start justify-between mt-4">
-        <div>
-            <h4 data-textify class="_font-zain rtl:text-xl font-medium">{{ $product->name }}</h4>
-            <p data-textify class="mt-1 font-light text-neutral-500 dark:text-neutral-400 tracking-wide line-clamp-3">
-                {{ $product->description }}</p>
-        </div>
+    <div class="mt-4 space-y-2">
+        <!-- Title - Full width for better readability -->
+        <h4 data-textify class="_font-zain rtl:text-xl font-medium leading-tight line-clamp-2">
+            {{ $product->name }}
+        </h4>
 
-        <span class="min-w-fit flex items-center">
-            {{ $product->price->getAmount() }} <x-sar />
-        </span>
+        <!-- Description -->
+        <p data-textify
+            class="font-light text-neutral-500 dark:text-neutral-400 tracking-wide line-clamp-3 text-sm max-md:text-xs leading-relaxed">
+            {{ $product->description }}
+        </p>
+
+        <!-- Price - Prominent display -->
+        <div class="flex items-center justify-end pt-1">
+            <span class="text-lg font-semibold text-base-content flex items-center">
+                {{ $product->price->getAmount() }} <x-sar />
+            </span>
+        </div>
     </div>
 </a>

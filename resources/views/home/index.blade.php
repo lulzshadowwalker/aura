@@ -55,7 +55,7 @@
     </section>
 
     {{-- Collections --}}
-    <div id="collections" class="container mx-auto px-4 my-12 max-md:my-8">
+    <section id="collections" class="container mx-auto px-4 my-12 max-md:my-8">
         <h2 class="sr-only">{{ __('app.our-collections') }}</h2>
         @foreach ($collections as $collection)
             <section id="{{ $collection->slug }}" class="mb-16 last:mb-0">
@@ -91,5 +91,5 @@
                 </div>
             @endif
         @endforeach
-    </div>
+    </section>
 </x-layout>
