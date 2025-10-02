@@ -78,7 +78,7 @@
         <div class="flex items-center justify-end pt-1">
             <span class="text-lg font-semibold text-base-content flex items-center">
                 {{ $product->price->getAmount() }} <x-sar />
-            </span>/
+            </span>
         </div>
     </div>
 </a>
