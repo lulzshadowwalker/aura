@@ -6,7 +6,6 @@ import Alpine from "alpinejs";
 import ajax from "@imacrayon/alpine-ajax";
 import focus from "@alpinejs/focus";
 import lightbox from "alpine-tailwind-lightbox";
-import posthog from "posthog-js";
 
 // NOTE: Uncomment to highlight overflowing elements for debugging
 // document.querySelectorAll("*").forEach((el) => {
@@ -15,11 +14,6 @@ import posthog from "posthog-js";
 //         el.style.outline = "3px solid red";
 //     }
 // });
-
-posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
-    api_host: import.meta.env.VITE_POSTHOG_API_HOST,
-    person_profiles: "always",
-});
 
 window.Alpine = Alpine;
 Alpine.plugin(ajax);

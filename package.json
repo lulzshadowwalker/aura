@@ -25,7 +25,6 @@
         "alpine-tailwind-lightbox": "^1.1.0",
         "fontfaceobserver": "^2.3.0",
         "gsap": "^3.13.0",
-        "posthog-js": "^1.257.0",
         "puppeteer": "^24.12.1",
         "quicklink": "^3.0.1",
         "textify.js": "^3.0.1"
