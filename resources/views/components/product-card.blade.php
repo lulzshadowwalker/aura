@@ -1,6 +1,6 @@
 @props(['product', 'collection', 'cart'])
 <a href="{{ route('products.show', ['product' => $product->slug, 'language' => app()->getLocale()]) }}" class="block">
-    <div class="card aspect-square overflow-hidden">
+    <div class="card aspect-square">
         <div class="card-body flex items-center justify-center group relative p-4">
             <img src="{{ $product->getFirstMediaUrl('product.cover', 'thumb') }}"
                 srcset="{{ $product->getFirstMedia('product.cover')?->getSrcset('thumb') }}"
@@ -78,7 +78,7 @@
         <div class="flex items-center justify-end pt-1">
             <span class="text-lg font-semibold text-base-content flex items-center">
                 {{ $product->price->getAmount() }} <x-sar />
-            </span>
+            </span>/
         </div>
     </div>
 </a>
