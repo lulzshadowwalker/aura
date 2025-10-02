@@ -1,6 +1,7 @@
 @php $id  = 'js_auth_modal_' . uniqid() @endphp
 <div x-data="{ isRegister: false }">
     <button class="btn btn-primary" onclick="{{ $id }}.showModal()">
+        <i class="fa fa-user-circle"></i>
         {{ __('app.account') }}
     </button>
 
@@ -8,7 +9,7 @@
         <div class="modal-box">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        aria-label="{{ __('app.close') }}">✕
+                    aria-label="{{ __('app.close') }}">✕
                 </button>
             </form>
 
@@ -23,7 +24,7 @@
                                 <span class="label-text">{{ __('app.phone-number') }}</span>
                             </label>
                             <input type="tel" name="phone_number" placeholder="{{ __('app.example-phone') }}"
-                                   class="input input-bordered w-full"/>
+                                class="input input-bordered w-full" />
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">{{ __('app.send-otp') }}</button>
                     </form>
@@ -50,7 +51,7 @@
                                 <span class="label-text">{{ __('app.phone-number') }}</span>
                             </label>
                             <input type="tel" name="phone_number" placeholder="{{ __('app.example-phone') }}"
-                                   class="input input-bordered w-full"/>
+                                class="input input-bordered w-full" />
                         </div>
                         <button type="submit" class="btn btn-primary w-full mt-4">{{ __('app.send-otp') }}</button>
                     </form>
@@ -80,12 +81,12 @@
             const formData = new FormData(form);
 
             fetch('{{ route('auth.otp', ['language' => app()->getLocale()]) }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
