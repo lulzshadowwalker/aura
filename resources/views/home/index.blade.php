@@ -72,7 +72,7 @@
                         @endforeach
                     </div>
 
-                    <a href="{{ route('collections.show', ['collection' => $collection->slug, 'language' => app()->getLocale()]) }}"
+                    <a href="{{ route('products.index', ['language' => app()->getLocale()]) }}"
                         class="btn btn-outline btn-sm mt-6 group transition-all duration-300 hover:btn-primary flex max-w-fit ms-auto">
                         {{ trans('app.view-all', ['name' => $collection->name]) }}
                         <i

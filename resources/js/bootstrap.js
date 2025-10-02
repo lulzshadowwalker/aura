@@ -1,24 +1,23 @@
 import "./quicklink.js";
+import "./textify.js";
 import axios from "axios";
 
 import Alpine from "alpinejs";
 import ajax from "@imacrayon/alpine-ajax";
-import focus from '@alpinejs/focus'
-import lightbox from 'alpine-tailwind-lightbox'
-import posthog from 'posthog-js'
+import focus from "@alpinejs/focus";
+import lightbox from "alpine-tailwind-lightbox";
+import posthog from "posthog-js";
 
-posthog.init(import.meta.env.VITE_POSTHOG_API_KEY,
-    {
-        api_host: import.meta.env.VITE_POSTHOG_API_HOST,
-        person_profiles: 'always'
-    }
-)
+posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
+    api_host: import.meta.env.VITE_POSTHOG_API_HOST,
+    person_profiles: "always",
+});
 
 window.Alpine = Alpine;
 Alpine.plugin(ajax);
 
-Alpine.plugin(focus)
-Alpine.plugin(lightbox)
+Alpine.plugin(focus);
+Alpine.plugin(lightbox);
 
 /**
  * If you imported Alpine into a bundle, you have to make sure you are

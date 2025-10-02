@@ -220,4 +220,7 @@ return [
     'please-login-to-favorite' => 'يرجى تسجيل الدخول لإضافة المنتجات إلى المفضلة',
     'product-removed-from-favorites' => 'تمت إزالة المنتج من المفضلة',
     'product-added-to-favorites' => 'تمت إضافة المنتج إلى المفضلة',
+
+    // Checkout
+    'please-login-to-checkout' => 'يرجى تسجيل الدخول للمتابعة إلى الدفع',
 ];

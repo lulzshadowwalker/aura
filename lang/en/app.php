@@ -220,4 +220,7 @@ return [
     'please-login-to-favorite' => 'Please login to add products to favorites',
     'product-removed-from-favorites' => 'Product removed from favorites',
     'product-added-to-favorites' => 'Product added to favorites',
+
+    // Checkout
+    'please-login-to-checkout' => 'Please login to proceed to checkout',
 ];

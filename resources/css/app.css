@@ -35,8 +35,8 @@
     --color-error: oklch(63% 0.237 25.331);
     --color-error-content: oklch(97% 0.013 17.38);
     --radius-selector: 2rem;
-    --radius-field: 2rem;
-    --radius-box: 2rem;
+    --radius-field: 1rem;
+    --radius-box: 1rem;
     --size-selector: 0.25rem;
     --size-field: 0.25rem;
     --border: 1px;
@@ -57,19 +57,22 @@ body {
     overflow-x: hidden;
 }
 
-html[lang="en"] body {
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.5px;
-    font-weight: 500;
+html[lang="ar"] body {
+    font-family: "Cairo", sans-serif;
 }
 
-html[lang="ar"] body {
-    font-family: "Tajawal", sans-serif;
+html[lang="en"] body {
+    font-family: "Inter", sans-serif;
 }
 
 html[lang="ar"] ._font-zain {
     font-family: "Zain", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
-    font-style: normal;
+}
+
+html[lang="en"] ._font-zain {
+    font-family: "Aref Ruqaa", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
 }

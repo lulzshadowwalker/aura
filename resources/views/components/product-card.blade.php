@@ -64,8 +64,8 @@
 
     <div class="flex items-start justify-between mt-4">
         <div>
-            <h4 class="_font-zain rtl:text-xl font-medium">{{ $product->name }}</h4>
-            <p class="mt-1 font-light text-neutral-500 dark:text-neutral-400 tracking-wide line-clamp-3">
+            <h4 data-textify class="_font-zain rtl:text-xl font-medium">{{ $product->name }}</h4>
+            <p data-textify class="mt-1 font-light text-neutral-500 dark:text-neutral-400 tracking-wide line-clamp-3">
                 {{ $product->description }}</p>
         </div>
 

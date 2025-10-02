@@ -16,7 +16,7 @@
             <i class="fa fa-bag-shopping text-lg mb-1 rotate-270"></i>
 
             <!-- Vertical text -->
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center gap-2">
                 <span
                     class="text-base font-medium leading-none writing-mode-vertical-rl text-orientation-mixed rotate-180"
                     style="writing-mode: vertical-rl; text-orientation: mixed;">

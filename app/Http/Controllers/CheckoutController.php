@@ -17,6 +17,10 @@ class CheckoutController extends Controller
 
     public function index(string $language, Request $request)
     {
+        if (! $request->user() || ! $request->user()->customer) {
+            return redirect()->route('home.index', ['language' => $language])->with('warning', __('app.please-login-to-checkout'));
+        }
+
         // Logic to display the checkout page
         // This could include fetching the user's cart, calculating totals, etc.
         $cart = $request->user()->customer->cart;

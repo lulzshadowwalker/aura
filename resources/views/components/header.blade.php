@@ -154,9 +154,9 @@
                         $arPath = implode('/', $segments);
                     @endphp
                     @if (app()->getLocale() === 'en')
-                        <span class="fi fi-gb"></span>
+                        <span class="fi fi-gb text-xl"></span>
                     @else
-                        <span class="fi fi-sa"></span>
+                        <span class="fi fi-sa text-xl"></span>
                     @endif
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24">

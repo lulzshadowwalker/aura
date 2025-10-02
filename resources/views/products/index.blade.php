@@ -7,12 +7,12 @@
 
         <div class="mb-8 flex justify-between items-center">
             <form action="{{ route('products.index', ['language' => app()->getLocale()]) }}" method="GET"
-                  class="flex items-center gap-2">
+                class="flex items-center gap-2">
                 <div class="form-control">
                     <input type="text" name="search" placeholder="{{ __('app.search-by-name') }}"
-                           class="input input-bordered w-full max-w-xs" value="{{ request('search') }}">
+                        class="input input-bordered input-accent w-full max-w-xs" value="{{ request('search') }}">
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __('app.search') }}</button>
+                <button type="submit" class="btn btn-accent">{{ __('app.search') }}</button>
             </form>
 
             <form action="{{ route('products.index', ['language' => app()->getLocale()]) }}" method="GET">
@@ -35,7 +35,7 @@
         @if ($products->isNotEmpty())
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                 @foreach ($products as $product)
-                    <x-product-card :product="$product" :cart="$cart"/>
+                    <x-product-card :product="$product" :cart="$cart" />
                 @endforeach
             </div>
         @else
