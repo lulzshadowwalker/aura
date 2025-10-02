@@ -18,7 +18,7 @@
             <!-- Vertical text -->
             <div class="flex flex-col items-center gap-2">
                 <span
-                    class="text-base font-medium leading-none writing-mode-vertical-rl text-orientation-mixed rotate-180"
+                    class="text-base font-medium leading-none writing-mode-vertical-rl text-orientation-mixed rotate-180 min-w-fit"
                     style="writing-mode: vertical-rl; text-orientation: mixed;">
                     {{ __('app.your-bag') }}
                 </span>
