@@ -20,7 +20,7 @@
                         </h2>
 
                         <img src="{{ asset('assets/images/logo-outline.png') }}" alt="{{ __('app.about-north-wind') }}"
-                            class="w-24 lg:w-32" />
+                            class="w-24 lg:w-32 invert" />
                     </div>
                 </div>
 
